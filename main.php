@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
 Plugin Name: Biblioteca Virtual
 Description: Administración de Herramientas virtuales para DGPC.

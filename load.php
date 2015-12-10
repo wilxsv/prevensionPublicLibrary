@@ -62,7 +62,8 @@ if(count($user_count)==0){
 
               CREATE TABLE `dgpc_grupoherramienta` (
                 `idgrupo` int(11) NOT NULL,
-                `idherramienta` int(11) NOT NULL
+                `idherramienta` int(11) NOT NULL,
+                `como` TEXT NOT NULL
               ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
               CREATE TABLE `dgpc_grupovulnerable` (
@@ -272,6 +273,78 @@ if(count($user_count)==0){
                 ADD CONSTRAINT `idcriterioval` FOREIGN KEY (`idcriterio`) REFERENCES `dgpc_criteriovalidacion` (`idcriterio`) ON UPDATE CASCADE,
                 ADD CONSTRAINT `idheramienta` FOREIGN KEY (`idherramienta`) REFERENCES `dgpc_herramienta` (`idherramienta`) ON UPDATE CASCADE;
 
+                INSERT INTO `dgpc_ambitoaplicacion` (`idambito`, `nombre`) VALUES
+                (1, 'Comisión Nacional de Protección Civil'),
+                (2, 'Comisión Comunal de Protección Civil'),
+                (3, 'Centros Educativos (Públicos y Privados)');
+
+                INSERT INTO `dgpc_area` (`idarea`, `nombre`) VALUES
+                (1, 'ANÁLISIS DE RIESGO'),
+                (2, 'REDUCCIÓN DE RIESGOS'),
+                (3, 'MANEJO DE EVENTOS ADVERSOS'),
+                (4, 'RECUPERACIÓN');
+
+                INSERT INTO `dgpc_claseherramienta` (`idclase`, `nombre`) VALUES
+                (1, 'Técnico'),
+                (2, 'Técnico – Científico'),
+                (3, 'Educativo');
+
+                INSERT INTO `dgpc_componente` (`idcomponente`, `idarea`, `nombre`) VALUES
+                (1, 1, 'Estudio de amenazas'),
+                (3, 1, 'Análisis de Vulnerabilidades'),
+                (4, 2, 'Prevención'),
+                (5, 2, 'Mitigación'),
+                (6, 3, 'Alerta'),
+                (7, 3, 'Preparación'),
+                (8, 3, 'Respuesta'),
+                (9, 4, 'Rehabilitación'),
+                (10, 4, 'Reconstrucción');
+
+                INSERT INTO `dgpc_criteriovalidacion` (`idcriterio`, `nombre`) VALUES
+                (1, 'Lugar y fecha'),
+                (2, '¿Qué motivó la elaboración de esta herramienta? (200  palabras)'),
+                (3, '¿Cómo se elaboró la herramienta? (2000 palabras)'),
+                (4, '¿Qué recursos y/o materiales bibliográficos se utilizaron  para la elaboración de la herramienta? (200 palabras)'),
+                (5, 'Breve descripción de la herramienta (etapas)'),
+                (6, '¿Cómo se ha puesto a prueba? (1000 palabras)'),
+                (7, 'Enliste los últimos planes, programas y proyectos donde  ha aplicado dicha herramienta'),
+                (8, 'En la aplicación de la herramienta en planes, programas  y proyectos ¿Cuál fue la población beneficiaria, según  sexo y edad? (500 palabras)');
+
+                INSERT INTO `dgpc_grupovulnerable` (`idgrupo`, `nombre`) VALUES
+                (1, 'Niñez'),
+                (2, 'Género'),
+                (3, 'Adultos  mayores'),
+                (4, 'Personas con discapacidad'),
+                (5, 'Apoyo psicosocial'),
+                (6, 'VIH SIDA');
+
+                INSERT INTO `dgpc_institucion` (`idinstitucion`, `nombre`) VALUES
+                (1, 'Insitucion de ejemplo 1'),
+                (2, 'Insitucion de ejemplo 2'),
+                (3, 'Insitucion de ejemplo 3'),
+                (4, 'Insitucion de ejemplo 4');
+
+                INSERT INTO `dgpc_itemincluye` (`iditem`, `nombre`) VALUES
+                (1, 'Cambio Climático'),
+                (2, 'Medio Ambiente'),
+                (3, 'Medios de Vida'),
+                (4, 'Enfoque de  derechos');
+
+                INSERT INTO `dgpc_preguntas` (`idpregunta`, `pregunta`) VALUES
+                (1, '¿Qué condiciones básicas se requiere para la utilización de la herramienta por otros? (1000 palabras)'),
+                (2, 'Mencione los organismos que han contribuido en la implementación (1000 palabras)'),
+                (3, '¿Cuál es la contribución que la herramienta da al Sistema Nacional de Protección Civil? (1000 palabras)'),
+                (4, '¿Cuál es la estrategia de sostenibilidad de la herramienta? (1000 palabras)'),
+                (5, 'Limitantes en la implementación de la herramienta'),
+                (6, 'Relate una Historia de Éxito en la implementación de la herramienta (1000 palabras)');
+
+                INSERT INTO `dgpc_tipoherramienta` (`idtipo`, `nombre`) VALUES
+                (1, 'Capacitación'),
+                (2, 'Consulta'),
+                (3, 'Audio'),
+                (4, 'Video'),
+                (5, 'Planes'),
+                (6, 'Normativa Legal');
 
               /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
               /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
@@ -280,7 +353,7 @@ if(count($user_count)==0){
         
    $con = null;
   }catch (PDOException $e) {
-    print "�Error!: " . $e->getMessage() . "<br/>";
+    print "¡Error!: " . $e->getMessage() . "<br/>";
     //die();
   }
       

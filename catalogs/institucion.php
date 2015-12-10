@@ -64,7 +64,6 @@ $(document).ready(function() {
 	});
 } );
 </script>
-</br>
     <div role='tabpanel' class='tab-pane' id='institucion'>
 	    <form role='form' name=f1 method=post>
 	    	 <div class='row'>

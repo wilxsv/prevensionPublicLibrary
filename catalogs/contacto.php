@@ -1,13 +1,13 @@
 <?php
 global $wpdb;
-$nombreambito="";
+$nombrecontacto="";
 //Almacenando registros
-if(isset($_POST["newambito"])){
-$nombreambito=$_POST["newnombreambito"];
+if(isset($_POST["newcontacto"])){
+$nombrecontacto=$_POST["newnombrecontacto"];
 $wpdb->query( 
 	$wpdb->prepare( 
-				"INSERT INTO dgpc_ambitoaplicacion (nombre) VALUES (%s)", 
-     			$nombreambito) 
+				"INSERT INTO dgpc_contacto (nombre) VALUES (%s)", 
+     			$nombrecontacto) 
 	);
 	echo "
 		<div>
@@ -21,63 +21,62 @@ $wpdb->query(
 }
 //Fin guardar registros
 //Eliminando Reg
-if(isset($_POST["delambito"])){
-$id=$_POST["delcodigoambito"];	
+if(isset($_POST["delcontacto"])){
+$id=$_POST["delcodigocontacto"];	
 $wpdb->query( 
 	$wpdb->prepare( 
-				"delete FROM dgpc_ambitoaplicacion WHERE idambito=%d", 
+				"delete FROM dgpc_contacto WHERE idcontacto=%d", 
      			$id) 
 	);
 }
 //fin eliminacion
 //Actualizacion
-if(isset($_POST["editambito"])){
-$id=$_POST["editcodigoambito"];
-$nombreambito=$_POST["editnombreambito"];	
+if(isset($_POST["editcontacto"])){
+$id=$_POST["editcodigocontacto"];
+$nombrecontacto=$_POST["editnombrecontacto"];	
 $wpdb->query( 
 	$wpdb->prepare( 
-				"UPDATE dgpc_ambitoaplicacion SET nombre=%s WHERE idambito=%d", 
-     			$nombreambito,$id) 
+				"UPDATE dgpc_contacto SET nombre=%s WHERE idcontacto=%d", 
+     			$nombrecontacto,$id) 
 	);
 }
 //fin actualizacion
 //consultando registros
-$datosambito="";
-$datosambito=$wpdb->get_results( 
-		"select idambito,nombre from dgpc_ambitoaplicacion order by nombre"    
+$datoscontacto="";
+$datoscontacto=$wpdb->get_results( 
+		"select idcontacto,nombre from dgpc_contacto order by nombre"    
 	);
 echo "
 <script>
 $(document).ready(function() {
 // Select tab by name
 $('.nav-tabs a[href=#".$tab."]').tab('show');
-   $('#datosambito').DataTable();
-   $('.borrarambito').click(function() {
-   		$('#delcodigoambito').val($(this).val());
-   		$('#ModalDelAmbito').modal();
+   $('#datoscontacto').DataTable();
+   $('.borrarcontacto').click(function() {
+   		$('#delcodigocontacto').val($(this).val());
+   		$('#ModalDelcontacto').modal();
 	});
 
-	$('.editarambito').click(function() {
+	$('.editarcontacto').click(function() {
    		var datos=$(this).val().split('|');
-   		$('#editcodigoambito').val(datos[0]);
-   		$('#editnombreambito').val(datos[1]);
-   		$('#ModalEditAmbito').modal();
+   		$('#editcodigocontacto').val(datos[0]);
+   		$('#editnombrecontacto').val(datos[1]);
+   		$('#ModalEditcontacto').modal();
 	});
 } );
 </script>
-
-    <div role='tabpanel' class='tab-pane' id='ambito'>
-	    <form role='form' name=f1 method=post>
+    <div role='tabpanel' class='tab-pane' id='contacto'>
+	    <form role='form' name=fcontacto1 method=post>
 	    	 <div class='row'>
-	    	 	<div class='col-xs-3'>
-	    	 		<label for=newnombreambito>Nombre del ámbito de aplicación</label>
+	    	 	<div class='col-xs-4'>
+	    	 		<label for=newnombrecontacto>Nombre</label>
 	    	 	</div>
 	    	 	<div class='col-xs-6'>
-	    	 		<input type=hidden name=tab id=tab value='ambito'>		
-	    			<input type=text name=newnombreambito id=newnombreambito class='form-control'> 
+	    	 		<input type=hidden name=tab id=tab value='contacto'>		
+	    			<input type=text name=newnombrecontacto id=newnombrecontacto class='form-control'> 
 	        	</div>
 	        	
-				<button type='submit' class='btn btn-success' name=newambito id=newambito value='ok'>
+				<button type='submit' class='btn btn-success' name=newcontacto id=newcontacto value='ok'>
 					<span class='glyphicon glyphicon-plus'></span>
 				</button>
 	      	</div> 
@@ -85,12 +84,12 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 	    </br>
 	  
 			<div class='table-responsive'>
-				<table class='table table-hover table-bordered' id=datosambito>
+				<table class='table table-hover table-bordered' id=datoscontacto>
 					<thead>
 					<tr>
 						<th class='text-center'>Código</th>
 						<th class='text-center'>
-							Nombre del ámbito. 
+							Nombre
 						</th>
 						<th class='text-center'>
 							
@@ -100,22 +99,22 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 					<tbody>
 					";
 
-					if($datosambito!=""){
-						foreach ($datosambito as $reg) {
+					if($datoscontacto!=""){
+						foreach ($datoscontacto as $reg) {
 							echo "
 					<tr>
 						<td class='text-center'>"
-							.$reg->idambito."
+							.$reg->idcontacto."
 						</td>
 						<td>".
 							$reg->nombre."
 						</td>
 						<td>
-							<button type='button' class='btn btn-success editarambito' name=editarambito id=editarambito value='".$reg->idambito."|".$reg->nombre."'>
+							<button type='button' class='btn btn-success editarcontacto' name=editarcontacto id=editarcontacto value='".$reg->idcontacto."|".$reg->nombre."'>
 								<span class='glyphicon glyphicon-pencil'></span>
 							</button>       
 							
-							<button type='button' class='btn btn-warning borrarambito' name=borrarambito id='borrarambito' value='".$reg->idambito."'>
+							<button type='button' class='btn btn-warning borrarcontacto' name=borrarcontacto id='borrarcontacto' value='".$reg->idcontacto."'>
 							<span class='glyphicon glyphicon-trash'></span>
 							</button>
 						</td>
@@ -133,8 +132,8 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 
 <div>
  <!-- Modal EDIT -->
-  <div class="modal fade" id="ModalEditAmbito" role="dialog"  tabindex="-1">
-    <form role='form' name=f4 method=post>
+  <div class="modal fade" id="ModalEditcontacto" role="dialog"  tabindex="-1">
+    <form role='form' name=fcontacto2 method=post>
 	    <div class="modal-dialog modal-sm" >
 	      <div class="modal-content">
 	        <div class="modal-header">
@@ -143,15 +142,15 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 	        </div>
 	        <div class="modal-body">
 		    	 	<div class='form-group'>
-		    	 		<label for=editnombreambito>Nombre de la Institución</label>
-		    	 		  <input type=hidden name=editcodigoambito id=editcodigoambito>
-		    	 		  <input type=hidden name=tab id=tab value='ambito'>
-		    	 		<input type=text required name=editnombreambito id=editnombreambito class='form-control'>             	
+		    	 		<label for=editnombrecontacto>Nombre de la Institución</label>
+		    	 		  <input type=hidden name=editcodigocontacto id=editcodigocontacto>
+		    	 		  <input type=hidden name=tab id=tab value='contacto'>
+		    	 		<input type=text required name=editnombrecontacto id=editnombrecontacto class='form-control'>             	
 		      		</div> 
 		    
 	        </div>
 	        <div class="modal-footer">
-	        	<button type='submit' class='btn btn-success' name=editambito id=editambito value=ok>
+	        	<button type='submit' class='btn btn-success' name=editcontacto id=editcontacto value=ok>
 					<span class='glyphicon glyphicon-ok'></span>
 				</button>	
 	          	<button type="button" class="btn btn-warning" data-dismiss="modal">
@@ -165,19 +164,19 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 </div>  
 <div>
  <!-- Modal DEL -->
-  <div class="modal fade" id="ModalDelAmbito" role="dialog"  tabindex="-1">
-    <form role='form' name=f5 method=post>
+  <div class="modal fade" id="ModalDelcontacto" role="dialog"  tabindex="-1">
+    <form role='form' name=fcontacto3 method=post>
 	    <div class="modal-dialog modal-sm" >
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
 	          <h4 class="modal-title warning">¿confirme que desea eliminar el registro?</h4>
-	          <input type=hidden name=delcodigoambito id=delcodigoambito>
-	          <input type=hidden name=tab id=tab value='ambito'>
+	          <input type=hidden name=delcodigocontacto id=delcodigocontacto>
+	          <input type=hidden name=tab id=tab value='contacto'>
 	        </div>
 	        
 	        <div class="modal-footer">
-	        	<button type='submit' class='btn btn-success' name=delambito value=ok>
+	        	<button type='submit' class='btn btn-success' name=delcontacto value=ok>
 					<span class='glyphicon glyphicon-ok'></span>
 				</button>	
 	          	<button type="button" class="btn btn-warning" data-dismiss="modal">

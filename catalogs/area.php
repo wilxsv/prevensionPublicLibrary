@@ -65,7 +65,6 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 	});
 } );
 </script>
-</br>
     <div role='tabpanel' class='tab-pane' id='area'>
 	    <form role='form' name=farea1 method=post>
 	    	 <div class='row'>

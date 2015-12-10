@@ -1,13 +1,13 @@
 <?php
 global $wpdb;
-$nombreambito="";
+$nombregrupo="";
 //Almacenando registros
-if(isset($_POST["newambito"])){
-$nombreambito=$_POST["newnombreambito"];
+if(isset($_POST["newgrupo"])){
+$nombregrupo=$_POST["newnombregrupo"];
 $wpdb->query( 
 	$wpdb->prepare( 
-				"INSERT INTO dgpc_ambitoaplicacion (nombre) VALUES (%s)", 
-     			$nombreambito) 
+				"INSERT INTO dgpc_grupovulnerable (nombre) VALUES (%s)", 
+     			$nombregrupo) 
 	);
 	echo "
 		<div>
@@ -21,63 +21,62 @@ $wpdb->query(
 }
 //Fin guardar registros
 //Eliminando Reg
-if(isset($_POST["delambito"])){
-$id=$_POST["delcodigoambito"];	
+if(isset($_POST["delgrupo"])){
+$id=$_POST["delcodigogrupo"];	
 $wpdb->query( 
 	$wpdb->prepare( 
-				"delete FROM dgpc_ambitoaplicacion WHERE idambito=%d", 
+				"delete FROM dgpc_grupovulnerable WHERE idgrupo=%d", 
      			$id) 
 	);
 }
 //fin eliminacion
 //Actualizacion
-if(isset($_POST["editambito"])){
-$id=$_POST["editcodigoambito"];
-$nombreambito=$_POST["editnombreambito"];	
+if(isset($_POST["editgrupo"])){
+$id=$_POST["editcodigogrupo"];
+$nombregrupo=$_POST["editnombregrupo"];	
 $wpdb->query( 
 	$wpdb->prepare( 
-				"UPDATE dgpc_ambitoaplicacion SET nombre=%s WHERE idambito=%d", 
-     			$nombreambito,$id) 
+				"UPDATE dgpc_grupovulnerable SET nombre=%s WHERE idgrupo=%d", 
+     			$nombregrupo,$id) 
 	);
 }
 //fin actualizacion
 //consultando registros
-$datosambito="";
-$datosambito=$wpdb->get_results( 
-		"select idambito,nombre from dgpc_ambitoaplicacion order by nombre"    
+$datosgrupo="";
+$datosgrupo=$wpdb->get_results( 
+		"select idgrupo,nombre from dgpc_grupovulnerable order by nombre"    
 	);
 echo "
 <script>
 $(document).ready(function() {
 // Select tab by name
 $('.nav-tabs a[href=#".$tab."]').tab('show');
-   $('#datosambito').DataTable();
-   $('.borrarambito').click(function() {
-   		$('#delcodigoambito').val($(this).val());
-   		$('#ModalDelAmbito').modal();
+   $('#datosgrupo').DataTable();
+   $('.borrargrupo').click(function() {
+   		$('#delcodigogrupo').val($(this).val());
+   		$('#ModalDelgrupo').modal();
 	});
 
-	$('.editarambito').click(function() {
+	$('.editargrupo').click(function() {
    		var datos=$(this).val().split('|');
-   		$('#editcodigoambito').val(datos[0]);
-   		$('#editnombreambito').val(datos[1]);
-   		$('#ModalEditAmbito').modal();
+   		$('#editcodigogrupo').val(datos[0]);
+   		$('#editnombregrupo').val(datos[1]);
+   		$('#ModalEditgrupo').modal();
 	});
 } );
 </script>
-
-    <div role='tabpanel' class='tab-pane' id='ambito'>
-	    <form role='form' name=f1 method=post>
+    <div role='tabpanel' class='tab-pane' id='grupo'>
+	    <form role='form' name=fgrupo1 method=post>
 	    	 <div class='row'>
-	    	 	<div class='col-xs-3'>
-	    	 		<label for=newnombreambito>Nombre del ámbito de aplicación</label>
+	    	 	<div class='col-xs-4'>
+	    	 		<label for=newnombregrupo>Nombre del grupo</label>
 	    	 	</div>
 	    	 	<div class='col-xs-6'>
-	    	 		<input type=hidden name=tab id=tab value='ambito'>		
-	    			<input type=text name=newnombreambito id=newnombreambito class='form-control'> 
+	    	 		<input type=hidden name=tab id=tab value='grupo'>		
+	    			<input type=text name=newnombregrupo id=newnombregrupo class='form-control'> 
 	        	</div>
 	        	
-				<button type='submit' class='btn btn-success' name=newambito id=newambito value='ok'>
+				<button type='submit' class='btn btn-success' name=newgrupo id=newgrupo value='ok'>
 					<span class='glyphicon glyphicon-plus'></span>
 				</button>
 	      	</div> 
@@ -85,12 +84,12 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 	    </br>
 	  
 			<div class='table-responsive'>
-				<table class='table table-hover table-bordered' id=datosambito>
+				<table class='table table-hover table-bordered' id=datosgrupo>
 					<thead>
 					<tr>
 						<th class='text-center'>Código</th>
 						<th class='text-center'>
-							Nombre del ámbito. 
+							Nombre del grupo 
 						</th>
 						<th class='text-center'>
 							
@@ -100,22 +99,22 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 					<tbody>
 					";
 
-					if($datosambito!=""){
-						foreach ($datosambito as $reg) {
+					if($datosgrupo!=""){
+						foreach ($datosgrupo as $reg) {
 							echo "
 					<tr>
 						<td class='text-center'>"
-							.$reg->idambito."
+							.$reg->idgrupo."
 						</td>
 						<td>".
 							$reg->nombre."
 						</td>
 						<td>
-							<button type='button' class='btn btn-success editarambito' name=editarambito id=editarambito value='".$reg->idambito."|".$reg->nombre."'>
+							<button type='button' class='btn btn-success editargrupo' name=editargrupo id=editargrupo value='".$reg->idgrupo."|".$reg->nombre."'>
 								<span class='glyphicon glyphicon-pencil'></span>
 							</button>       
 							
-							<button type='button' class='btn btn-warning borrarambito' name=borrarambito id='borrarambito' value='".$reg->idambito."'>
+							<button type='button' class='btn btn-warning borrargrupo' name=borrargrupo id='borrargrupo' value='".$reg->idgrupo."'>
 							<span class='glyphicon glyphicon-trash'></span>
 							</button>
 						</td>
@@ -133,8 +132,8 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 
 <div>
  <!-- Modal EDIT -->
-  <div class="modal fade" id="ModalEditAmbito" role="dialog"  tabindex="-1">
-    <form role='form' name=f4 method=post>
+  <div class="modal fade" id="ModalEditgrupo" role="dialog"  tabindex="-1">
+    <form role='form' name=fgrupo2 method=post>
 	    <div class="modal-dialog modal-sm" >
 	      <div class="modal-content">
 	        <div class="modal-header">
@@ -143,15 +142,15 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 	        </div>
 	        <div class="modal-body">
 		    	 	<div class='form-group'>
-		    	 		<label for=editnombreambito>Nombre de la Institución</label>
-		    	 		  <input type=hidden name=editcodigoambito id=editcodigoambito>
-		    	 		  <input type=hidden name=tab id=tab value='ambito'>
-		    	 		<input type=text required name=editnombreambito id=editnombreambito class='form-control'>             	
+		    	 		<label for=editnombregrupo>Nombre de la Institución</label>
+		    	 		  <input type=hidden name=editcodigogrupo id=editcodigogrupo>
+		    	 		  <input type=hidden name=tab id=tab value='grupo'>
+		    	 		<input type=text required name=editnombregrupo id=editnombregrupo class='form-control'>             	
 		      		</div> 
 		    
 	        </div>
 	        <div class="modal-footer">
-	        	<button type='submit' class='btn btn-success' name=editambito id=editambito value=ok>
+	        	<button type='submit' class='btn btn-success' name=editgrupo id=editgrupo value=ok>
 					<span class='glyphicon glyphicon-ok'></span>
 				</button>	
 	          	<button type="button" class="btn btn-warning" data-dismiss="modal">
@@ -165,19 +164,19 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 </div>  
 <div>
  <!-- Modal DEL -->
-  <div class="modal fade" id="ModalDelAmbito" role="dialog"  tabindex="-1">
-    <form role='form' name=f5 method=post>
+  <div class="modal fade" id="ModalDelgrupo" role="dialog"  tabindex="-1">
+    <form role='form' name=fgrupo3 method=post>
 	    <div class="modal-dialog modal-sm" >
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
 	          <h4 class="modal-title warning">¿confirme que desea eliminar el registro?</h4>
-	          <input type=hidden name=delcodigoambito id=delcodigoambito>
-	          <input type=hidden name=tab id=tab value='ambito'>
+	          <input type=hidden name=delcodigogrupo id=delcodigogrupo>
+	          <input type=hidden name=tab id=tab value='grupo'>
 	        </div>
 	        
 	        <div class="modal-footer">
-	        	<button type='submit' class='btn btn-success' name=delambito value=ok>
+	        	<button type='submit' class='btn btn-success' name=delgrupo value=ok>
 					<span class='glyphicon glyphicon-ok'></span>
 				</button>	
 	          	<button type="button" class="btn btn-warning" data-dismiss="modal">
