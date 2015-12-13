@@ -1,7 +1,7 @@
 <?php
 global $wpdb;
 $nombrecomponente="";
-$idarea=="";
+$idarea="";
 //Almacenando registros
 if(isset($_POST["newcomponente"])){
 $nombrecomponente=$_POST["newnombrecomponente"];

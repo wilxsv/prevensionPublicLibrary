@@ -17,16 +17,19 @@ echo "
 	  <ul class='nav nav-tabs' role='tablist' id='myTabs'>
 	    <li role='presentation' class='active'>
 	    	<a href='#generales' aria-controls='generales' role='tab' data-toggle='tab'>
-	    	<span class='glyphicon glyphicon-search' aria-hidden='true'></span>Generales</a>
+	    	<span class='glyphicon glyphicon-option-vertical' aria-hidden='true'></span>Generales</a>
 	    </li>
 	    <li role='presentation'>
-	    	<a href='#clasificacion' aria-controls='clasificacion' role='tab' data-toggle='tab'>Clasificación y ámbito de aplicación</a>
+	    	<a href='#clasificacion' aria-controls='clasificacion' role='tab' data-toggle='tab'>
+	    	<span class='glyphicon glyphicon-option-vertical' aria-hidden='true'></span>Clasificación y ámbito de aplicación</a>
 	    </li>
 	    <li role='presentation'>
-	    	<a href='#mecanismos' aria-controls='mecanismos' role='tab' data-toggle='tab'>Validación / Prueba de la Herramienta</a>
+	    	<a href='#mecanismos' aria-controls='mecanismos' role='tab' data-toggle='tab'>
+	    	<span class='glyphicon glyphicon-option-vertical' aria-hidden='true'></span>Validación / Prueba de la Herramienta</a>
 	    </li>
 	    <li role='presentation'>
-	    	<a href='#settings' aria-controls='settings' role='tab' data-toggle='tab'>Settings</a>
+	    	<a href='#settings' aria-controls='settings' role='tab' data-toggle='tab'>
+	    	<span class='glyphicon glyphicon-option-vertical' aria-hidden='true'></span>Settings</a>
 	    </li>
 	  </ul>
 	<div class='tab-content'>

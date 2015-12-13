@@ -4,10 +4,14 @@ $nombrecontacto="";
 //Almacenando registros
 if(isset($_POST["newcontacto"])){
 $nombrecontacto=$_POST["newnombrecontacto"];
+$cargocontacto=$_POST["newcargocontacto"];
+$telefonocontacto=$_POST["newtelefonocontacto"];
+$emailcontacto=$_POST["newemailcontacto"];
+$websitecontacto=$_POST["newwebsitecontacto"];
 $wpdb->query( 
 	$wpdb->prepare( 
-				"INSERT INTO dgpc_contacto (nombre) VALUES (%s)", 
-     			$nombrecontacto) 
+				"INSERT INTO dgpc_contacto (nombre,cargo,telefono,email,website) VALUES (%s,%s,%s,%s,%s)", 
+     			$nombrecontacto,$cargocontacto,$telefonocontacto,$emailcontacto,$websitecontacto) 
 	);
 	echo "
 		<div>
@@ -33,18 +37,22 @@ $wpdb->query(
 //Actualizacion
 if(isset($_POST["editcontacto"])){
 $id=$_POST["editcodigocontacto"];
-$nombrecontacto=$_POST["editnombrecontacto"];	
+$nombrecontacto=$_POST["editnombrecontacto"];
+$cargocontacto=$_POST["editcargocontacto"];
+$telefonocontacto=$_POST["edittelefonocontacto"];
+$emailcontacto=$_POST["editemailcontacto"];
+$websitecontacto=$_POST["editwebsitecontacto"];	
 $wpdb->query( 
 	$wpdb->prepare( 
-				"UPDATE dgpc_contacto SET nombre=%s WHERE idcontacto=%d", 
-     			$nombrecontacto,$id) 
+				"UPDATE dgpc_contacto SET nombre=%s, cargo=%s, telefono=%s, email=%s, website=%s WHERE idcontacto=%d", 
+     			$nombrecontacto,$cargocontacto,$telefonocontacto,$emailcontacto,$websitecontacto ,$id) 
 	);
 }
 //fin actualizacion
 //consultando registros
 $datoscontacto="";
 $datoscontacto=$wpdb->get_results( 
-		"select idcontacto,nombre from dgpc_contacto order by nombre"    
+		"select idcontacto,nombre,cargo,telefono,email,website from dgpc_contacto order by nombre"    
 	);
 echo "
 <script>
@@ -61,26 +69,44 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
    		var datos=$(this).val().split('|');
    		$('#editcodigocontacto').val(datos[0]);
    		$('#editnombrecontacto').val(datos[1]);
+   		$('#editcargocontacto').val(datos[2]);
+   		$('#edittelefonocontacto').val(datos[3]);
+   		$('#editemailcontacto').val(datos[4]);
+   		$('#editwebsitecontacto').val(datos[5]);
    		$('#ModalEditcontacto').modal();
 	});
 } );
 </script>
     <div role='tabpanel' class='tab-pane' id='contacto'>
 	    <form role='form' name=fcontacto1 method=post>
-	    	 <div class='row'>
-	    	 	<div class='col-xs-4'>
-	    	 		<label for=newnombrecontacto>Nombre</label>
-	    	 	</div>
-	    	 	<div class='col-xs-6'>
-	    	 		<input type=hidden name=tab id=tab value='contacto'>		
-	    			<input type=text name=newnombrecontacto id=newnombrecontacto class='form-control'> 
-	        	</div>
-	        	
+	    	 <div class='form-group col-md-5'>
+	    	 	<label for=newnombrecontacto>Nombre</label>
+	    	 	<input type=hidden name=tab id=tab value='contacto'>		
+	    		<input type=text name=newnombrecontacto id=newnombrecontacto class='form-control' required> 
+	        </div>
+	        <div class='form-group col-md-4'>
+	        	<label for=newcargocontacto>Cargo</label>
+	        	<input type=text name=newcargocontacto id=newcargocontacto class='form-control' required> 
+	        </div>
+	        <div class='form-group col-md-2'>
+	        	<label for=newtelefonocontacto>Teléfono</label>
+	        	<input type=text name=newtelefonocontacto id=newtelefonocontacto class='form-control' required> 
+	        </div>
+	        <div class='form-group col-md-6'>
+	        	<label for=newemailcontacto>Correo electrónico</label>
+	        	<input type=email name=newemailcontacto id=newemailcontacto class='form-control' required> 
+	        </div>
+	        <div class='form-group col-md-6'>
+	        	<label for=newwebsitecontacto>Dirección de sitio web</label>
+	        	<input type=url name=newwebsitecontacto id=newwebsitecontacto class='form-control' required> 
+	        </div>
+	        <div class='form-group col-md-1'>
 				<button type='submit' class='btn btn-success' name=newcontacto id=newcontacto value='ok'>
 					<span class='glyphicon glyphicon-plus'></span>
 				</button>
-	      	</div> 
+			</div>		
 	    </form>
+	    <div class='clear'></div>
 	    </br>
 	  
 			<div class='table-responsive'>
@@ -90,6 +116,18 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 						<th class='text-center'>Código</th>
 						<th class='text-center'>
 							Nombre
+						</th>
+						<th class='text-center'>
+							Cargo
+						</th>
+						<th class='text-center'>
+							Teléfono
+						</th>
+						<th class='text-center'>
+							Email
+						</th>
+						<th class='text-center'>
+							Website
 						</th>
 						<th class='text-center'>
 							
@@ -109,8 +147,20 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 						<td>".
 							$reg->nombre."
 						</td>
+						<td>".
+							$reg->cargo."
+						</td>
+						<td>".
+							$reg->telefono."
+						</td>
+						<td>".
+							$reg->email."
+						</td>
+						<td>".
+							$reg->website."
+						</td>
 						<td>
-							<button type='button' class='btn btn-success editarcontacto' name=editarcontacto id=editarcontacto value='".$reg->idcontacto."|".$reg->nombre."'>
+							<button type='button' class='btn btn-success editarcontacto' name=editarcontacto id=editarcontacto value='".$reg->idcontacto."|".$reg->nombre."|".$reg->cargo."|".$reg->telefono."|".$reg->email."|".$reg->website."'>
 								<span class='glyphicon glyphicon-pencil'></span>
 							</button>       
 							
@@ -126,9 +176,10 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 				echo"</tbody>	
 				</table>
 	    	</div>
+
 	 ";
  ?>
- 	</div>
+</div>
 
 <div>
  <!-- Modal EDIT -->
@@ -138,16 +189,31 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Actualización de instituciones</h4>
+	          <h4 class="modal-title">Actualización de Contactos</h4>
 	        </div>
 	        <div class="modal-body">
 		    	 	<div class='form-group'>
-		    	 		<label for=editnombrecontacto>Nombre de la Institución</label>
+		    	 		<label for=editnombrecontacto>Nombre del Contacto</label>
 		    	 		  <input type=hidden name=editcodigocontacto id=editcodigocontacto>
 		    	 		  <input type=hidden name=tab id=tab value='contacto'>
 		    	 		<input type=text required name=editnombrecontacto id=editnombrecontacto class='form-control'>             	
 		      		</div> 
-		    
+					<div class='form-group'>
+	        			<label for=editcargocontacto>Cargo</label>
+	        			<input type=text name=editcargocontacto id=editcargocontacto class='form-control' required> 
+	        		</div>
+			        <div class='form-group'>
+			        	<label for=edittelefonocontacto>Teléfono</label>
+			        	<input type=text name=edittelefonocontacto id=edittelefonocontacto class='form-control' required> 
+			        </div>
+			        <div class='form-group'>
+			        	<label for=editemailcontacto>Correo electrónico</label>
+			        	<input type=email name=editemailcontacto id=editemailcontacto class='form-control' required> 
+			        </div>
+			        <div class='form-group'>
+			        	<label for=editwebsitecontacto>Dirección de sitio web</label>
+			        	<input type=url name=editwebsitecontacto id=editwebsitecontacto class='form-control' required> 
+			        </div>		    
 	        </div>
 	        <div class="modal-footer">
 	        	<button type='submit' class='btn btn-success' name=editcontacto id=editcontacto value=ok>
