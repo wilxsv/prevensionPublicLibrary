@@ -1,0 +1,28 @@
+<fulfillmentToken fulfillmentType="buy" auth="user" xmlns="http://ns.adobe.com/adept">
+  <distributor>urn:uuid:10f29be3-5a0c-4c83-aa86-4b4fd67ff954</distributor>
+  <operatorURL>http://acs.tagusbooks.com/fulfillment</operatorURL>
+  <transaction>LMp2Fy2UPuFr0W6dK1449976568768</transaction>
+  <expiration>2015-12-16T04:16:08+01:00</expiration>
+  <resourceItemInfo>
+    <resource>urn:uuid:9b702509-8feb-4e8e-9745-ed6b3be673ef</resource>
+    <resourceItem>0</resourceItem>
+    <metadata>
+      <dc:title xmlns:dc="http://purl.org/dc/elements/1.1/">Ética y responsabilidad empresarial</dc:title>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Camacho Laraña, Ildefonso</dc:creator>
+      <dc:publisher xmlns:dc="http://purl.org/dc/elements/1.1/">DESCLEE DE BROWUER</dc:publisher>
+      <dc:identifier xmlns:dc="http://purl.org/dc/elements/1.1/">urn:isbn:9788433036353</dc:identifier>
+      <dc:format xmlns:dc="http://purl.org/dc/elements/1.1/">application/epub+zip</dc:format>
+      <dc:language xmlns:dc="http://purl.org/dc/elements/1.1/">es</dc:language>
+    </metadata>
+    <licenseToken>
+      <resource>urn:uuid:9b702509-8feb-4e8e-9745-ed6b3be673ef</resource>
+      <permissions>
+        <display/>
+        <excerpt/>
+        <print/>
+        <play/>
+      </permissions>
+    </licenseToken>
+  </resourceItemInfo>
+  <hmac>Ox+ujOdOwQtohddFHLCiSYbMcjo=</hmac>
+</fulfillmentToken>
