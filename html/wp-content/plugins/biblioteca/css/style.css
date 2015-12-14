@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700");
+
+#wpbody-content {
+    width: 99%;
+}
+.tab-pane {
+    padding: 10pt 0pt 10pt 0pt;
+}
+
+.tab-pane form div label {
+    font-size: medium;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus{
+    color: #ffffff;
+    background-color: #0066cc;
+    border-color: #0061c2
+}
+
+.glyphicon {
+    padding-right: 5px;
+}
+
+.nav-tabs {
+    font-size: 12px;
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    padding: 4px;
+}

@@ -10,6 +10,7 @@ echo "
 	    
 		
 	    <link href='".plugin_dir_url( __FILE__ )."bootstrap-3.3.6/css/dataTables.bootstrap.min.css' rel='stylesheet'>
+	    <link href='".plugin_dir_url( __FILE__ )."../css/style.css' rel='stylesheet'>
 	    <script src='".plugin_dir_url( __FILE__ )."bootstrap-3.3.6/js/jquery.dataTables.min.js'></script>
 	    <script src='".plugin_dir_url( __FILE__ )."bootstrap-3.3.6/js/dataTables.bootstrap.min.js'></script>
 ";
