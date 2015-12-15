@@ -442,7 +442,7 @@ $r=$wpdb->query(
 				    					foreach ($areas as $reg) {
                                             $grupo="grupo".$z;
 				    				?>
-				    				<th class='text-center'><?php echo $reg->nombre;?>
+				    				<th class='text-left'><?php echo $reg->nombre;?>
 				    								<?php
 				    								
 				    								$componentes=$wpdb->get_results($wpdb->prepare( 
