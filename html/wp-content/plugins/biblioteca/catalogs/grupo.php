@@ -4,12 +4,13 @@ $nombregrupo="";
 //Almacenando registros
 if(isset($_POST["newgrupo"])){
 $nombregrupo=$_POST["newnombregrupo"];
-$wpdb->query( 
+$r=$wpdb->query( 
 	$wpdb->prepare( 
 				"INSERT INTO dgpc_grupovulnerable (nombre) VALUES (%s)", 
      			$nombregrupo) 
 	);
-	echo "
+	if($r==1){
+		echo "
 		<div>
   			<div class='alert alert-success'>
     			<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
@@ -18,6 +19,17 @@ $wpdb->query(
   			</div>
 		</div>
 	";
+	}else{
+		echo "
+		<div>
+  			<div class='alert alert-warning'>
+    			<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+    			<strong>Se ha producido un error al intentar almacenar, compruebe los datos</strong> 
+    			
+  			</div>
+		</div>
+	";
+	}
 }
 //Fin guardar registros
 //Eliminando Reg

@@ -8,12 +8,13 @@ $cargocontacto=$_POST["newcargocontacto"];
 $telefonocontacto=$_POST["newtelefonocontacto"];
 $emailcontacto=$_POST["newemailcontacto"];
 $websitecontacto=$_POST["newwebsitecontacto"];
-$wpdb->query( 
+$r=$wpdb->query( 
 	$wpdb->prepare( 
 				"INSERT INTO dgpc_contacto (nombre,cargo,telefono,email,website) VALUES (%s,%s,%s,%s,%s)", 
      			$nombrecontacto,$cargocontacto,$telefonocontacto,$emailcontacto,$websitecontacto) 
 	);
-	echo "
+	if($r==1){
+		echo "
 		<div>
   			<div class='alert alert-success'>
     			<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
@@ -22,6 +23,17 @@ $wpdb->query(
   			</div>
 		</div>
 	";
+	}else{
+		echo "
+		<div>
+  			<div class='alert alert-warning'>
+    			<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+    			<strong>Se ha producido un error al intentar almacenar, compruebe los datos</strong> 
+    			
+  			</div>
+		</div>
+	";
+	}
 }
 //Fin guardar registros
 //Eliminando Reg

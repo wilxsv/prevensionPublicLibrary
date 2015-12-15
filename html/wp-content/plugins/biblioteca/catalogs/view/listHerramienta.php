@@ -64,3 +64,49 @@
  </div>
 </div>
 -->
+<div class='table-responsive'>
+        <table class='table table-hover table-bordered'>
+         <tr>
+          <td>Descripción</td>
+          <td><input type=text name=nombre required/></td>
+         </tr>
+         <tr>
+          <td>Idioma</td>
+          <td>
+           <select multiple>
+        <option value="es">Español</option>
+        <option value="en">Ingles</option>
+        <option value="gr">Aleman</option>
+       </select> 
+          </td>
+         </tr>
+         <tr>
+          <td>Subir archivo</td>
+          <td><input type=file id=pubArchivo name=pubArchivo multiple=multiple required /></td>
+         </tr>
+         <tr>
+          <td>Incio de publicación</td>
+          <td>
+           <input type='text' name="pubInicio" id='pubInicio' />
+            </td>
+         </tr>
+         <tr>
+          <td>Fin de publicación</td>
+          <td><input type=text name=pubFin id=pubFin required/></td>
+         </tr>
+         <tr>
+          <td>Acceso</td>
+          <td><select><option value=1>Publico</option><option value=0>Privado</option></select></td>
+         </tr>
+         <tr>
+          <td></td>
+          <td>
+           Guardar herramienta 
+           <button type='submit' class='btn btn-success' name=newclase id=newclase value='ok'>
+            <span class='glyphicon glyphicon-plus'></span>
+           </button>
+          </td>
+         </tr>
+        </table>
+       </div>
+      </div>
