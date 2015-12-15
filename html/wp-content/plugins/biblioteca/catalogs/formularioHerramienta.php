@@ -436,9 +436,11 @@ $r=$wpdb->query(
 				    		<table class='table'>
 				    			<tr class='success'>
 				    				<?php 
-				    				$opcionesComp=array();
+				    				$opcionesComp;
+                                    $z=1;
+
 				    					foreach ($areas as $reg) {
-				    				
+                                            $grupo="grupo".$z;
 				    				?>
 				    				<th class='text-center'><?php echo $reg->nombre;?>
 				    								<?php
@@ -447,14 +449,19 @@ $r=$wpdb->query(
 				    									"select dgpc_componente.idcomponente,dgpc_componente.nombre from dgpc_componente 
 				    									 where dgpc_componente.idarea=%d order by dgpc_componente.nombre" , $reg->idarea)    
 														);
-
 				    								foreach ($componentes as $c) {
-				    										$opcionesComp[$reg->nombre].="<input type=checkbox name=componente[] value='". $c->idcomponente. "'>".$c->nombre."<br>";
+                                                        if(isset($opcionesComp[$grupo])) {
+                                                            $opcionesComp[$grupo] .= "<input type=checkbox name=componente[] value='" . $c->idcomponente . "'>" . $c->nombre . "<br>";
+                                                        }else{
+                                                            $opcionesComp[$grupo] = "<input type=checkbox name=componente[] value='" . $c->idcomponente . "'>" . $c->nombre . "<br>";
+                                                        }
 				    									}	
 				    								?>	
 
 				    					</th>
-				    				<?php }?>
+				    				<?php
+                                        $z++;
+                                        }?>
 				    			</tr>
 				    			<tr>
 				    				<?php
