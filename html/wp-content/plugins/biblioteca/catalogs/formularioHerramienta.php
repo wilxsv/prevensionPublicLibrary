@@ -33,9 +33,11 @@ $preguntas=$wpdb->get_results(
 		"select  * from dgpc_contacto  order by dgpc_contacto.nombre"    
 		);
 */
+
 ?>
 <?php
 if(isset($_POST["newherramienta"])){
+	$id="";
 	$nombre=$_POST["nombre"];
 	$objetivo=$_POST["objetivo"];	
 	$idinstitucionelaboro=$_POST["idinstitucionelaboro"];
@@ -45,6 +47,11 @@ if(isset($_POST["newherramienta"])){
 	$fechaactualizacion=$_POST["fechaactualizacion"];
 	$idinstitucionpresenta=$_POST["institucionpresenta"];
 	$pais=$_POST["pais"];
+	$contacto=$_POST["newnombrecontacto"];
+	$cargo=$_POST["newcargocontacto"];
+	$telefono=$_POST["newtelefonocontacto"];
+	$email=$_POST["newemailcontacto"];
+	$website=$_POST["newwebsitecontacto"];
 	//Asumiendo que son excluyentes
 	$idcomponente=$_POST["componente"][0];
 	$idtipoherramienta=$_POST["tipo"][0];
@@ -55,14 +62,59 @@ $r=$wpdb->query(
 				"INSERT INTO  dgpc_herramienta ( nombre ,  objetivo , 
 					 idinstitucionelaboro ,  lugarelaboracion ,  fechaelaboracion , 
 					 lugaractualizacion ,  fechaactualizacion ,  idinstitucionpresenta , 
-					 idcomponente ,  idtipoherramienta ,  idclaseherramienta , pais ) 
-				VALUES (%s,%s,%d,%s,%s,%s,%s,%d,%d,%d,%d,%s)"
+					 idcomponente ,  idtipoherramienta ,  idclaseherramienta , pais,contacto,
+					 cargo,telefono,email,website ) 
+				VALUES (%s,%s,%d,%s,%s,%s,%s,%d,%d,%d,%d,%s,%s,%s,%s,%s,%s)"
 				,$nombre,$objetivo,$idinstitucionelaboro,$lugarelaboracion,$fechaelaboracion,
 				$lugaractualizacion,$fechaactualizacion,$idinstitucionpresenta,$idcomponente,
-				$idtipoherramienta,$idclaseherramienta,$pais
+				$idtipoherramienta,$idclaseherramienta,$pais,$contacto,$cargo,$telefono,$email,$website
 				)
 		);
+	$idh=$wpdb->insert_id;
+//	insertando los registros en las tablas intermedias.
+	//AmbitosXHerramienta
+	$ambitosid=$_POST["ambito"];
+	foreach ($ambitosid as $idambito) {
+			$wpdb->query($wpdb->prepare(
+					"INSERT INTO dgpc_ambitoherramienta(idambito,idherramienta)values(%d,%d)",$idambito,$idh 		
+			));
+	}
+
+	//Mecanismos de validacion
+	
+	$mecanismorespuesta=$_POST["mecanismorespuesta"];
+	foreach ($mecanismorespuesta as $id=>$respuesta) {
+		
+		$wpdb->query($wpdb->prepare(
+					"INSERT INTO dgpc_validacion(idcriterio,idherramienta,descripcion)values(%d,%d,%s)",$id,$idh,$respuesta 		
+			));
+	}
+//Grupos vulnerables
+	
+	$grupoid=$_POST["grupo"];
+	foreach ($grupoid as $id) {
+			$wpdb->query($wpdb->prepare(
+					"INSERT INTO dgpc_grupoherramienta(idgrupo,idherramienta,como)values(%d,%d,%s)",$id,$idh,'nada' 		
+			));
+	}
+//La herramienta incluye
+	
+	$incluyeid=$_POST["incluye"];
+	foreach ($incluyeid as $id) {
+			$wpdb->query($wpdb->prepare(
+					"INSERT INTO dgpc_herramientaincluye(iditem,idherramienta,pregunta)values(%d,%d,%s)",$id,$idh,'nada' 		
+			));
+	}
+//Las preguntas
+	
+	$preguntaid=$_POST["pregunta"];
+	foreach ($preguntaid as $id=>$respuesta) {
+			$wpdb->query($wpdb->prepare(
+					"INSERT INTO dgpc_preguntaherramienta(idpregunta,idherramienta,respuesta)values(%d,%d,%s)",$id,$idh,$respuesta 		
+			));
+	}
 	if($r==1){
+
 		echo "
 		<div>
   			<div class='alert alert-success'>
@@ -436,9 +488,11 @@ $r=$wpdb->query(
 				    		<table class='table'>
 				    			<tr class='success'>
 				    				<?php 
+				    				$z=1;
+				    				
 				    				$opcionesComp=array();
 				    					foreach ($areas as $reg) {
-				    				
+				    					$grupo="grupo".$z;
 				    				?>
 				    				<th class='text-center'><?php echo $reg->nombre;?>
 				    								<?php
@@ -449,12 +503,18 @@ $r=$wpdb->query(
 														);
 
 				    								foreach ($componentes as $c) {
-				    										$opcionesComp[$reg->nombre].="<input type=checkbox name=componente[] value='". $c->idcomponente. "'>".$c->nombre."<br>";
+				    										if(isset($opcionesComp[$grupo])){
+				    											$opcionesComp[$grupo].="<input type=checkbox name=componente[] value='". $c->idcomponente. "'>".$c->nombre."<br>";
+				    										}else{
+				    											$opcionesComp[$grupo]="<input type=checkbox name=componente[] value='". $c->idcomponente. "'>".$c->nombre."<br>";
+				    										}
 				    									}	
 				    								?>	
 
 				    					</th>
-				    				<?php }?>
+				    				<?php
+				    					$z++;
+				    				 }?>
 				    			</tr>
 				    			<tr>
 				    				<?php
@@ -589,7 +649,7 @@ $r=$wpdb->query(
 							echo "<tr><td colspan=2>".$m->nombre."</td>";
 							echo "<td colspan=4>
 							<input type=hidden name=mecanismoid[] value=".$m->idcriterio.">
-							<textarea name=mecanismorespuesta[]   cols=65 rows=3></textarea></td></tr>";
+							<textarea name=mecanismorespuesta[".$m->idcriterio."]   cols=65 rows=3></textarea></td></tr>";
 						}
 					?>
 				
@@ -674,7 +734,7 @@ $r=$wpdb->query(
 	  				<?php 
 	  					foreach ($preguntas as $p) {
 	  						echo "<tr><td colspan=6>".$p->pregunta."</td></tr>
-	  						<tr><td colspan=6><textarea name=pregunta[] cols=128 rows=4></textarea></td></tr>";
+	  						<tr><td colspan=6><textarea name=pregunta[".$p->idpregunta."] cols=128 rows=4></textarea></td></tr>";
 	  					}
 	  				?>	
 	  			<!--<tr>

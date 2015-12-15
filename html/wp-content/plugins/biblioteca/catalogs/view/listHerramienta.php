@@ -1,3 +1,20 @@
+<?php //consultando registros
+include("/../cabecera.php");
+global $wpdb;
+$herramientas=$wpdb->get_results( 
+    "select dgpc_herramienta.idherramienta, 
+    dgpc_herramienta.nombre, 
+    dgpc_componente.nombre as nombreComponente,
+     dgpc_tipoherramienta.nombre as nombreTipo, 
+     dgpc_claseherramienta.nombre as nombreClase
+    from dgpc_herramienta 
+    inner join dgpc_tipoherramienta on dgpc_herramienta.idtipoherramienta=dgpc_tipoherramienta.idtipo 
+    inner join dgpc_claseherramienta on dgpc_herramienta.idclaseherramienta=dgpc_claseherramienta.idclase 
+    inner join dgpc_componente on dgpc_herramienta.idcomponente=dgpc_componente.idcomponente 
+    inner join dgpc_area on dgpc_area.idarea=dgpc_componente.idarea 
+    order by dgpc_herramienta.idherramienta desc"    
+  );
+?>
 <div class="wrap">
  <h1>Listado de Herramientas registradas en la biblioteca</h1>
  <table class="wp-list-table widefat fixed striped posts">
@@ -13,11 +30,25 @@
    </tr>
   </thead>
   <tbody id="the-list">
-   <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-   <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-   <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-   <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-   <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <?php
+    foreach ($herramientas as $h) {
+      echo"
+         <tr>
+            <td>".$h->nombre."</td>
+            <td></td>
+            <td>".$h->nombreComponente."</td>
+            <td>".$h->nombreTipo."</td>
+            <td>".$h->nombreClase."</td>
+            <td></td>
+            <td>
+              <button type='button' class='btn btn-success publich' name=publich id=publich>
+                <span class='glyphicon glyphicon-pencil'></span>
+              </button> </td>
+          </tr>
+      ";
+    }
+   ?>
+   
   </tbody>
   <tfoot>
 	<th class="manage-column">Nombre</th>
@@ -64,49 +95,66 @@
  </div>
 </div>
 -->
-<div class='table-responsive'>
-        <table class='table table-hover table-bordered'>
-         <tr>
-          <td>Descripción</td>
-          <td><input type=text name=nombre required/></td>
-         </tr>
-         <tr>
-          <td>Idioma</td>
-          <td>
-           <select multiple>
-        <option value="es">Español</option>
-        <option value="en">Ingles</option>
-        <option value="gr">Aleman</option>
-       </select> 
-          </td>
-         </tr>
-         <tr>
-          <td>Subir archivo</td>
-          <td><input type=file id=pubArchivo name=pubArchivo multiple=multiple required /></td>
-         </tr>
-         <tr>
-          <td>Incio de publicación</td>
-          <td>
-           <input type='text' name="pubInicio" id='pubInicio' />
-            </td>
-         </tr>
-         <tr>
-          <td>Fin de publicación</td>
-          <td><input type=text name=pubFin id=pubFin required/></td>
-         </tr>
-         <tr>
-          <td>Acceso</td>
-          <td><select><option value=1>Publico</option><option value=0>Privado</option></select></td>
-         </tr>
-         <tr>
-          <td></td>
-          <td>
-           Guardar herramienta 
-           <button type='submit' class='btn btn-success' name=newclase id=newclase value='ok'>
-            <span class='glyphicon glyphicon-plus'></span>
+<!-- Modal EDIT -->
+  <div class="modal fade" id="ModalPublicacion" role="dialog"  tabindex="-1">
+    <form role='form' name=fpublicacion method=post>
+      <div class="modal-dialog modal-sm" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Publicar Herramienta</h4>
+          </div>
+          <div class="modal-body">
+            <div class='form-group'>
+              <label for=descripcion>Descripción</label>
+                <input type=hidden name=codigoherramienta id=ecodigoherramienta>
+                <input type=text required name=descripcion id=descripcion class='form-control'>               
+              </div> 
+            <div class='form-group'>
+                <label for=idioma>Idioma</label>
+                <select name=idioma>
+                  <option value="es">Español</option>
+                  <option value="en">Ingles</option>
+                  <option value="gr">Aleman</option>
+                </select>
+            </div>  
+            <div class='form-group'>
+                <label for=idioma>Archivo</label>
+                <input type=file id=pubArchivo name=pubArchivo multiple=multiple required />  
+            </div>  
+            <div class='form-group'>
+                <label for=idioma>Inicio de Publicación</label>
+                <input type='text' name="pubInicio" id='pubInicio' />  
+            </div>  
+            <div class='form-group'>
+                <label for=idioma>Fin de Publicación</label>
+                <input type=text name=pubFin id=pubFin required/>
+            </div>  
+            <div class='form-group'>
+                <label for=idioma>Acceso</label>
+                <select name=acceso>
+                  <option value=1>Publico</option>
+                  <option value=0>Privado</option>
+                  </select>
+            </div>  
+            <button type='submit' class='btn btn-success' name=newclase id=newclase value='ok'>
+            <span class='glyphicon glyphicon-plus'>Publicar</span>
            </button>
-          </td>
-         </tr>
-        </table>
-       </div>
+          </div>
+          <div class="modal-footer">
+            <button type='submit' class='btn btn-success' name=editarea id=editarea value=ok>
+          <span class='glyphicon glyphicon-ok'></span>
+        </button> 
+              <button type="button" class="btn btn-warning" data-dismiss="modal">
+                <span class='glyphicon glyphicon-ban-circle'></span>  
+              </button>
+          </div>
+        </div>
       </div>
+    </form>
+  </div>
+  <script>
+  $('.publich').click(function() {
+      $('#ModalPublicacion').modal();
+  });
+  </script>

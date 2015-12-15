@@ -85,8 +85,13 @@ if(count($user_count)==0){
                 `idtipoherramienta` int(11) NOT NULL,
                 `idclaseherramienta` int(11) NOT NULL,
                 `idioma` varchar(45) DEFAULT NULL,
-                `pais` varchar(45) DEFAULT NULL
-              ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                `pais` varchar(45) DEFAULT NULL,
+                `contacto` varchar(50) NOT NULL,
+                `cargo` varchar(60) NOT NULL,
+                `telefono` varchar(15) NOT NULL,
+                `email` varchar(60) NOT NULL,
+                `website` varchar(100) NOT NULL
+                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
               CREATE TABLE `dgpc_herramientaincluye` (
                 `iditem` int(11) NOT NULL,
