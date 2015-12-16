@@ -121,12 +121,17 @@ if(count($user_count)==0){
               ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
               CREATE TABLE `dgpc_publicacion` (
-                `idpublicacion` int(11) NOT NULL,
-                `idherramienta` int(11) NOT NULL,
-                `archivo` varchar(255) NOT NULL,
-                `portada` varchar(255) DEFAULT NULL,
-                `tipoarchivo` varchar(45) DEFAULT NULL,
-                `fechaPublicacion` date DEFAULT NULL
+              `idpublicacion` int(11) NOT NULL,
+              `idherramienta` int(11) NOT NULL,
+              `archivo` varchar(255) NOT NULL,
+              `portada` varchar(255) DEFAULT NULL,
+              `tipoarchivo` varchar(45) DEFAULT NULL,
+              `fechaInicio` date DEFAULT NULL,
+              `fechaFin` date NOT NULL,
+              `descripcion` text NOT NULL,
+              `idioma` varchar(25) NOT NULL,
+              `acceso` varchar(25) NOT NULL,
+              `peso` double NOT NULL
               ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
               CREATE TABLE `dgpc_tipoherramienta` (
