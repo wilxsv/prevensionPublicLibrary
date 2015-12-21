@@ -2,10 +2,11 @@
 /*
 Plugin Name: Biblioteca Virtual
 Description: Administración de Herramientas virtuales de la DGPC.
-Author: Daniel Sorto
-Version: 0.1
+Author: [Dirección General de Proteccion Civil.]
+Version: 0.6
 */
 register_activation_hook( __FILE__, 'createDB' );
+add_action('admin_menu', 'setup_menu');
 add_action('admin_menu', 'setup_menu');
 
 function createDB(){
@@ -21,7 +22,7 @@ function FormHerramientas(){
 }
 	
 function listadoHerramienta(){
-	require('catalogs/view/listHerramienta.php');
+	require('view/listHerramienta.php');
 }
 function loadArea(){
 	require('area.php');
@@ -30,4 +31,14 @@ function parametros(){
 
 	include('catalogs/catalogos.php');
 }
+
+function viewLateral(){
+	include('view/lateralSearch.php');
+}
+function viewContent(){
+
+	include('view/contentSearch.php');
+}
+
+//the_content
 ?>
