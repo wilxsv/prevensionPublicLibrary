@@ -47,10 +47,10 @@ echo "</br>
        <a href='#pregunta' aria-controls='pregunta' role='tab' data-toggle='tab'>
        <span class='glyphicon glyphicon-question-sign' aria-hidden='true'></span>Aplicabilidad ¿Cómo?</a>
     </li>
-    <li role='presentation'>
+   <!-- <li role='presentation'>
         <a href='#contacto' aria-controls='contacto' role='tab' data-toggle='tab'>
         <span class='glyphicon glyphicon-user' aria-hidden='true'></span>Contactos</a>
-    </li>
+    </li>-->
   </ul>
 <div class='tab-content'>";
 include('institucion.php');

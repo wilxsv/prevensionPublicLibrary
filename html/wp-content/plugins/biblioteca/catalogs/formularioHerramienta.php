@@ -56,18 +56,35 @@ if(isset($_POST["newherramienta"])){
 	$idcomponente=$_POST["componente"][0];
 	$idtipoherramienta=$_POST["tipo"][0];
 	$idclaseherramienta=$_POST["clase"][0];
+  $longitud=$_POST["longitud"];
+  $latitud=$_POST["latitud"];
+  $fechapresentacion=$_POST["fechapresentacion"];
 
-$r=$wpdb->query(
+  $fe = explode('/',$fechaelaboracion);
+  $fechaelaboracion = $fe[2].'-'.$fe[1].'-'.$fe[0];
+
+  $fa = explode('/',$fechaactualizacion);
+  $fechaactualizacion = $fa[2].'-'.$fa[1].'-'.$fa[0];
+
+  $fp = explode('/',$fechapresentacion);
+  $fechapresentacion = $fp[2].'-'.$fp[1].'-'.$fp[0];
+  //punto GEO longitud y latitud
+  $puntogeo="geomfromtext('POINT(".$longitud." ".$latitud.")')";
+   // REcuperando usuario activo
+  global $current_user;
+  get_currentuserinfo();
+
+  $r=$wpdb->query(
 			$wpdb->prepare(
 				"INSERT INTO  dgpc_herramienta ( nombre ,  objetivo , 
 					 idinstitucionelaboro ,  lugarelaboracion ,  fechaelaboracion , 
 					 lugaractualizacion ,  fechaactualizacion ,  idinstitucionpresenta , 
 					 idcomponente ,  idtipoherramienta ,  idclaseherramienta , pais,contacto,
-					 cargo,telefono,email,website ) 
-				VALUES (%s,%s,%d,%s,%s,%s,%s,%d,%d,%d,%d,%s,%s,%s,%s,%s,%s)"
+					 cargo,telefono,email,website,fechapresentacion,coordenada,iduser ) 
+				VALUES (%s,%s,%d,%s,%s,%s,%s,%d,%d,%d,%d,%s,%s,%s,%s,%s,%s,%s,$puntogeo,%d)"
 				,$nombre,$objetivo,$idinstitucionelaboro,$lugarelaboracion,$fechaelaboracion,
 				$lugaractualizacion,$fechaactualizacion,$idinstitucionpresenta,$idcomponente,
-				$idtipoherramienta,$idclaseherramienta,$pais,$contacto,$cargo,$telefono,$email,$website
+				$idtipoherramienta,$idclaseherramienta,$pais,$contacto,$cargo,$telefono,$email,$website,$fechapresentacion,$current_user->ID 
 				)
 		);
 	$idh=$wpdb->insert_id;
@@ -114,6 +131,13 @@ $r=$wpdb->query(
 			));
 	}
 	if($r==1){
+    //notificancion por email
+    $to = $email;
+    $subject = 'Registro de Herramienta Direccion General de Protección Civil';
+    $body = 'Por este medio se informa del registro correcto de la herramienta: <b>$nombre</b>.
+    <br>Presentada en fecha:$fechapresentacion.';
+    $headers = array('Content-Type: text/html; charset=UTF-8');
+    $remail=wp_mail( $to, $subject, $body, $headers );
 
 		echo "
 		<div>
@@ -167,14 +191,14 @@ $r=$wpdb->query(
 					<tr>
 						<th>Nombre de la herramienta</th>
 						<td>
-							<input type=text name=nombre id=nombre  size=35>
+							<textarea name=nombre id=nombre cols=85 rows=4></textarea>
 						</td>
 					</tr>
 					<tr>
 						<th>Objetivo de la herramienta
 						</th>
 						<td>
-							<input type=text name=objetivo  size=35>
+							<textarea name=objetivo cols=85 rows=5></textarea> 
 						</td>
 					</tr>
 					<tr>
@@ -451,6 +475,25 @@ $r=$wpdb->query(
 							<input id="fechaelaboracion" name=fechaelaboracion type="text" class="date-picker" size=9  />	       
 						</td>
 					</tr>
+          <tr>
+            <th>
+              Longitud del Lugar
+            </th>
+            <td>
+               
+              <input id="longitud" name=longitud type="number" step="any" size=15 maxlength="15">
+             
+             </td> 
+          </tr>      
+          <tr>
+            <th>
+              Latitud del Lugar
+            </th>
+            <td>
+              <input id="latitud" name=latitud type="number" step="any" size=15 maxlength="15">
+             </td> 
+          </tr>
+              
 					<tr>
 						<th>
 							Lugar y Fecha de actualización
@@ -478,6 +521,10 @@ $r=$wpdb->query(
 							</div>
 						</td>
 					</tr>
+          <tr>
+            <th>Fecha de presentación en la DGPC</th>
+            <td><input id="fechaapresentacion" name=fechapresentacion type="text" class="date-picker" size=9   /></td>
+          </tr>
 					<tr>
 						<th colspan=2 align=center>
 							Marque en la casilla el área y componente a la que pertenece la herramienta
@@ -551,13 +598,13 @@ $r=$wpdb->query(
 								if($cuenta%3==0){
 									if($cuenta==0){
 							 			echo "<td colspan=$col>
-							 			<input type=checkbox name=tipo[] value=".$t->idtipo.">".$t->nombre."<br>";
+							 			<input type=checkbox name=tipo[] value=".$t->idtipo.">".$t->nombre."</td>";
 							 		}else{
-							 			echo"</td><td colspan=$col>
-							 			<input type=checkbox name=tipo[] value=".$t->idtipo.">".$t->nombre."<br>";
+							 			echo"<tr><td colspan=$col>
+							 			<input type=checkbox name=tipo[] value=".$t->idtipo.">".$t->nombre."</td>";
 							 		}
 							 	}else{
-							 		echo "<input type=checkbox name=tipo[] value=".$t->idtipo.">".$t->nombre."<br>";
+							 		echo "<td colspan=$col><input type=checkbox name=tipo[] value=".$t->idtipo.">".$t->nombre."</td>";
 							 	}	
 							 	$cuenta++;	
 							}
@@ -582,13 +629,13 @@ $r=$wpdb->query(
 									if($cuenta%3==0){
 											if($cuenta==0){
 												echo"<td colspan=$col>
-												<input type=checkbox name=clase[] value=".$c->idclase.">".$c->nombre."<br>";
+												<input type=checkbox name=clase[] value=".$c->idclase.">".$c->nombre."</td>";
 											}else{
-												echo"</td><td colspan=$col>
-												<input type=checkbox name=clase[] value=".$c->idclase.">".$c->nombre."<br>";
+												echo"<tr><td colspan=$col>
+												<input type=checkbox name=clase[] value=".$c->idclase.">".$c->nombre."</td>";
 											}
 									}else{
-										echo "<input type=checkbox name=clase[] value=".$c->idclase.">".$c->nombre."<br>";
+										echo "<td colspan=$col><input type=checkbox name=clase[] value=".$c->idclase.">".$c->nombre."</td>";
 									}	
 									$cuenta++;		
 								}
@@ -616,16 +663,15 @@ $r=$wpdb->query(
 									if($cuenta==0){
 										echo"
 										<td colspan=$col>
-										<input type=checkbox name=ambito[] value=".$a->idambito.">".$a->nombre."<br>";
+										<input type=checkbox name=ambito[] value=".$a->idambito.">".$a->nombre."</td>";
 									}else{
-										echo"
-										</td><td colspan=$col>
-										<input type=checkbox name=ambito[] value=".$a->idambito.">".$a->nombre."<br>";
+										echo"<tr><td colspan=$col>
+										<input type=checkbox name=ambito[] value=".$a->idambito.">".$a->nombre."</td>";
 									}
 									
 
 								}else{
-								echo "<input type=checkbox name=ambito[] value=".$a->idambito.">".$a->nombre."<br>";
+								echo "<td colspan=$col><input type=checkbox name=ambito[] value=".$a->idambito.">".$a->nombre."</td>";
 
 							}
 							$cuenta++;
@@ -655,7 +701,7 @@ $r=$wpdb->query(
 				
 				
 				<tr class=success>
-					<th class='text-center' colspan=6>Que grupos vulnerables afecta</th>
+					<th class='text-center' colspan=6>QUÉ GRUPOS VULNERABLES AFECTA</th>
 				</tr>
 				<tr>
 				 <td colspan=6>
@@ -671,14 +717,14 @@ $r=$wpdb->query(
 											if($cuenta==0){
 											echo"
 												<td colspan=$col>
-												<input type=checkbox name=grupo[] value=".$g->idgrupo.">".$g->nombre."<br>";
+												<input type=checkbox name=grupo[] value=".$g->idgrupo.">".$g->nombre."</td>";
 											}else{
 												echo"
-													</td><td colspan=$col>
-													<input type=checkbox name=grupo[] value=".$g->idgrupo.">".$g->nombre."<br>";
+													<tr><td colspan=$col>
+													<input type=checkbox name=grupo[] value=".$g->idgrupo.">".$g->nombre."</td>";
 											}
 										}else{
-											echo "<input type=checkbox name=grupo[] value=".$g->idgrupo.">".$g->nombre."<br>";
+											echo "<td colspan=$col><input type=checkbox name=grupo[] value=".$g->idgrupo.">".$g->nombre."</td>";
 										}
 										$cuenta++;		
 									}
@@ -706,14 +752,14 @@ $r=$wpdb->query(
 												if($cuenta==0){
 													echo"
 														<td colspan=$col>
-														<input type=checkbox name=incluye[] value=".$i->iditem.">".$i->nombre."<br>";
+														<input type=checkbox name=incluye[] value=".$i->iditem.">".$i->nombre."</td>";
 												}else{
 													echo"
-													</td><td colspan=$col>
-													<input type=checkbox name=incluye[] value=".$i->iditem.">".$i->nombre."<br>";
+													<tr><td colspan=$col>
+													<input type=checkbox name=incluye[] value=".$i->iditem.">".$i->nombre."</td>";
 												}
 											}else{
-												echo "<input type=checkbox name=incluye[] value=".$i->iditem.">".$i->nombre."<br>";
+												echo "<td colspan=$col><input type=checkbox name=incluye[] value=".$i->iditem.">".$i->nombre."</td>";
 											}
 											$cuenta++;			
 										}
@@ -789,26 +835,27 @@ $r=$wpdb->query(
 
 <script type="text/javascript">
 jQuery(document).ready(function() {
-    jQuery('#pubInicio').datepicker({
-        dateFormat : 'yy-mm-dd',
-        showOn: "button",
-        minDate: new Date(),
-		buttonImage: "images/date-button.gif",
-		buttonImageOnly: true,
-		buttonText: "Fecha de inicio"
-    });
-    jQuery('#pubFin').datepicker({
-        dateFormat : 'yy-mm-dd',
-        showOn: "button",
-		buttonImage: "images/date-button.gif",
-		buttonImageOnly: true,
-		buttonText: "Fecha de fin de publicacion",
-		minDate: $("#pubInicio").datepicker("getDate")
-
-    });
-
-    $(".date-picker").datepicker({dateFormat:'yy-mm-dd'});
-
+ $.datepicker.regional['es'] = {
+ closeText: 'Cerrar',
+ prevText: '<Ant',
+ nextText: 'Sig>',
+ currentText: 'Hoy',
+ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+ monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+ dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+ dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+ dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+ weekHeader: 'Sm',
+ dateFormat: 'dd/mm/yy',
+ changeMonth: true,
+ changeYear: true, 
+ firstDay: 1,
+ isRTL: false,
+ showMonthAfterYear: false,
+ yearSuffix: ''
+ };
+ $.datepicker.setDefaults($.datepicker.regional['es']);
+    $(".date-picker").datepicker();
 
 });
 </script>

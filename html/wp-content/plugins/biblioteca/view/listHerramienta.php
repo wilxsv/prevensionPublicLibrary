@@ -1,5 +1,5 @@
 <?php 
-include(plugin_dir_path( __FILE__ )."../cabecera.php");
+include(plugin_dir_path( __FILE__ )."../catalogs/cabecera.php");
 global $wpdb;
 if(isset($_POST["newpublicacion"])){
   $idherramienta=$_POST["idherramienta"];
@@ -9,7 +9,35 @@ if(isset($_POST["newpublicacion"])){
   $pubInicio=$_POST["pubInicio"];
   $pubFin=$_POST["pubFin"];
   $acceso=$_POST["acceso"];
-  $path=plugin_dir_path( __FILE__ );
+
+  $fi = explode('/',$pubInicio);
+  $pubInicio = $fi[2].'-'.$fi[1].'-'.$fi[0];
+
+  $ff = explode('/',$pubFin);
+  $pubFin = $ff[2].'-'.$ff[1].'-'.$ff[0];
+
+    $darea=$wpdb->get_col(
+        $wpdb->prepare("
+            select dgpc_area.nombre from dgpc_area inner join dgpc_componente
+            on dgpc_area.idarea=dgpc_componente.idarea
+            inner join dgpc_herramienta on dgpc_componente.idcomponente=dgpc_herramienta.idcomponente
+            where dgpc_herramienta.idherramienta=%d
+          ",$idherramienta)
+      );
+    $dtipo=$wpdb->get_col(
+        $wpdb->prepare("
+            select dgpc_tipoherramienta.nombre from dgpc_tipoherramienta 
+            inner join dgpc_herramienta on dgpc_tipoherramienta.idtipo=dgpc_herramienta.idtipoherramienta 
+         where dgpc_herramienta.idherramienta=%d
+          ",$idherramienta)
+      );
+   if(!file_exists(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_")){
+      mkdir(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_");
+    }
+     if(!file_exists(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_/_".$dtipo[0])."_"){
+      mkdir(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_/_".$dtipo[0]."_");
+    }
+    $path=plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_/_".$dtipo[0]."_/";
   //almacenando la publicacion
   $r=$wpdb->query(
           $wpdb->prepare(
@@ -21,8 +49,10 @@ if(isset($_POST["newpublicacion"])){
             )
 
     );
-  //Copiando archivo falta chequear el path segun lo indico William
+  //Copiando archivo falta chequear el path segun lo indico William biblioDocs/_AREA_/_TIPO_
   if($r==1){
+   
+   
     @copy($archivo["tmp_name"],$path.$archivo["name"]);
       
   } 
@@ -201,7 +231,7 @@ $herramientas=$wpdb->get_results(
   });
 
 jQuery(document).ready(function() {
-$.datepicker.regional['es'] = {
+ $.datepicker.regional['es'] = {
  closeText: 'Cerrar',
  prevText: '<Ant',
  nextText: 'Sig>',
@@ -222,14 +252,9 @@ $.datepicker.regional['es'] = {
  };
  $.datepicker.setDefaults($.datepicker.regional['es']);
 
-    $("#pubInicio").datepicker({dateFormat:'dd/mm/yy'});
-    //$("#pubFin").datepicker({dateFormat:'yy-mm-dd'});
-     $('#pubFin').datepicker({
-           dateFormat:'yy-mm-dd'
-           
-        });
-        $("#pubInicio").on("change", function (e) {
-
+    $("#pubInicio").datepicker();
+    $('#pubFin').datepicker();
+    $("#pubInicio").on("change", function (e) {
             $('#pubFin').datepicker('option', 'minDate', $(this).val()); 
         });
         $("#pubFin").on("change", function (e) {

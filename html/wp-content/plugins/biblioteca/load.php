@@ -72,26 +72,29 @@ if(count($user_count)==0){
               ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
               CREATE TABLE `dgpc_herramienta` (
-                `idherramienta` int(11) NOT NULL,
-                `nombre` varchar(255) NOT NULL,
-                `objetivo` varchar(255) NOT NULL,
-                `idinstitucionelaboro` int(11) NOT NULL,
-                `lugarelaboracion` varchar(255) NOT NULL,
-                `fechaelaboracion` date NOT NULL,
-                `lugaractualizacion` varchar(255) NOT NULL,
-                `fechaactualizacion` date NOT NULL,
-                `idinstitucionpresenta` int(11) NOT NULL,
-                `idcomponente` int(11) NOT NULL,
-                `idtipoherramienta` int(11) NOT NULL,
-                `idclaseherramienta` int(11) NOT NULL,
-                `idioma` varchar(45) DEFAULT NULL,
-                `pais` varchar(45) DEFAULT NULL,
-                `contacto` varchar(50) NOT NULL,
-                `cargo` varchar(60) NOT NULL,
-                `telefono` varchar(15) NOT NULL,
-                `email` varchar(60) NOT NULL,
-                `website` varchar(100) NOT NULL
-                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+              `idherramienta` int(11) NOT NULL,
+              `nombre` varchar(255) NOT NULL,
+              `objetivo` varchar(255) NOT NULL,
+              `idinstitucionelaboro` int(11) NOT NULL,
+              `lugarelaboracion` varchar(255) NOT NULL,
+              `fechaelaboracion` date NOT NULL,
+              `lugaractualizacion` varchar(255) NOT NULL,
+              `fechaactualizacion` date NOT NULL,
+              `idinstitucionpresenta` int(11) NOT NULL,
+              `idcomponente` int(11) NOT NULL,
+              `idtipoherramienta` int(11) NOT NULL,
+              `idclaseherramienta` int(11) NOT NULL,
+              `idioma` varchar(45) DEFAULT NULL,
+              `pais` varchar(45) DEFAULT NULL,
+              `contacto` varchar(50) NOT NULL,
+              `cargo` varchar(60) NOT NULL,
+              `telefono` varchar(15) NOT NULL,
+              `email` varchar(60) NOT NULL,
+              `website` varchar(100) NOT NULL,
+              `fechapresentacion` date NOT NULL,
+              `coordenada` point NOT NULL,
+              `iduser` int(11) NOT NULL
+              ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
               CREATE TABLE `dgpc_herramientaincluye` (
                 `iditem` int(11) NOT NULL,
