@@ -9,13 +9,10 @@ if(isset($_POST["newpublicacion"])){
   $pubInicio=$_POST["pubInicio"];
   $pubFin=$_POST["pubFin"];
   $acceso=$_POST["acceso"];
-
   $fi = explode('/',$pubInicio);
   $pubInicio = $fi[2].'-'.$fi[1].'-'.$fi[0];
-
   $ff = explode('/',$pubFin);
   $pubFin = $ff[2].'-'.$ff[1].'-'.$ff[0];
-
     $darea=$wpdb->get_col(
         $wpdb->prepare("
             select dgpc_area.nombre from dgpc_area inner join dgpc_componente
@@ -51,14 +48,12 @@ if(isset($_POST["newpublicacion"])){
     );
   //Copiando archivo falta chequear el path segun lo indico William biblioDocs/_AREA_/_TIPO_
   if($r==1){
-   
-   
+
+  //Copiando archivo falta chequear el path segun lo indico William
+  if($r==1){
     @copy($archivo["tmp_name"],$path.$archivo["name"]);
       
   } 
-  
-
- 
 }
 $herramientas=$wpdb->get_results( 
     "select dgpc_herramienta.idherramienta, 
@@ -82,7 +77,6 @@ $herramientas=$wpdb->get_results(
   <thead>
    <tr>
 	<th class="manage-column">Nombre</th>
-
     <th class="manage-column">Componente</th>
     <th class="manage-column">Tipo</th>
     <th class="manage-column">Clase</th>
@@ -113,8 +107,7 @@ $herramientas=$wpdb->get_results(
   </tbody>
   <tfoot>
 	<th class="manage-column">Nombre</th>
-  
-    <th class="manage-column">Componente</th>
+     <th class="manage-column">Componente</th>
     <th class="manage-column">Tipo</th>
     <th class="manage-column">Clase</th>
     <th class="manage-column">Peso</th>
@@ -255,7 +248,33 @@ jQuery(document).ready(function() {
     $("#pubInicio").datepicker();
     $('#pubFin').datepicker();
     $("#pubInicio").on("change", function (e) {
-            $('#pubFin').datepicker('option', 'minDate', $(this).val()); 
+
+ /*   jQuery('#pubInicio').datepicker({
+        dateFormat : 'yy-mm-dd',
+        showOn: "button",
+        minDate: new Date(),
+    buttonImage: "images/date-button.gif",
+    buttonImageOnly: true,
+    buttonText: "Fecha de inicio"
+    });
+    jQuery('#pubFin').datepicker({
+        dateFormat : 'yy-mm-dd',
+        showOn: "button",
+    buttonImage: "images/date-button.gif",
+    buttonImageOnly: true,
+    buttonText: "Fecha de fin de publicacion",
+    minDate: $("#pubInicio").datepicker("getDate")
+
+    });
+*/
+    $("#pubInicio").datepicker({dateFormat:'yy-mm-dd'});
+    //$("#pubFin").datepicker({dateFormat:'yy-mm-dd'});
+     $('#pubFin').datepicker({
+           dateFormat:'yy-mm-dd'
+           
+        });
+        $("#pubInicio").on("change", function (e) {
+			$('#pubFin').datepicker('option', 'minDate', $(this).val()); 
         });
         $("#pubFin").on("change", function (e) {
             $('#pubInicio').datepicker('option', 'maxDate', $(this).val());
