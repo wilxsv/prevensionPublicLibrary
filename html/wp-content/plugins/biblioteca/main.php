@@ -1,12 +1,13 @@
 <?php
 /*
-Plugin Name: Biblioteca Virtual
-Description: Administración de Herramientas virtuales de la DGPC.
-Author: [Dirección General de Proteccion Civil.]
-Version: 0.6
+ Plugin Name: Biblioteca Virtual
+ Description: Administración de Herramientas virtuales de la DGPC.
+ Version: 0.1
+ Author: Dirección General de Proteccion Civil.
+ Author URI: http://##########
+ License: GPLv3
 */
 register_activation_hook( __FILE__, 'createDB' );
-add_action('admin_menu', 'setup_menu');
 add_action('admin_menu', 'setup_menu');
 
 function createDB(){
@@ -40,5 +41,7 @@ function viewContent(){
 	include('view/contentSearch.php');
 }
 
+include("view/lateralSearch.php");
+$lateralView = new LateralView();
 //the_content
 ?>

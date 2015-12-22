@@ -11,7 +11,11 @@ if ( 'left' == $sidebar_position ) {
 	$sidebar_position_class = 'sidebar-hidden';
 }
 ?>
-
+<?php if (!is_page_template( 'contentSearch.php' ) ) { ?>
+  <div class="container">
+   <?php include WP_PLUGIN_DIR."/biblioteca/view/contentSearch.php"; ?>
+  </div>
+<?php } ?>
 <div id="page-wrapper" class="container <?php echo $sidebar_position_class; ?>">
 	<div class="row">
 		<div id="page-content" class="col-sm-7 col-md-8">

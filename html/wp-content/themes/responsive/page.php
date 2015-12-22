@@ -21,6 +21,11 @@ if ( !defined( 'ABSPATH' ) ) {
  */
 
 get_header(); ?>
+<?php if (!is_page_template( 'contentSearch.php' ) ) { ?>
+  <div class="wrapper">
+   <?php include WP_PLUGIN_DIR."/biblioteca/view/contentSearch.php"; ?>
+  </div>
+<?php } ?>
 
 <div id="content" class="<?php echo esc_attr( implode( ' ', responsive_get_content_classes() ) ); ?>">
 
