@@ -2,9 +2,9 @@
 include('cabecera.php');
 echo "<b>Ficha de recolección de información de herramienas desarrolladas para la gestión integral de riesgos.</b>";	    
 global $wpdb;
-$instituciones=$wpdb->get_results( 
+/*$instituciones=$wpdb->get_results( 
 		"select dgpc_institucion.idinstitucion,dgpc_institucion.nombre from dgpc_institucion order by dgpc_institucion.nombre"    
-		);
+		);*/
 $areas=$wpdb->get_results( 
 		"select distinct dgpc_area.idarea,dgpc_area.nombre from dgpc_area inner join dgpc_componente on dgpc_area.idarea=dgpc_componente.idarea  order by dgpc_area.nombre"    
 		);
@@ -449,17 +449,17 @@ if(isset($_POST["newherramienta"])){
 						</th>
 						<td>
 							<div id=selectinstituciones>
-							<select name=idinstitucionelaboro>
+							<select name=idinstitucionelaboro id=idinstitucionelaboro>
 								<?php
-									foreach ($instituciones as $reg) {
+									/* foreach ($instituciones as $reg) {
 										echo "<option value=".$reg->idinstitucion.">".$reg->nombre."</option>";
-									}
+									} */
 								?>
 							</select>
-							<!--
-							<button type=button class='btn btn-success'>
-								<span class='glyphicon glyphicon-search'></span>
-							</button>-->
+							
+							<button type=button class='btn btn-success' id=addinstitucion name=addinstitucion>
+								<span class='glyphicon glyphicon-plus'></span>
+							</button>
 							</div>
 
 						</td>
@@ -511,14 +511,18 @@ if(isset($_POST["newherramienta"])){
 						</th>
 						<td>
 							<div id=selectinstituciones>
-								<select name=institucionpresenta>
-								<?php
+								<select name=institucionpresenta id=institucionpresenta>
+								<?php /*
 										foreach ($instituciones as $reg) {
 											echo "<option value=".$reg->idinstitucion.">".$reg->nombre."</option>";
-										}
+										} */
 									?>
 								</select>
+                <button type=button class='btn btn-success' id=addinstitucion2 name=addinstitucion2>
+                <span class='glyphicon glyphicon-plus'></span>
+              </button>
 							</div>
+              
 						</td>
 					</tr>
           <tr>
@@ -832,7 +836,34 @@ if(isset($_POST["newherramienta"])){
 
 </div>
 </form>
-
+ <!-- Modal EDIT -->
+  <div class="modal fade" id="ModalAdd" role="dialog"  tabindex="-1">
+    <form role='form' name=f4 method=post>
+      <div class="modal-dialog modal-sm" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Registrar institución</h4>
+          </div>
+          <div class="modal-body">
+            <div class='form-group'>
+                  <label for=nombre>Nombre de Institución</label>
+                 <input type=text required name=nombreinstitucion id=nombreinstitucion class='form-control' value=''>               
+              </div> 
+        
+          </div>
+          <div class="modal-footer">
+            <button type="button"  class='btn btn-success' name=saveinstitucion id=saveinstitucion value=ok>
+          <span class='glyphicon glyphicon-ok'>Guardar</span>
+        </button> 
+              <button type="button" class="btn btn-warning" data-dismiss="modal">
+                <span class='glyphicon glyphicon-ban-circle'>Cancelar</span>  
+              </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 <script type="text/javascript">
 jQuery(document).ready(function() {
  $.datepicker.regional['es'] = {
@@ -857,6 +888,57 @@ jQuery(document).ready(function() {
  $.datepicker.setDefaults($.datepicker.regional['es']);
     $(".date-picker").datepicker();
 
+//funcion ajax
+    $('#addinstitucion').on('click', function(){
+        $('#ModalAdd').modal();
+
+      });
+    $('#saveinstitucion').on('click', function(){
+        registrarInstitucion();
+         $('#ModalAdd').modal('hide');
+
+    });   
+  function getInstituciones(arg){
+
+  $.post( 'admin-ajax.php', {action: 'get_instituciones'}, function(data)
+        {
+          var q = data.length;
+          
+            if ( q > 0 ) {
+                $('#idinstitucionelaboro').html('');
+                 $('#institucionpresenta').html('');
+              for ( var i = 0; i < q; i++ )
+                {
+                 
+                  if(arg==data[i].nombre){
+                    $('#idinstitucionelaboro').append("<option selected value="+data[i].value+">"+data[i].nombre+"</option>");
+                  
+                    $('#institucionpresenta').append("<option selected value="+data[i].value+">"+data[i].nombre+"</option>");
+                  }else{
+                    $('#idinstitucionelaboro').append("<option value="+data[i].value+">"+data[i].nombre+"</option>");
+                  
+                  $('#institucionpresenta').append("<option value="+data[i].value+">"+data[i].nombre+"</option>");
+                  }
+                  
+                }
+            } 
+        }, 'json');
+  }
+
+  function registrarInstitucion(){
+      $.post( 'admin-ajax.php', {action: 'insert_institucion',nombre: $('#nombreinstitucion').val()}, function(data)
+        {
+          var q = data.length;
+          
+            if ( q > 0 ) {
+               getInstituciones($('#nombreinstitucion').val());
+              
+                //$('#institucionpresenta option:contains('+$('#nombreinstitucion').val()+')').prop('selected', true);
+            } 
+        }, 'json');
+  }    
+  getInstituciones();
+  
 });
 </script>
 
