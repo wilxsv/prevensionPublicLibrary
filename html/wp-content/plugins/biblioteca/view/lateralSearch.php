@@ -37,7 +37,7 @@ class LateralView extends WP_Widget {
 		
 		if ( ! empty( $component ) && $component == 1 ) { echo "<p>component</p>"; }
 		if ( ! empty( $ramdom ) && $ramdom == 1 ) { echo "<p>ramdom</p>"; }
-		if ( ! empty( $images ) && $images == 1 ) { echo "<p>Ultimos</p>"; }
+		if ( ! empty( $images ) && $images == 1 ) { echo "<p>Mostrar imagenes</p>"; }
 
 		echo $after_widget;
     }
@@ -54,18 +54,18 @@ class LateralView extends WP_Widget {
         ?>
 		<p>
         	<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php echo "Titulo"; ?></label> 
-          	<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" ramdom="text" value="<?php echo $title; ?>" />
+          	<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
         </p>
 		<p>
-         	<input id="<?php echo $this->get_field_id( 'ramdom' ); ?>" name="<?php echo $this->get_field_name( 'ramdom' ); ?>" ramdom="checkbox" value="1" <?php checked( '1', $ramdom ); ?>/>
+         	<input id="<?php echo $this->get_field_id( 'ramdom' ); ?>" name="<?php echo $this->get_field_name( 'ramdom' ); ?>" type="checkbox" value="1" <?php checked( '1', $ramdom ); ?>/>
           	<label for="<?php echo $this->get_field_id( 'ramdom' ); ?>"><?php echo "Mostrar por tipo"; ?></label> 
         </p>
 		<p>
-          	<input id="<?php echo $this->get_field_id( 'component' ); ?>" name="<?php echo $this->get_field_name( 'component' ); ?>" ramdom="checkbox" value="1" <?php checked( '1', $component ); ?>/>
+          	<input id="<?php echo $this->get_field_id( 'component' ); ?>" name="<?php echo $this->get_field_name( 'component' ); ?>" type="checkbox" value="1" <?php checked( '1', $component ); ?>/>
           	<label for="<?php echo $this->get_field_id( 'component' ); ?>"><?php echo "Orden aleatorio"; ?></label> 
         </p>
         <p>
-        	<input id="<?php echo $this->get_field_id( 'images' ); ?>" name="<?php echo $this->get_field_name( 'images' ); ?>" ramdom="checkbox" value="1" <?php checked( '1', $images ); ?>/>
+        	<input id="<?php echo $this->get_field_id( 'images' ); ?>" name="<?php echo $this->get_field_name( 'images' ); ?>" type="checkbox" value="1" <?php checked( '1', $images ); ?>/>
         	<label for="<?php echo $this->get_field_id( 'images' ); ?>"><?php echo "Mostrar portadas"; ?></label>
         </p>
         <?php 

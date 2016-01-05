@@ -22,9 +22,6 @@ function FormHerramientas(){
 	require('catalogs/formularioHerramienta.php');
 }
 	
-function listadoHerramienta(){
-	require('view/listHerramienta.php');
-}
 function loadArea(){
 	require('area.php');
 } 
@@ -33,13 +30,6 @@ function parametros(){
 	include('catalogs/catalogos.php');
 }
 
-function viewLateral(){
-	include('view/lateralSearch.php');
-}
-function viewContent(){
-
-	include('view/contentSearch.php');
-}
 function ajax_get_instituciones(){
 	global $wpdb;
 	$instituciones=$wpdb->get_results( 
@@ -71,4 +61,11 @@ function ajax_insert_institucion(){
 
 }
 //the_content
+/**********************************************************************
+ *  Views and Widgets
+ * *******************************************************************/
+function listadoHerramienta()	{ require('view/listHerramienta.php'); }
+function viewContent()			{ include('view/contentSearch.php'); }
+include("view/lateralSearch.php");
+$lateralView = new LateralView();
 ?>
