@@ -865,6 +865,7 @@ if(isset($_POST["newherramienta"])){
     </form>
   </div>
 <script type="text/javascript">
+var selectActivo='';
 jQuery(document).ready(function() {
  $.datepicker.regional['es'] = {
  closeText: 'Cerrar',
@@ -891,35 +892,38 @@ jQuery(document).ready(function() {
 //funcion ajax
     $('#addinstitucion').on('click', function(){
         $('#ModalAdd').modal();
+        selectActivo=1;
 
       });
+    $('#addinstitucion2').on('click', function(){
+    $('#ModalAdd').modal();
+      selectActivo=2;
+      });
+        
     $('#saveinstitucion').on('click', function(){
         registrarInstitucion();
          $('#ModalAdd').modal('hide');
 
     });   
-  function getInstituciones(arg){
+  function getInstituciones(nombreIns,selectName){
 
   $.post( 'admin-ajax.php', {action: 'get_instituciones'}, function(data)
         {
           var q = data.length;
           
             if ( q > 0 ) {
-                $('#idinstitucionelaboro').html('');
-                 $('#institucionpresenta').html('');
+               
+                $(selectName).html('');
               for ( var i = 0; i < q; i++ )
                 {
                  
-                  if(arg==data[i].nombre){
-                    $('#idinstitucionelaboro').append("<option selected value="+data[i].value+">"+data[i].nombre+"</option>");
-                  
-                    $('#institucionpresenta').append("<option selected value="+data[i].value+">"+data[i].nombre+"</option>");
-                  }else{
-                    $('#idinstitucionelaboro').append("<option value="+data[i].value+">"+data[i].nombre+"</option>");
-                  
-                  $('#institucionpresenta').append("<option value="+data[i].value+">"+data[i].nombre+"</option>");
+                  if(selectName!=null){
+                      if(nombreIns==data[i].nombre){
+                           $(selectName).append("<option selected value="+data[i].value+">"+data[i].nombre+"</option>");
+                      }else{
+                           $(selectName).append("<option value="+data[i].value+">"+data[i].nombre+"</option>");
+                      }
                   }
-                  
                 }
             } 
         }, 'json');
@@ -929,16 +933,19 @@ jQuery(document).ready(function() {
       $.post( 'admin-ajax.php', {action: 'insert_institucion',nombre: $('#nombreinstitucion').val()}, function(data)
         {
           var q = data.length;
-          
             if ( q > 0 ) {
-               getInstituciones($('#nombreinstitucion').val());
+              if(selectActivo==1){
+               getInstituciones($('#nombreinstitucion').val(),'#idinstitucionelaboro');
+              }else{
+               getInstituciones($('#nombreinstitucion').val(),'#institucionpresenta');
+              }
               
-                //$('#institucionpresenta option:contains('+$('#nombreinstitucion').val()+')').prop('selected', true);
             } 
         }, 'json');
   }    
-  getInstituciones();
   
+  getInstituciones(null,'#idinstitucionelaboro');
+  getInstituciones(null,'#institucionpresenta');
 });
 </script>
 
