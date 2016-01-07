@@ -25,20 +25,28 @@ class LateralView extends WP_Widget {
 		global $wpdb;
 		
       	$title = apply_filters( 'widget_title', $instance['title'] );
-		$component = ! empty ( $instance['component'] ) ? $instance['component'] : '';
+		$limit = ! empty ( $instance['limit'] ) ? $instance['limit'] : '';
 		$ramdom = ! empty( $instance['ramdom'] ) ? $instance['ramdom'] : '';
 		$images = ! empty ( $instance['images'] ) ? $instance['images'] : ''; 
-		
+
         echo $before_widget;
         
         if ( ! empty( $title ) ) {
 			echo $before_title . $title . $after_title;
         }
+        $query = "SELECT nombre, objetivo";
+        if ( ! empty( $images ) ) { $query.=", portadaherramienta AS portada"; }
+        $query.=" FROM dgpc_herramienta";
+        if ( ! empty( $ramdom ) && $ramdom == 1 ) { $query.=" ORDER BY RAND()"; }
+        if ( ! empty( $limit ) && $limit > 2 ) { $query.=" LIMIT ".$limit; }
+        else { $query.=" LIMIT 2"; }
+        $lista=$wpdb->get_results($query);        
+        foreach ($lista as $i) {
+			echo "<p>".$i->nombre.'<br />';
+			if ( ! empty( $images ) ) { echo '<img src="'.get_site_url().'/'.$i->portada.'" alt="'.$i->nombre.'" height="300" width="200" />'; }
+			echo '</p>';
+		}
 		
-		if ( ! empty( $component ) && $component == 1 ) { echo "<p>component</p>"; }
-		if ( ! empty( $ramdom ) && $ramdom == 1 ) { echo "<p>ramdom</p>"; }
-		if ( ! empty( $images ) && $images == 1 ) { echo "<p>Mostrar imagenes</p>"; }
-
 		echo $after_widget;
     }
 	
@@ -48,7 +56,7 @@ class LateralView extends WP_Widget {
     public function form( $instance ) {
 
     	$title = isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : '';
-		$component = isset( $instance['component'] ) ? esc_attr( $instance['component'] ) : '';
+		$limit = isset( $instance['limit'] ) ? esc_attr( $instance['limit'] ) : '';
 		$ramdom = isset( $instance['ramdom'] ) ? esc_attr( $instance['ramdom']) : '';
 		$images = isset( $instance['images'] ) ? esc_attr( $instance['images'] ) : '';
         ?>
@@ -58,15 +66,15 @@ class LateralView extends WP_Widget {
         </p>
 		<p>
          	<input id="<?php echo $this->get_field_id( 'ramdom' ); ?>" name="<?php echo $this->get_field_name( 'ramdom' ); ?>" type="checkbox" value="1" <?php checked( '1', $ramdom ); ?>/>
-          	<label for="<?php echo $this->get_field_id( 'ramdom' ); ?>"><?php echo "Mostrar por tipo"; ?></label> 
-        </p>
-		<p>
-          	<input id="<?php echo $this->get_field_id( 'component' ); ?>" name="<?php echo $this->get_field_name( 'component' ); ?>" type="checkbox" value="1" <?php checked( '1', $component ); ?>/>
-          	<label for="<?php echo $this->get_field_id( 'component' ); ?>"><?php echo "Orden aleatorio"; ?></label> 
+          	<label for="<?php echo $this->get_field_id( 'ramdom' ); ?>"><?php echo "Orden aleatorio"; ?></label> 
         </p>
         <p>
         	<input id="<?php echo $this->get_field_id( 'images' ); ?>" name="<?php echo $this->get_field_name( 'images' ); ?>" type="checkbox" value="1" <?php checked( '1', $images ); ?>/>
         	<label for="<?php echo $this->get_field_id( 'images' ); ?>"><?php echo "Mostrar portadas"; ?></label>
+        </p>
+		<p>
+          	<input id="<?php echo $this->get_field_id( 'limit' ); ?>" name="<?php echo $this->get_field_name( 'limit' ); ?>" type="number" value="<?php echo $limit; ?>" />
+          	<label for="<?php echo $this->get_field_id( 'limit' ); ?>"><?php echo "Limite"; ?></label> 
         </p>
         <?php 
     }
@@ -78,7 +86,7 @@ class LateralView extends WP_Widget {
     	
 		$instance = $old_instance;
 		$instance['title'] = isset( $new_instance['title'] ) ? strip_tags( $new_instance['title'] ) : '';
-		$instance['component'] = isset( $new_instance['component'] ) ? strip_tags( $new_instance['component'] ) : '';
+		$instance['limit'] = isset( $new_instance['limit'] ) ? strip_tags( $new_instance['limit'] ) : '';
 		$instance['ramdom'] = isset( $new_instance['ramdom'] ) ? strip_tags( $new_instance['ramdom'] ) : '';
 		$instance['images'] = isset( $new_instance['images'] ) ? strip_tags( $new_instance['images'] ) : '';
 		

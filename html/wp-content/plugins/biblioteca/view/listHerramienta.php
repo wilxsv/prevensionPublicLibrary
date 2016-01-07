@@ -96,7 +96,6 @@ $herramientas=$wpdb->get_results(
       echo"
          <tr>
             <td>".$h->nombre."</td>
-  
             <td>".$h->nombreComponente."</td>
             <td>".$h->nombreTipo."</td>
             <td>".$h->nombreClase."</td>

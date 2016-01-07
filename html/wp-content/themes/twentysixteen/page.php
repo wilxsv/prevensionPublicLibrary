@@ -12,7 +12,19 @@
  */
 
 get_header(); ?>
+<?php
+$pagename = get_query_var('pagename');  
+if ( !$pagename && $id > 0 ) {  
+    // If a static page is set as the front page, $pagename will not be set. Retrieve it from the queried object  
+    $post = $wp_query->get_queried_object();  
+    $pagename = $post->post_name;  
+}
+echo $pagename;
+?>
 
+<div class="wrapper">
+   <?php include WP_PLUGIN_DIR."/biblioteca/view/contentSearch.php"; ?>
+  </div>
 <div id="primary" class="content-area">
 	<main id="main" class="site-main" role="main">
 		<?php
