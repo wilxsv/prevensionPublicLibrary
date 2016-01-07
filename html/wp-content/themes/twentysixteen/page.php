@@ -19,7 +19,6 @@ if ( !$pagename && $id > 0 ) {
     $post = $wp_query->get_queried_object();  
     $pagename = $post->post_name;  
 }
-echo $pagename;
 ?>
 
 <div class="wrapper">
