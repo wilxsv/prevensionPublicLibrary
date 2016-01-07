@@ -472,7 +472,7 @@ if(isset($_POST["newherramienta"])){
 							<input type=text name=lugarelaboracion  size=35>
 							<label for="fechaelaboracion" class="btn"><span class="glyphicon glyphicon-calendar"></span>
 							 </label>
-							<input id="fechaelaboracion" name=fechaelaboracion type="text" class="date-picker" size=9  />	       
+							<input id="fechaelaboracion" readonly="true" name=fechaelaboracion type="text" class="date-picker" size=9  />	       
 						</td>
 					</tr>
           <tr>
@@ -481,7 +481,7 @@ if(isset($_POST["newherramienta"])){
             </th>
             <td>
                
-              <input id="longitud" name=longitud type="number" step="any" size=15 maxlength="15">
+              <input id="longitud" name=longitud type="text" size=15 maxlength="15">
              
              </td> 
           </tr>      
@@ -490,7 +490,7 @@ if(isset($_POST["newherramienta"])){
               Latitud del Lugar
             </th>
             <td>
-              <input id="latitud" name=latitud type="number" step="any" size=15 maxlength="15">
+              <input id="latitud" name=latitud type="text"  size=15 maxlength="15">
              </td> 
           </tr>
               
@@ -502,7 +502,7 @@ if(isset($_POST["newherramienta"])){
 							<input type=text name=lugaractualizacion   size=35>
 							<label for="fechaactualizacion" class="btn"><span class="glyphicon glyphicon-calendar"></span>
 							 </label>
-							<input id="fechaactualizacion" name=fechaactualizacion type="text" class="date-picker" size=9   />
+							<input id="fechaactualizacion" readonly="true" name=fechaactualizacion type="text" class="date-picker" size=9   />
 						</td>
 					</tr>
 					<tr>
@@ -527,7 +527,11 @@ if(isset($_POST["newherramienta"])){
 					</tr>
           <tr>
             <th>Fecha de presentación en la DGPC</th>
-            <td><input id="fechaapresentacion" name=fechapresentacion type="text" class="date-picker" size=9   /></td>
+
+            <td>
+              <label for="fechapresentacion" class="btn"><span class="glyphicon glyphicon-calendar"></span>
+               </label>  
+            <input id="fechapresentacion" readonly="true" name=fechapresentacion type="text" class="date-picker" size=9   /></td>
           </tr>
 					<tr>
 						<th colspan=2 align=center>
@@ -835,6 +839,7 @@ if(isset($_POST["newherramienta"])){
 		</div>
 
 </div>
+</div>
 </form>
  <!-- Modal EDIT -->
   <div class="modal fade" id="ModalAdd" role="dialog"  tabindex="-1">
@@ -884,7 +889,10 @@ jQuery(document).ready(function() {
  firstDay: 1,
  isRTL: false,
  showMonthAfterYear: false,
- yearSuffix: ''
+ yearSuffix: '',
+ minDate: "-50Y", 
+ maxDate: 0,
+ yearRange: '-50:+0'
  };
  $.datepicker.setDefaults($.datepicker.regional['es']);
     $(".date-picker").datepicker();
@@ -946,6 +954,14 @@ jQuery(document).ready(function() {
   
   getInstituciones(null,'#idinstitucionelaboro');
   getInstituciones(null,'#institucionpresenta');
+});
+
+
+$('#ModalAdd').keypress(function(e) {
+    if (e.keyCode == $.ui.keyCode.ENTER) {
+          $('#saveinstitucion').click();
+          return false;
+          }
 });
 </script>
 
