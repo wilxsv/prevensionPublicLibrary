@@ -482,7 +482,9 @@ if(isset($_POST["newherramienta"])){
             <td>
                
               <input id="longitud" name=longitud type="text" size=15 maxlength="15">
-             
+              <button type=button class='btn btn-success' id=addPoint name=addPoint alt='Abrir mapa'>
+                <span class='glyphicon glyphicon-globe'></span>
+              </button>
              </td> 
           </tr>      
           <tr>
@@ -491,6 +493,7 @@ if(isset($_POST["newherramienta"])){
             </th>
             <td>
               <input id="latitud" name=latitud type="text"  size=15 maxlength="15">
+             
              </td> 
           </tr>
               
@@ -869,6 +872,9 @@ if(isset($_POST["newherramienta"])){
       </div>
     </form>
   </div>
+<?php
+include("geolocalizacion.php");
+?>  
 <script type="text/javascript">
 var selectActivo='';
 jQuery(document).ready(function() {
@@ -898,6 +904,16 @@ jQuery(document).ready(function() {
     $(".date-picker").datepicker();
 
 //funcion ajax
+    $('#addPoint').on('click', function(){
+        $('#ModalMapa').modal();
+        center_map_on_location();       
+
+      });
+ $('#savepoint').on('click', function(){
+        
+         $('#ModalMapa').modal('hide');
+
+    });  
     $('#addinstitucion').on('click', function(){
         $('#ModalAdd').modal();
         selectActivo=1;

@@ -9,3 +9,10 @@
 textarea,input[type="email"],input[type="url"],select,input[type="text"] {
     background-color: #D8D8D8;
 }
+input[type="checkbox"] {
+    margin-right:5px;
+     background-color: #D8D8D8;
+}
+#registroh{
+	font-size: 15px;
+}

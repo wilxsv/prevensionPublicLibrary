@@ -12,6 +12,10 @@ echo "
 	    <link href='".plugin_dir_url( __FILE__ )."bootstrap-3.3.6/css/dataTables.bootstrap.min.css' rel='stylesheet'>
 	    <script src='".plugin_dir_url( __FILE__ )."bootstrap-3.3.6/js/jquery.dataTables.min.js'></script>
 	    <script src='".plugin_dir_url( __FILE__ )."bootstrap-3.3.6/js/dataTables.bootstrap.min.js'></script>
+	    <script src='".plugin_dir_url( __FILE__ )."../js/leaflet.js'></script>
+	     <script src='".plugin_dir_url( __FILE__ )."../js/leaflet-geoip.js'></script>
+		
+		
 ";
 
 ?>
