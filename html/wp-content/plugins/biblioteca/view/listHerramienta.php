@@ -6,6 +6,7 @@ if(isset($_POST["newpublicacion"])){
   $idioma=$_POST["idioma"];
   $descripcion=$_POST["descripcion"];
   $archivo=$_FILES["pubArchivo"];
+  $archivoPortada=$_FILES["pubPortada"];
   $pubInicio=$_POST["pubInicio"];
   $pubFin=$_POST["pubFin"];
   $acceso=$_POST["acceso"];
@@ -32,10 +33,10 @@ if(isset($_POST["newpublicacion"])){
           ",$idherramienta)
       );
    if(!file_exists(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_")){
-      mkdir(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_");
+      @mkdir(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_");
     }
      if(!file_exists(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_/_".$dtipo[0])."_"){
-      mkdir(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_/_".$dtipo[0]."_");
+      @mkdir(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_/_".$dtipo[0]."_");
     }
     $path=plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_/_".$dtipo[0]."_/";
   //almacenando la publicacion
@@ -44,7 +45,7 @@ if(isset($_POST["newpublicacion"])){
             "INSERT INTO dgpc_publicacion(
               idherramienta,archivo,portada,tipoarchivo,
               fechaInicio,fechaFin,descripcion,idioma,acceso,peso) values(%d,%s,%s,%s,%s,%s,%s,%s,%s,%f)",
-              $idherramienta,$path.$archivo["name"],'portada',$archivo["type"],$pubInicio,
+              $idherramienta,$path.$archivo["name"],'../thums/'.$archivoPortada["name"],$archivo["type"],$pubInicio,
               $pubFin,$descripcion,$idioma,$acceso,$archivo["size"]
             )
 
@@ -54,6 +55,10 @@ if(isset($_POST["newpublicacion"])){
    
    
     @copy($archivo["tmp_name"],$path.$archivo["name"]);
+    //subiendo imagen de portada
+    $path=plugin_dir_path( __FILE__ )."../thums/";
+    @copy($archivoPortada["tmp_name"],$path.$archivoPortada["name"]);
+    
       
   } 
   
@@ -181,13 +186,17 @@ $herramientas=$wpdb->get_results(
             <div class='form-group'>
                 <label for=pubArchivo>Archivo</label>
                 <input type=file id=pubArchivo name=pubArchivo required class='form-control' />  
-            </div>  
+            </div>
+            <div class='form-group'>
+                <label for=pubPortada>Imagen de portada</label>
+                <input type=file id=pubPortada name=pubPortada required class='form-control' />  
+            </div>    
             <div class='form-group'>
                 <div class="col-md-4">
                 <label for=pubInicio>Inicio de Publicación</label>
                 </div>
                 <div class="col-md-4">
-                  <input type='text' name="pubInicio" id='pubInicio' class='form-control date-picker' />  
+                  <input type='text' required name="pubInicio" id='pubInicio' class='form-control date-picker' />  
                 </div> 
             </div>
             </br>&nbsp;
@@ -260,5 +269,19 @@ jQuery(document).ready(function() {
         $("#pubFin").on("change", function (e) {
             $('#pubInicio').datepicker('option', 'maxDate', $(this).val());
         });  
+});
+$("#pubPortada").on("change",function(){
+  var ext=['gif','jpg','jpeg','png'];
+  var v=$("#pubPortada").val().split('.').pop().toLowerCase();
+  var valido=false;
+    for(var i=0,n;n=ext[i];i++){
+        if(n.toLowerCase()==v)
+            valido=true
+    }
+   if(valido==false){
+    alert('Formato de portada no válido');
+    $("#pubPortada").val('');
+   } 
+
 });
 </script>
