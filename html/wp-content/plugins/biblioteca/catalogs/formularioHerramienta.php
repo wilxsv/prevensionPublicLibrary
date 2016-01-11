@@ -847,7 +847,7 @@ if(isset($_POST["newherramienta"])){
  <!-- Modal EDIT -->
   <div class="modal fade" id="ModalAdd" role="dialog"  tabindex="-1">
     <form role='form' name=f4 method=post>
-      <div class="modal-dialog modal-sm" >
+      <div class="modal-dialog modal-sm" style="position: inherit;" >
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
