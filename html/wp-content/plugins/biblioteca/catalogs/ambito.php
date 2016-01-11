@@ -4,6 +4,13 @@ $nombreambito="";
 //Almacenando registros
 if(isset($_POST["newambito"])){
 $nombreambito=$_POST["newnombreambito"];
+//Comprobar que el registro no exista
+$v=$wpdb->get_results(
+		
+				"select nombre from dgpc_ambitoaplicacion where nombre='".$nombreambito."'"
+			
+	);
+if($wpdb->num_rows==0){
 $r=$wpdb->query( 
 	$wpdb->prepare( 
 				"INSERT INTO dgpc_ambitoaplicacion (nombre) VALUES (%s)", 
@@ -30,6 +37,7 @@ $r=$wpdb->query(
 		</div>
 	";
 	}
+}	
 }
 //Fin guardar registros
 //Eliminando Reg
@@ -151,11 +159,11 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Actualización de instituciones</h4>
+	          <h4 class="modal-title">Edición de ámbito de aplicación</h4>
 	        </div>
 	        <div class="modal-body">
 		    	 	<div class='form-group'>
-		    	 		<label for=editnombreambito>Nombre de la Institución</label>
+		    	 		<label for=editnombreambito>Ámbito de aplicación</label>
 		    	 		  <input type=hidden name=editcodigoambito id=editcodigoambito>
 		    	 		  <input type=hidden name=tab id=tab value='ambito'>
 		    	 		<input type=text required name=editnombreambito id=editnombreambito class='form-control'>             	

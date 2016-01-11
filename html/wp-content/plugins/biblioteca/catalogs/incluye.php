@@ -4,6 +4,13 @@ $nombreincluye="";
 //Almacenando registros
 if(isset($_POST["newincluye"])){
 $nombreincluye=$_POST["newnombreincluye"];
+//Comprobar que el registro no exista
+$v=$wpdb->get_results(
+		
+				"select nombre from dgpc_itemincluye where nombre='".$nombreincluye."'"
+			
+	);
+if($wpdb->num_rows==0){
 $r=$wpdb->query( 
 	$wpdb->prepare( 
 				"INSERT INTO dgpc_itemincluye (nombre) VALUES (%s)", 
@@ -30,6 +37,7 @@ $r=$wpdb->query(
 		</div>
 	";
 	}
+ }	
 }
 //Fin guardar registros
 //Eliminando Reg
@@ -150,11 +158,11 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Actualización de instituciones</h4>
+	          <h4 class="modal-title">Edición de campos de acción</h4>
 	        </div>
 	        <div class="modal-body">
 		    	 	<div class='form-group'>
-		    	 		<label for=editnombreincluye>Nombre de la Institución</label>
+		    	 		<label for=editnombreincluye>Campo de acción</label>
 		    	 		  <input type=hidden name=editcodigoincluye id=editcodigoincluye>
 		    	 		  <input type=hidden name=tab id=tab value='incluye'>
 		    	 		<input type=text required name=editnombreincluye id=editnombreincluye class='form-control'>             	

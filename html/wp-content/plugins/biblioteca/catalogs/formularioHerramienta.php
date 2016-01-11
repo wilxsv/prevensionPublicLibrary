@@ -162,7 +162,7 @@ if(isset($_POST["newherramienta"])){
 	
 }
 ?>
-<form method="post"name=registroh id=registroh>
+<form method="post"name=registroh id=registroh onsubmit="return validar();">
 <div>
   	<!-- Nav tabs -->
 	  <ul class='nav nav-tabs' role='tablist' id='myTabs'>
@@ -198,7 +198,7 @@ if(isset($_POST["newherramienta"])){
 						<th>Objetivo de la herramienta
 						</th>
 						<td>
-							<textarea name=objetivo cols=85 rows=5></textarea> 
+							<textarea name='objetivo' cols=85 rows=5 id='objetivo'></textarea> 
 						</td>
 					</tr>
 					<tr>
@@ -469,7 +469,7 @@ if(isset($_POST["newherramienta"])){
 							Lugar y Fecha de elaboración
 						</th>
 						<td>
-							<input type=text name=lugarelaboracion  size=35>
+							<input type=text name=lugarelaboracion id=lugarelaboracion  size=35>
 							<label for="fechaelaboracion" class="btn"><span class="glyphicon glyphicon-calendar"></span>
 							 </label>
 							<input id="fechaelaboracion" readonly="true" name=fechaelaboracion type="text" class="date-picker" size=9  />	       
@@ -481,8 +481,8 @@ if(isset($_POST["newherramienta"])){
             </th>
             <td>
                
-              <input id="longitud" name=longitud type="text" size=15 maxlength="15">
-              <button type=button class='btn btn-success' id=addPoint name=addPoint alt='Abrir mapa'>
+              <input id="longitud" name='longitud' type="text" size='15' maxlength="15">
+              <button type='button' class='btn btn-success' id='addPoint' name='addPoint' alt='Abrir mapa'>
                 <span class='glyphicon glyphicon-globe'></span>
               </button>
              </td> 
@@ -502,7 +502,7 @@ if(isset($_POST["newherramienta"])){
 							Lugar y Fecha de actualización
 						</th>
 						<td>
-							<input type=text name=lugaractualizacion   size=35>
+							<input type=text name=lugaractualizacion id=lugaractualizacion   size=35>
 							<label for="fechaactualizacion" class="btn"><span class="glyphicon glyphicon-calendar"></span>
 							 </label>
 							<input id="fechaactualizacion" readonly="true" name=fechaactualizacion type="text" class="date-picker" size=9   />
@@ -847,7 +847,7 @@ if(isset($_POST["newherramienta"])){
  <!-- Modal EDIT -->
   <div class="modal fade" id="ModalAdd" role="dialog"  tabindex="-1">
     <form role='form' name=f4 method=post>
-      <div class="modal-dialog modal-sm" >
+      <div class="modal-dialog modal-sm" style="position: inherit;" >
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -929,6 +929,7 @@ jQuery(document).ready(function() {
          $('#ModalAdd').modal('hide');
 
     });   
+
   function getInstituciones(nombreIns,selectName){
 
   $.post( 'admin-ajax.php', {action: 'get_instituciones'}, function(data)
@@ -960,6 +961,7 @@ jQuery(document).ready(function() {
             if ( q > 0 ) {
               if(selectActivo==1){
                getInstituciones($('#nombreinstitucion').val(),'#idinstitucionelaboro');
+               getInstituciones(null,'#institucionpresenta');
               }else{
                getInstituciones($('#nombreinstitucion').val(),'#institucionpresenta');
               }
@@ -979,5 +981,91 @@ $('#ModalAdd').keypress(function(e) {
           return false;
           }
 });
+
+function validar(){
+campos=null;  
+campos='<ul>';
+procesar=true;
+
+ if ($("#nombre").val().length==0){
+    campos+="<li>- Nombre de herramienta</li>";
+    procesar=false;
+   
+ }
+  
+  if($("#objetivo").val()==""){
+    campos+="<li>- Objetivo de herramienta </li>";
+    procesar=false;
+  }
+
+  if($("#lugarelaboracion").val()==""){
+    campos+="<li>- Institución que elaboró  </li>";
+    procesar=false;
+  }
+
+  if($("#lugarelaboracion").val()==""){
+    campos+="<li>- Lugar de elaboración </li>";
+    procesar=false;
+  }
+  
+  if($("#fechaelaboracion").val()==""){
+    campos+="<li>- Fecha de elaboración</li>";
+    procesar=false;
+  }
+
+   if($("#lugaractualizacion").val()==""){
+    campos+="<li>- Lugar actualización</li>";
+    procesar=false;
+  }
+
+  if($("#fechaactualizacion").val()==""){
+    campos+="<li>- Fecha de actualización</li>";
+    procesar=false;
+  }
+  if($("#longitud").val()==""){
+    campos+="<li>- Longitud</li>";
+    procesar=false;
+  }
+  if($("#latitud").val()==""){
+    campos+="<li>- Latitud </li>";
+    procesar=false;
+  }
+  if($("#fechapresentacion").val()==""){
+    campos+="<li>- Fecha presentación</li>";
+    procesar=false;
+  }
+  
+   if($("#newnombrecontacto").val()==""){
+    campos+="<li>- Nombre del contacto</li>";
+    procesar=false;
+  }
+  
+  if($("#newtelefonocontacto").val()==""){
+    campos+="<li>- Teléfono del contacto</li>";
+    procesar=false;
+  }
+  if($("#newcargocontacto").val()==""){
+    campos+="<li>- Cargo del contacto</li>";
+    procesar=false;
+  }
+  if($("#newmailcontacto").val()==""){
+    campos+="<li>- Email del contacto</li>";
+    procesar=false;
+  }
+  
+  if($("#newwebsitecontacto").val()==""){
+    campos+="<li>- Website </li>";
+    procesar=false;
+  }
+
+  campos+="</ol>"; 
+  if(procesar==false){
+     $("#ModalErrores").remove();   
+    $("#wpbody-content").append('<div class="modal" id="ModalErrores" role="dialog" tabindex="-1" ><div class="modal-dialog modal-sm">          <div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button>              <h4 class="modal-title">Debe de completar los campos requeridos: </h4></div><div class="modal-body">'+campos+'</div><div class="modal-footer"><button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-ban-circle">Cerrar</span></button></div></div></div></div>');  
+    $("#ModalErrores").modal();    
+  }  
+  return procesar;
+}
+
 </script>
 

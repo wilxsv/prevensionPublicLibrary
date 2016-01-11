@@ -21,7 +21,7 @@ if(isset($_POST["newpublicacion"])){
             )
 
     );
-  //Copiando archivo falta chequear el path segun lo indico William
+
   if($r==1){
     @copy($archivo["tmp_name"],$path.$archivo["name"]);
       
@@ -161,16 +161,16 @@ $herramientas=$wpdb->get_results(
                   <input type='text' name="pubInicio" id='pubInicio' class='form-control date-picker' />  
                 </div> 
             </div>
-            <div class="clear">
+            <div class="clear"></div>
             <div class='form-group'>
               <div class="col-md-4">
-                <label for=pubFin>Fin de Publicación</label>
+                <label for=pubFin>Finss de Publicación</label>
               </div>
               <div class="col-md-4">
                 <input type=text name=pubFin id=pubFin required class='form-control date-picker' />
               </div> 
             </div> 
-            <div class="clear"> 
+            <div class="clear"> </div>
             <div class='form-group'>
                 <label for=idioma>Acceso</label>
                 <select name=acceso class='form-control'>

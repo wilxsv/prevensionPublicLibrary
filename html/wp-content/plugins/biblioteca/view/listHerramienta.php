@@ -190,7 +190,8 @@ $herramientas=$wpdb->get_results(
                   <input type='text' name="pubInicio" id='pubInicio' class='form-control date-picker' />  
                 </div> 
             </div>
-            <div class="clear">
+            </br>&nbsp;
+            <div class="clear"></div>
             <div class='form-group'>
               <div class="col-md-4">
                 <label for=pubFin>Fin de Publicación</label>

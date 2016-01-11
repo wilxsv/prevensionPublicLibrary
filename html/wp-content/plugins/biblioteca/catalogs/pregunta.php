@@ -4,6 +4,13 @@ $nombrepregunta="";
 //Almacenando registros
 if(isset($_POST["newpregunta"])){
 $nombrepregunta=$_POST["newnombrepregunta"];
+//Comprobar que el registro no exista
+$v=$wpdb->get_results(
+		
+				"select pregunta from dgpc_preguntas where pregunta='".$nombrepregunta."'"
+			
+	);
+if($wpdb->num_rows==0){
 $r=$wpdb->query( 
 	$wpdb->prepare( 
 				"INSERT INTO dgpc_preguntas (pregunta) VALUES (%s)", 
@@ -30,6 +37,7 @@ $r=$wpdb->query(
 		</div>
 	";
 	}
+  }	
 }
 //Fin guardar registros
 //Eliminando Reg
@@ -146,15 +154,15 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
  <!-- Modal EDIT -->
   <div class="modal fade" id="ModalEditpregunta" role="dialog"  tabindex="-1">
     <form role='form' name=fpregunta2 method=post>
-	    <div class="modal-dialog modal-sm" >
+	    <div class="modal-dialog modal-ls" >
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Actualización de instituciones</h4>
+	          <h4 class="modal-title">Edición de aplicabilidad</h4>
 	        </div>
 	        <div class="modal-body">
 		    	 	<div class='form-group'>
-		    	 		<label for=editnombrepregunta>Nombre de la Institución</label>
+		    	 		<label for=editnombrepregunta>Interrogante</label>
 		    	 		  <input type=hidden name=editcodigopregunta id=editcodigopregunta>
 		    	 		  <input type=hidden name=tab id=tab value='pregunta'>
 		    	 		<input type=text required name=editnombrepregunta id=editnombrepregunta class='form-control'>             	

@@ -4,6 +4,13 @@ $nombreclase="";
 //Almacenando registros
 if(isset($_POST["newclase"])){
 $nombreclase=$_POST["newnombreclase"];
+//Comprobar que el registro no exista
+$v=$wpdb->get_results(
+		
+				"select nombre from dgpc_claseherramienta where nombre='".$nombreclase."'"
+			
+	);
+if($wpdb->num_rows==0){
 $r=$wpdb->query( 
 	$wpdb->prepare( 
 				"INSERT INTO dgpc_claseherramienta (nombre) VALUES (%s)", 
@@ -30,6 +37,7 @@ $r=$wpdb->query(
 		</div>
 	";
 	}
+  }	
 }
 //Fin guardar registros
 //Eliminando Reg
@@ -150,11 +158,11 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Actualización de instituciones</h4>
+	          <h4 class="modal-title">Edición de clase de herramientas</h4>
 	        </div>
 	        <div class="modal-body">
 		    	 	<div class='form-group'>
-		    	 		<label for=editnombreclase>Nombre de la Institución</label>
+		    	 		<label for=editnombreclase>Nombre de la clase de herramienta</label>
 		    	 		  <input type=hidden name=editcodigoclase id=editcodigoclase>
 		    	 		  <input type=hidden name=tab id=tab value='clase'>
 		    	 		<input type=text required name=editnombreclase id=editnombreclase class='form-control'>             	

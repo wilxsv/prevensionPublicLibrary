@@ -6,6 +6,13 @@ $idarea="";
 if(isset($_POST["newcomponente"])){
 $nombrecomponente=$_POST["newnombrecomponente"];
 $idarea=$_POST["newareacomponente"];
+//Comprobar que el registro no exista
+$v=$wpdb->get_results(
+		
+				"select nombre from dgpc_componente where nombre='".$nombrecomponente."'"
+			
+	);
+if($wpdb->num_rows==0){
 $r=$wpdb->query( 
 	$wpdb->prepare( 
 				"INSERT INTO dgpc_componente (idarea,nombre) VALUES (%d,%s)", 
@@ -32,6 +39,7 @@ $r=$wpdb->query(
 		</div>
 	";
 	}
+  }	
 }
 //Fin guardar registros
 //Eliminando Reg
@@ -173,14 +181,16 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Actualización de instituciones</h4>
+	          <h4 class="modal-title">Actualización de componente</h4>
 	        </div>
 	        <div class="modal-body">
 		    	 	<div class='form-group'>
-		    	 		<label for=editnombrecomponente>Nombre de la Institución</label>
+		    	 		<label for=editnombrecomponente>Nombre del componente</label>
 		    	 		  <input type=hidden name=editcodigocomponente id=editcodigocomponente>
 		    	 		  <input type=hidden name=tab id=tab value='componente'>
 		    	 		<input type=text required name=editnombrecomponente id=editnombrecomponente class='form-control'>             	
+		      			</br>
+		      			<label for=editareacomponente>Area:</label>
 		      			<select name=editareacomponente id=editareacomponente>
 				        <?php
 				        	foreach ($areas as $opcion) {

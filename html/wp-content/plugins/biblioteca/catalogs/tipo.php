@@ -4,6 +4,13 @@ $nombretipoherramienta="";
 //Almacenando registros
 if(isset($_POST["newtipoherramienta"])){
 $nombretipoherramienta=$_POST["newnombretipoherramienta"];
+//Comprobar que el registro no exista
+$v=$wpdb->get_results(
+		
+				"select nombre from dgpc_tipoherramienta where nombre='".$nombretipoherramienta."'"
+			
+	);
+if($wpdb->num_rows==0){
 $r=$wpdb->query( 
 	$wpdb->prepare( 
 				"INSERT INTO dgpc_tipoherramienta (nombre) VALUES (%s)", 
@@ -30,6 +37,7 @@ $r=$wpdb->query(
 		</div>
 	";
 	}
+  }	
 }
 //Fin guardar registros
 //Eliminando Reg
@@ -150,11 +158,11 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Actualización de instituciones</h4>
+	          <h4 class="modal-title">Edición de tipo de herramienta</h4>
 	        </div>
 	        <div class="modal-body">
 		    	 	<div class='form-group'>
-		    	 		<label for=editnombretipoherramienta>Nombre de la Institución</label>
+		    	 		<label for=editnombretipoherramienta>Nombre del tipo de herramienta</label>
 		    	 		  <input type=hidden name=editcodigotipoherramienta id=editcodigotipoherramienta>
 		    	 		  <input type=hidden name=tab id=tab value='tipo'>
 		    	 		<input type=text required name=editnombretipoherramienta id=editnombretipoherramienta class='form-control'>             	

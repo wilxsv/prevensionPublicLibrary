@@ -4,6 +4,13 @@ $nombrecriterio="";
 //Almacenando registros
 if(isset($_POST["newcriterio"])){
 $nombrecriterio=$_POST["newnombrecriterio"];
+//Comprobar que el registro no exista
+$v=$wpdb->get_results(
+		
+				"select nombre from dgpc_criteriovalidacion where nombre='".$nombrecriterio."'"
+			
+	);
+if($wpdb->num_rows==0){
 $r=$wpdb->query( 
 	$wpdb->prepare( 
 				"INSERT INTO dgpc_criteriovalidacion (nombre) VALUES (%s)", 
@@ -30,6 +37,7 @@ $r=$wpdb->query(
 		</div>
 	";
 	}
+  }	
 }
 //Fin guardar registros
 //Eliminando Reg
@@ -150,11 +158,11 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Actualización de instituciones</h4>
+	          <h4 class="modal-title">Edición criterios de validación</h4>
 	        </div>
 	        <div class="modal-body">
 		    	 	<div class='form-group'>
-		    	 		<label for=editnombrecriterio>Nombre de la Institución</label>
+		    	 		<label for=editnombrecriterio>Nombre del criterio de validación</label>
 		    	 		  <input type=hidden name=editcodigocriterio id=editcodigocriterio>
 		    	 		  <input type=hidden name=tab id=tab value='validacion'>
 		    	 		<input type=text required name=editnombrecriterio id=editnombrecriterio class='form-control'>             	

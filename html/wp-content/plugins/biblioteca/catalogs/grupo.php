@@ -4,6 +4,13 @@ $nombregrupo="";
 //Almacenando registros
 if(isset($_POST["newgrupo"])){
 $nombregrupo=$_POST["newnombregrupo"];
+//Comprobar que el registro no exista
+$v=$wpdb->get_results(
+		
+				"select nombre from dgpc_grupovulnerable where nombre='".$nombregrupo."'"
+			
+	);
+if($wpdb->num_rows==0){
 $r=$wpdb->query( 
 	$wpdb->prepare( 
 				"INSERT INTO dgpc_grupovulnerable (nombre) VALUES (%s)", 
@@ -30,6 +37,7 @@ $r=$wpdb->query(
 		</div>
 	";
 	}
+  }	
 }
 //Fin guardar registros
 //Eliminando Reg
@@ -150,11 +158,11 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Actualización de instituciones</h4>
+	          <h4 class="modal-title">Edición de grupo vulnerable</h4>
 	        </div>
 	        <div class="modal-body">
 		    	 	<div class='form-group'>
-		    	 		<label for=editnombregrupo>Nombre de la Institución</label>
+		    	 		<label for=editnombregrupo>Nombre del grupo vulnerable</label>
 		    	 		  <input type=hidden name=editcodigogrupo id=editcodigogrupo>
 		    	 		  <input type=hidden name=tab id=tab value='grupo'>
 		    	 		<input type=text required name=editnombregrupo id=editnombregrupo class='form-control'>             	

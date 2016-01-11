@@ -21,7 +21,7 @@ echo "
 ?>
 
 <style type="text/css">
-	.modal-dialog {
-		position: inherit;
-	}
+ 	.modal-dialog {
+ 		position: inherit;
+ 	}
 </style>

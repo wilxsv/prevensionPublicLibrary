@@ -4,6 +4,13 @@ $nombrearea="";
 //Almacenando registros
 if(isset($_POST["newarea"])){
 $nombrearea=$_POST["newnombrearea"];
+//Comprobar que el registro no exista
+$v=$wpdb->get_results(
+		
+				"select nombre from dgpc_area where nombre='".$nombrearea."'"
+			
+	);
+if($wpdb->num_rows==0){
 $r=$wpdb->query( 
 	$wpdb->prepare( 
 				"INSERT INTO dgpc_area (nombre) VALUES (%s)", 
@@ -30,6 +37,7 @@ $r=$wpdb->query(
 		</div>
 	";
 	}
+ }	
 }
 //Fin guardar registros
 //Eliminando Reg
@@ -150,11 +158,11 @@ $('.nav-tabs a[href=#".$tab."]').tab('show');
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Actualización de instituciones</h4>
+	          <h4 class="modal-title">Actualización de áreas</h4>
 	        </div>
 	        <div class="modal-body">
 		    	 	<div class='form-group'>
-		    	 		<label for=editnombrearea>Nombre de la Institución</label>
+		    	 		<label for=editnombrearea>Nombre del área</label>
 		    	 		  <input type=hidden name=editcodigoarea id=editcodigoarea>
 		    	 		  <input type=hidden name=tab id=tab value='area'>
 		    	 		<input type=text required name=editnombrearea id=editnombrearea class='form-control'>             	
