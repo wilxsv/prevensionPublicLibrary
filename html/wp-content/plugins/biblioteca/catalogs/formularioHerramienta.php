@@ -1057,7 +1057,38 @@ procesar=true;
     campos+="<li>- Website </li>";
     procesar=false;
   }
-
+  //Verificando la activacion de los grupos de checkbox
+  totalcheck = $('[name="componente[]"]:checked').length;
+  if(totalcheck==0){
+    campos+="<li>- Seleccione el area y/o componente </li>";
+    procesar=false;
+  }  
+  totalcheck = $('[name="clase[]"]:checked').length;
+  if(totalcheck==0){
+    campos+="<li>- Seleccione la clase de herramienta</li>";
+    procesar=false;
+  }  
+  totalcheck = $('[name="tipo[]"]:checked').length;
+  if(totalcheck==0){
+     campos+="<li>- Seleccione el tipo de herramienta</li>";
+     procesar=false;
+  } 
+  totalcheck = $('[name="ambito[]"]:checked').length;
+  if(totalcheck==0) {
+    campos+="<li>- Seleccione el ámbito de aplicación </li>";
+    procesar=false;
+  } 
+  totalcheck = $('[name="grupo[]"]:checked').length;
+  if(totalcheck==0){
+     campos+="<li>- Seleccione los grupos vulnerables </li>";
+     procesar=false;
+  } 
+  totalcheck = $('[name="incluye[]"]:checked').length;
+  if(totalcheck==0) {
+    campos+="<li>- Seleccione lo que incluye la herramienta</li>";
+    procesar=false;
+  } 
+  
   campos+="</ol>"; 
   if(procesar==false){
      $("#ModalErrores").remove();   

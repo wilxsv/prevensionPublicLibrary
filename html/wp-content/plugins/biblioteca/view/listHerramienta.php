@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 include(plugin_dir_path( __FILE__ )."../catalogs/cabecera.php");
 global $wpdb;
 //eliminando publicacion
