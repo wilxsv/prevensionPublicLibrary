@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 include(plugin_dir_path( __FILE__ )."../catalogs/cabecera.php");
 global $wpdb;
 //eliminando publicacion
@@ -9,8 +9,8 @@ if(isset($_POST["delpublicacion"])){
                where dgpc_publicacion.idpublicacion=$idpublicacion"
             );
     foreach ($contenido as $reg) {
-        unlink($reg->archivo);
-        unlink($reg->portada);
+        @unlink($reg->archivo);
+        @unlink($reg->portada);
     }
 
   $r=$wpdb->query(
