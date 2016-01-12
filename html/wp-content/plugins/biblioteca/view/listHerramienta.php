@@ -1,6 +1,27 @@
 <?php 
 include(plugin_dir_path( __FILE__ )."../catalogs/cabecera.php");
 global $wpdb;
+//eliminando publicacion
+if(isset($_POST["delpublicacion"])){
+  $idpublicacion=$_POST["delcodigopublicacion"];
+  $contenido=$wpdb->get_results(       
+              "select dgpc_publicacion.archivo,dgpc_publicacion.portada from dgpc_publicacion
+               where dgpc_publicacion.idpublicacion=$idpublicacion"
+            );
+    foreach ($contenido as $reg) {
+        unlink($reg->archivo);
+        unlink($reg->portada);
+    }
+
+  $r=$wpdb->query(
+          $wpdb->prepare(
+            "DELETE FROM dgpc_publicacion WHERE idpublicacion=%d",
+              $idpublicacion
+            )
+
+    );
+
+}
 if(isset($_POST["newpublicacion"])){
   $idherramienta=$_POST["idherramienta"];
   $idioma=$_POST["idioma"];
@@ -10,59 +31,70 @@ if(isset($_POST["newpublicacion"])){
   $pubInicio=$_POST["pubInicio"];
   $pubFin=$_POST["pubFin"];
   $acceso=$_POST["acceso"];
+//Comprobando que no tenga una publicacion
+  $v=$wpdb->get_results(
+        "select idherramienta from dgpc_publicacion where idherramienta='".$idherramienta."'"
+     
+  );
+  if($wpdb->num_rows==0){
 
-  $fi = explode('/',$pubInicio);
-  $pubInicio = $fi[2].'-'.$fi[1].'-'.$fi[0];
+        $fi = explode('/',$pubInicio);
+        $pubInicio = $fi[2].'-'.$fi[1].'-'.$fi[0];
 
-  $ff = explode('/',$pubFin);
-  $pubFin = $ff[2].'-'.$ff[1].'-'.$ff[0];
+        $ff = explode('/',$pubFin);
+        $pubFin = $ff[2].'-'.$ff[1].'-'.$ff[0];
 
-    $darea=$wpdb->get_col(
-        $wpdb->prepare("
-            select dgpc_area.nombre from dgpc_area inner join dgpc_componente
-            on dgpc_area.idarea=dgpc_componente.idarea
-            inner join dgpc_herramienta on dgpc_componente.idcomponente=dgpc_herramienta.idcomponente
-            where dgpc_herramienta.idherramienta=%d
-          ",$idherramienta)
-      );
-    $dtipo=$wpdb->get_col(
-        $wpdb->prepare("
-            select dgpc_tipoherramienta.nombre from dgpc_tipoherramienta 
-            inner join dgpc_herramienta on dgpc_tipoherramienta.idtipo=dgpc_herramienta.idtipoherramienta 
-         where dgpc_herramienta.idherramienta=%d
-          ",$idherramienta)
-      );
-   if(!file_exists(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_")){
-      @mkdir(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_");
-    }
-     if(!file_exists(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_/_".$dtipo[0])."_"){
-      @mkdir(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_/_".$dtipo[0]."_");
-    }
-    $path=plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_/_".$dtipo[0]."_/";
-  //almacenando la publicacion
-  $r=$wpdb->query(
-          $wpdb->prepare(
-            "INSERT INTO dgpc_publicacion(
-              idherramienta,archivo,portada,tipoarchivo,
-              fechaInicio,fechaFin,descripcion,idioma,acceso,peso) values(%d,%s,%s,%s,%s,%s,%s,%s,%s,%f)",
-              $idherramienta,$path.$archivo["name"],'../thums/'.$archivoPortada["name"],$archivo["type"],$pubInicio,
-              $pubFin,$descripcion,$idioma,$acceso,$archivo["size"]
-            )
+          $darea=$wpdb->get_col(
+              $wpdb->prepare("
+                  select dgpc_area.nombre from dgpc_area inner join dgpc_componente
+                  on dgpc_area.idarea=dgpc_componente.idarea
+                  inner join dgpc_herramienta on dgpc_componente.idcomponente=dgpc_herramienta.idcomponente
+                  where dgpc_herramienta.idherramienta=%d
+                ",$idherramienta)
+            );
+          $dtipo=$wpdb->get_col(
+              $wpdb->prepare("
+                  select dgpc_tipoherramienta.nombre from dgpc_tipoherramienta 
+                  inner join dgpc_herramienta on dgpc_tipoherramienta.idtipo=dgpc_herramienta.idtipoherramienta 
+               where dgpc_herramienta.idherramienta=%d
+                ",$idherramienta)
+            );
+         if(!file_exists(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_")){
+            @mkdir(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_");
+          }
+           if(!file_exists(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_/_".$dtipo[0])."_"){
+            @mkdir(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_/_".$dtipo[0]."_");
+          }
+          $path=plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_/_".$dtipo[0]."_/";
 
-    );
-  //Copiando archivo falta chequear el path segun lo indico William biblioDocs/_AREA_/_TIPO_
-  if($r==1){
-   
-   
-    @copy($archivo["tmp_name"],$path.$archivo["name"]);
-    //subiendo imagen de portada
-    $path=plugin_dir_path( __FILE__ )."../thums/";
-    @copy($archivoPortada["tmp_name"],$path.$archivoPortada["name"]);
-    
-      
-  } 
+        //almacenando la publicacion
+        $r=$wpdb->query(
+                $wpdb->prepare(
+                  "INSERT INTO dgpc_publicacion(
+                    idherramienta,archivo,portada,tipoarchivo,
+                    fechaInicio,fechaFin,descripcion,idioma,acceso,peso) values(%d,%s,%s,%s,%s,%s,%s,%s,%s,%f)",
+                    $idherramienta,$path.$archivo["name"],$path.$archivoPortada["name"],$archivo["type"],$pubInicio,
+                    $pubFin,$descripcion,$idioma,$acceso,$archivo["size"]
+                  )
+
+          );
+        //Copiando archivo falta chequear el path segun lo indico William biblioDocs/_AREA_/_TIPO_
+        if($r==1){
+           @copy($archivo["tmp_name"],$path.$archivo["name"]);
+          //subiendo imagen de portada  
+          @copy($archivoPortada["tmp_name"],$path.$archivoPortada["name"]);
+          
+        } 
   
-
+  }else{
+    echo"<div>
+        <div class='alert alert-warning'>
+          <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+          <strong>Ya existe una publicación para esta harramienta.</strong> 
+          
+        </div>
+    </div>";
+  }
  
 }
 $herramientas=$wpdb->get_results( 
@@ -71,7 +103,11 @@ $herramientas=$wpdb->get_results(
     dgpc_componente.nombre as nombreComponente,
     dgpc_tipoherramienta.nombre as nombreTipo, 
     dgpc_claseherramienta.nombre as nombreClase,
-    dgpc_publicacion.peso
+    dgpc_publicacion.peso,
+    dgpc_publicacion.fechaInicio,
+    dgpc_publicacion.fechaFin,
+    dgpc_publicacion.acceso,
+    dgpc_publicacion.idpublicacion
     from dgpc_herramienta 
     inner join dgpc_tipoherramienta on dgpc_herramienta.idtipoherramienta=dgpc_tipoherramienta.idtipo 
     inner join dgpc_claseherramienta on dgpc_herramienta.idclaseherramienta=dgpc_claseherramienta.idclase 
@@ -83,84 +119,88 @@ $herramientas=$wpdb->get_results(
 ?>
 <div class="wrap">
  <h1>Listado de Herramientas registradas en la biblioteca</h1>
- <table class="wp-list-table widefat fixed striped posts">
-  <thead>
-   <tr>
-	<th class="manage-column">Nombre</th>
-
-    <th class="manage-column">Componente</th>
-    <th class="manage-column">Tipo</th>
-    <th class="manage-column">Clase</th>
-    <th class="manage-column">Peso</th>
-    <th class="manage-column">Acciones</th>
-   </tr>
-  </thead>
-  <tbody id="the-list">
-  <?php
-    foreach ($herramientas as $h) {
-      echo"
-         <tr>
-            <td>".$h->nombre."</td>
-            <td>".$h->nombreComponente."</td>
-            <td>".$h->nombreTipo."</td>
-            <td>".$h->nombreClase."</td>
-            <td>".round(($h->peso)/(1024*1024),2)." MB</td>
-            <td>
-              <button type='button' class='btn btn-success publich' name=publich id=publich value=".$h->idherramienta.">
-                <span class='glyphicon glyphicon-globe'>Publicar</span>
-              </button> </td>
+ <div class='table-responsive'>
+        <table class='table table-hover table-bordered' id='datosherramienta'>
+          <thead>
+          <tr>
+            <th class="text-center">Nombre</th>
+            <th class="text-center">Componente</th>
+            <th class="text-center">Tipo</th>
+            <th class="text-center">Clase</th>
+            <th class="text-center">Fecha inicio</th>
+            <th class="text-center">Fecha fin</th>
+            <th class="text-center">Peso</th>
+            <th class="text-center">Acceso</th>
+            <th class="text-center">Acciones</th>
+            
           </tr>
-      ";
-    }
-   ?>
-   
-  </tbody>
-  <tfoot>
-	<th class="manage-column">Nombre</th>
+          <thead>
+          <tbody>
+          <?php
+            foreach ($herramientas as $h) {
+              echo"
+                 <tr>
+                    <td>".$h->nombre."</td>
+                    <td>".$h->nombreComponente."</td>
+                    <td>".$h->nombreTipo."</td>
+                    <td>".$h->nombreClase."</td>
+                    <td class='text-center'>".$h->fechaInicio."</td>
+                    <td class='text-center'>".$h->fechaFin."</td>
+                    <td class='text-center'>".round(($h->peso)/(1024*1024),2)." MB</td>
+                    <td class='text-center'>".$h->acceso."</td>
+                    <td>
+                      <button type='button' title='Publicar' class='btn btn-success btn-xs publich' name=publich id=publich value=".$h->idherramienta.">
+                        <span class='glyphicon glyphicon-globe' data-toggle='tooltip' data-placement='top' title='Publicar'></span>
+                      </button>
+                      <button type='button' title='Borrar' class='btn btn-danger btn-xs borrarpub' name=borrarpub id=borrarpub value=".$h->idpublicacion.">
+                        <span class='glyphicon glyphicon-ban-circle' data-toggle='tooltip' data-placement='top' title='Borrar'></span>
+                      </button>
   
-    <th class="manage-column">Componente</th>
-    <th class="manage-column">Tipo</th>
-    <th class="manage-column">Clase</th>
-    <th class="manage-column">Peso</th>
-    <th class="manage-column">Acciones</th>
-  </tfoot>
- </table>
+                    </td>
+                  </tr>
+              ";
+            }
+           ?>
+     
+        </tbody> 
+        </table>
+    </div>
  <div class="card pressthis">
   <p>Informacion que se considere necesaria ...... o derechos de autor de proteccion civil</p>
  </div>
 </div>
-<?php /*include(plugin_dir_path( __FILE__ )."../cabecera.php"); */ ?>
-<!--
-<div class="tab-content"> 
- <div class="row">
-  <div class="table-responsive">
-   <table class="table table-hover ">
-	<thead>
-	 <tr>
-	  <th class="text-center">Código</th>
-	  <th class="text-center">Nombre del área </th>
-	 </tr>
-	</thead>
-	<tbody>
-	 <tr>
-	  <td></td>
-	  <td></td>
-	  <td>
-	   <button type="button" class="btn btn-success editFicha" name="editFicha" id="editFicha" value="">
-		<span class="glyphicon glyphicon-pencil"></span>
-	   </button>
-	   <button type="button" class="btn btn-warning borrarFicha" name="borrarFicha" id="borrarFicha" value="">
-		<span class="glyphicon glyphicon-trash"></span>
-	   </button>
-	  </td>
-	 </tr>
-	</tbody>	
-   </table>
+  <!-- Modal DELPub -->
+  <div class="modal fade" id="ModalDelPub" role="dialog"  tabindex="-1">
+    <form role='form' name=fpubdel method=post>
+      <div class="modal-dialog modal-sm" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title warning">¿Confirme que desea eliminar la publicación?</h4>
+            <input type="hidden" name="delcodigopublicacion" id="delcodigopublicacion">
+            
+          </div>
+          <div class="modal-body">
+           <span class='glyphicon glyphicon-remove-circle'>
+             Tenga presente que al eliminar una publicación unicamente se eliminaran los archivos: <b>contenido y portada</b><br>
+             - El registro de la herramienta no es eliminado.
+           </span>
+          
+          </div>
+          <div class="modal-footer">
+            <button type='submit' class='btn btn-success' name=delpublicacion value=ok>
+          <span class='glyphicon glyphicon-ok'></span>
+        </button> 
+              <button type="button" class="btn btn-warning" data-dismiss="modal">
+                <span class='glyphicon glyphicon-ban-circle'></span>  
+              </button>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
- </div>
-</div>
--->
-<!-- Modal EDIT -->
+
+ <!-- Modal ADD -->
   <div class="modal fade" id="ModalPublicacion" role="dialog"  tabindex="-1">
     <form role='form' name=fpublicacion method=post enctype="multipart/form-data">
       <div class="modal-dialog modal-md" >
@@ -199,7 +239,7 @@ $herramientas=$wpdb->get_results(
                   <input type='text' required name="pubInicio" id='pubInicio' class='form-control date-picker' />  
                 </div> 
             </div>
-            </br>&nbsp;
+            
             <div class="clear"></div>
             <div class='form-group'>
               <div class="col-md-4">
@@ -209,11 +249,11 @@ $herramientas=$wpdb->get_results(
                 <input type=text name=pubFin id=pubFin required class='form-control date-picker' />
               </div> 
             </div> 
-            <div class="clear"> 
+            <div class="clear"></div> 
             <div class='form-group'>
                 <label for=idioma>Acceso</label>
                 <select name=acceso class='form-control'>
-                  <option>Publico</option>
+                  <option>Público</option>
                   <option>Privado</option>
                   </select>
             </div>  
@@ -238,7 +278,12 @@ $herramientas=$wpdb->get_results(
       $('#ModalPublicacion').modal();
       $('#idherramienta').val($(this).val());
   });
-
+  $('.borrarpub').click(function(){
+    $("#ModalDelPub").modal();
+    $("#delcodigopublicacion").val($(this).val());
+   
+  });
+ 
 jQuery(document).ready(function() {
  $.datepicker.regional['es'] = {
  closeText: 'Cerrar',
@@ -284,4 +329,7 @@ $("#pubPortada").on("change",function(){
    } 
 
 });
+$('[data-toggle="tooltip"]').tooltip(); 
+ $('#datosherramienta').DataTable();
+ 
 </script>

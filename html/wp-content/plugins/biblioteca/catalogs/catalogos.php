@@ -4,7 +4,13 @@ $tab="institucion";
 if(isset($_POST["tab"])){
     $tab=$_POST["tab"];
 }
-echo "</br>
+echo "
+<style type='text/css'>
+    .modal-dialog {
+        position: inherit;
+    }
+</style>
+</br>
   <ul class='nav nav-tabs' role='tablist' id='myTabs'>
     <li role='presentation'>
     	<a href='#institucion' aria-controls='institucion' role='tab' data-toggle='tab'>

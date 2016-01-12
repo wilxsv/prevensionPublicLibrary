@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
 <!-- Modal Mapa -->
+
   	<div class="modal" id="ModalMapa" role="dialog" tabindex="-1" > 
 	  	<div class="modal-dialog">
 	        <div class="modal-content">
