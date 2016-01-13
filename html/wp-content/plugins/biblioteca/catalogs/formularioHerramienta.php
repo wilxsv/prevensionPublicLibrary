@@ -162,7 +162,7 @@ if(isset($_POST["newherramienta"])){
 	
 }
 ?>
-<form method="post"name=registroh id=registroh onsubmit="return validar();">
+<form method="post" name=registroh id=registroh onsubmit="return validar();">
 <div>
   	<!-- Nav tabs -->
 	  <ul class='nav nav-tabs' role='tablist' id='myTabs'>
@@ -786,28 +786,12 @@ if(isset($_POST["newherramienta"])){
 
 	    <div role='tabpanel' class='tab-pane' id='settings'>
 	    <table class='table table-bordered table-hover'>
-	     	
-	  				
 	  				<?php 
 	  					foreach ($preguntas as $p) {
 	  						echo "<tr><td colspan=6>".$p->pregunta."</td></tr>
 	  						<tr><td colspan=6><textarea name=pregunta[".$p->idpregunta."] cols=128 rows=4></textarea></td></tr>";
 	  					}
 	  				?>	
-	  			<!--<tr>
-	  				<td colspan="6">
-	  				Contacto:
-	  					<select name=contacto>
-	  						<?php
-	  							/*foreach ($contactos as $con) {
-	  								echo"<option value=".$con->idcontacto.">".$con->nombre. "&nbsp;". $con->cargo."</option";
-	  							}*/
-	  						?>
-
-	  					</select>
-	  				</td>
-	  			</tr>-->
-	
 	  				<tr><td><div class='form-group col-md-5'>Datos del Contacto</div>
 	  				<div class=clear></div>
 							 <div class='form-group col-md-5'>
@@ -840,7 +824,6 @@ if(isset($_POST["newherramienta"])){
 	  				</tr>
 	     </table>
 		</div>
-
 </div>
 </div>
 </form>
@@ -872,9 +855,11 @@ if(isset($_POST["newherramienta"])){
       </div>
     </form>
   </div>
+
 <?php
 include("geolocalizacion.php");
-?>  
+?>
+ 
 <script type="text/javascript">
 var selectActivo='';
 jQuery(document).ready(function() {
@@ -909,6 +894,14 @@ jQuery(document).ready(function() {
         center_map_on_location();       
 
       });
+$('#ModalMapa').on('shown.bs.modal', function() {
+    $(this).find('.modal-dialog').css({
+        'margin-left': function () {
+            return -($(this).outerWidth() / 2);
+        }
+    });
+});
+
  $('#savepoint').on('click', function(){
         
          $('#ModalMapa').modal('hide');
@@ -1092,8 +1085,13 @@ procesar=true;
   campos+="</ol>"; 
   if(procesar==false){
      $("#ModalErrores").remove();   
-    $("#wpbody-content").append('<div class="modal" id="ModalErrores" role="dialog" tabindex="-1" ><div class="modal-dialog modal-sm">          <div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button>              <h4 class="modal-title">Debe de completar los campos requeridos: </h4></div><div class="modal-body">'+campos+'</div><div class="modal-footer"><button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-ban-circle">Cerrar</span></button></div></div></div></div>');  
-    $("#ModalErrores").modal();    
+    $("#wpbody-content").append('<div class="modal" id="ModalErrores" role="dialog" tabindex="-1" ><div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button>              <h4 class="modal-title">Debe de completar los campos requeridos: </h4></div><div class="modal-body">'+campos+'</div><div class="modal-footer"><button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-ban-circle">Cerrar</span></button></div></div></div></div>');  
+    $("#ModalErrores").modal(); 
+     $("#ModalErrores").find('.modal-dialog').css({
+        'margin-left': function () {
+            return -($(this).outerWidth() / 2);
+        }
+    });   
   }  
   return procesar;
 }
