@@ -1,6 +1,21 @@
 <?php 
 include(plugin_dir_path( __FILE__ )."../catalogs/cabecera.php");
 global $wpdb;
+function normalize ($string) {
+    $table = array(
+        'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj', 'Ž'=>'Z', 'ž'=>'z', 'C'=>'C', 'c'=>'c', 'C'=>'C', 'c'=>'c',
+        'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',
+        'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O',
+        'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss',
+        'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e',
+        'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o',
+        'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b',
+        'ÿ'=>'y', 'R'=>'R', 'r'=>'r',
+    );
+
+    return strtr($string, $table);
+}
+
 //eliminando publicacion
 if(isset($_POST["delpublicacion"])){
   $idpublicacion=$_POST["delcodigopublicacion"];
@@ -9,9 +24,14 @@ if(isset($_POST["delpublicacion"])){
                where dgpc_publicacion.idpublicacion=$idpublicacion"
             );
     foreach ($contenido as $reg) {
-        @unlink($reg->archivo);
-        @unlink($reg->portada);
+        $nom=explode("/", $reg->archivo);
+        $nomp=explode("/", $reg->portada);
+        if(is_file(plugin_dir_path( __FILE__ )."../biblioDocs/".$nom[count($nom)-3]."/".$nom[count($nom)-2]."/".$nom[count($nom)-1])){
+          @unlink(plugin_dir_path( __FILE__ )."../biblioDocs/".$nom[count($nom)-3]."/".$nom[count($nom)-2]."/".$nom[count($nom)-1]);
+          @unlink(plugin_dir_path( __FILE__ )."../biblioDocs/".$nomp[count($nomp)-3]."/".$nomp[count($nomp)-2]."/".$nomp[count($nomp)-1]);
+        }
     }
+        
 
   $r=$wpdb->query(
           $wpdb->prepare(
@@ -59,13 +79,13 @@ if(isset($_POST["newpublicacion"])){
                where dgpc_herramienta.idherramienta=%d
                 ",$idherramienta)
             );
-         if(!file_exists(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_")){
-            @mkdir(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_");
+         if(!file_exists(plugin_dir_path( __FILE__ )."../biblioDocs/_".normalize($darea[0])."_")){
+            @mkdir(plugin_dir_path( __FILE__ )."../biblioDocs/_".normalize($darea[0])."_");
           }
-           if(!file_exists(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_/_".$dtipo[0])."_"){
-            @mkdir(plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_/_".$dtipo[0]."_");
+           if(!file_exists(plugin_dir_path( __FILE__ )."../biblioDocs/_".normalize($darea[0])."_/_".normalize($dtipo[0]))."_"){
+            @mkdir(plugin_dir_path( __FILE__ )."../biblioDocs/_".normalize($darea[0])."_/_".normalize($dtipo[0])."_");
           }
-          $path=plugin_dir_path( __FILE__ )."../biblioDocs/_".$darea[0]."_/_".$dtipo[0]."_/";
+          $path=plugins_url()."/biblioteca/biblioDocs/_".normalize($darea[0])."_/_".normalize($dtipo[0])."_/";
 
         //almacenando la publicacion
         $r=$wpdb->query(
@@ -73,16 +93,17 @@ if(isset($_POST["newpublicacion"])){
                   "INSERT INTO dgpc_publicacion(
                     idherramienta,archivo,portada,tipoarchivo,
                     fechaInicio,fechaFin,descripcion,idioma,acceso,peso) values(%d,%s,%s,%s,%s,%s,%s,%s,%s,%f)",
-                    $idherramienta,$path.$archivo["name"],$path.$archivoPortada["name"],$archivo["type"],$pubInicio,
+                    $idherramienta,$path.normalize($archivo["name"]),$path.normalize($archivoPortada["name"]),$archivo["type"],$pubInicio,
                     $pubFin,$descripcion,$idioma,$acceso,$archivo["size"]
                   )
 
           );
         //Copiando archivo falta chequear el path segun lo indico William biblioDocs/_AREA_/_TIPO_
         if($r==1){
-           @copy($archivo["tmp_name"],$path.$archivo["name"]);
+          $path=plugin_dir_path( __FILE__ )."../biblioDocs/_".normalize($darea[0])."_/_".normalize($dtipo[0])."_/";
+           @copy($archivo["tmp_name"],$path.normalize($archivo["name"]));
           //subiendo imagen de portada  
-          @copy($archivoPortada["tmp_name"],$path.$archivoPortada["name"]);
+          @copy($archivoPortada["tmp_name"],$path.normalize($archivoPortada["name"]));
           
         } 
   
@@ -107,7 +128,9 @@ $herramientas=$wpdb->get_results(
     dgpc_publicacion.fechaInicio,
     dgpc_publicacion.fechaFin,
     dgpc_publicacion.acceso,
-    dgpc_publicacion.idpublicacion
+    dgpc_publicacion.idpublicacion,
+    dgpc_publicacion.archivo
+
     from dgpc_herramienta 
     inner join dgpc_tipoherramienta on dgpc_herramienta.idtipoherramienta=dgpc_tipoherramienta.idtipo 
     inner join dgpc_claseherramienta on dgpc_herramienta.idclaseherramienta=dgpc_claseherramienta.idclase 
@@ -152,10 +175,16 @@ $herramientas=$wpdb->get_results(
                       <button type='button' title='Publicar' class='btn btn-success btn-xs publich' name=publich id=publich value=".$h->idherramienta.">
                         <span class='glyphicon glyphicon-globe' data-toggle='tooltip' data-placement='top' title='Publicar'></span>
                       </button>
-                      <button type='button' title='Borrar' class='btn btn-danger btn-xs borrarpub' name=borrarpub id=borrarpub value=".$h->idpublicacion.">
-                        <span class='glyphicon glyphicon-ban-circle' data-toggle='tooltip' data-placement='top' title='Borrar'></span>
+                      <button type='button' title='Borrar Publicación' class='btn btn-danger btn-xs borrarpub' name=borrarpub id=borrarpub value=".$h->idpublicacion.">
+                        <span class='glyphicon glyphicon-eye-close' data-toggle='tooltip' data-placement='top' title='Borrar Publicación'></span>
                       </button>
-  
+                      <button type='button' title='Editar datos de herramienta' class='btn btn-success btn-xs borrarpub' name=editherramienta id=editherramienta value=".$h->idherramienta.">
+                        <span class='glyphicon glyphicon-pencil' data-toggle='tooltip' data-placement='top' title='Editar datos de herramienta'></span>
+                      </button>
+                      <button type='button' title='Eliminar registro de Herramienta' class='btn btn-danger btn-xs borrarpub' name=borrarherramienta id=borrarherramienta value=".$h->idherramienta.">
+                        <span class='glyphicon glyphicon-trash' data-toggle='tooltip' data-placement='top' title='Eliminar registro de Herramienta'></span>
+                      </button>
+                      
                     </td>
                   </tr>
               ";
