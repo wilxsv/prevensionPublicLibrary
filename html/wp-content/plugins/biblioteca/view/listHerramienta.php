@@ -1,4 +1,5 @@
 <?php 
+/*wp-content/themes/presso/framework/redux-framework/ReduxCore/inc/class.redux_filesystem.php on line 131*/
 include(plugin_dir_path( __FILE__ )."../catalogs/cabecera.php");
 global $wpdb;
 function normalize ($string) {
@@ -79,14 +80,7 @@ if(isset($_POST["newpublicacion"])){
                where dgpc_herramienta.idherramienta=%d
                 ",$idherramienta)
             );
-         if(!file_exists(plugin_dir_path( __FILE__ )."../biblioDocs/_".normalize($darea[0])."_")){
-            @mkdir(plugin_dir_path( __FILE__ )."../biblioDocs/_".normalize($darea[0])."_");
-          }
-           if(!file_exists(plugin_dir_path( __FILE__ )."../biblioDocs/_".normalize($darea[0])."_/_".normalize($dtipo[0]))."_"){
-            @mkdir(plugin_dir_path( __FILE__ )."../biblioDocs/_".normalize($darea[0])."_/_".normalize($dtipo[0])."_");
-          }
           $path=plugins_url()."/biblioteca/biblioDocs/_".normalize($darea[0])."_/_".normalize($dtipo[0])."_/";
-
         //almacenando la publicacion
         $r=$wpdb->query(
                 $wpdb->prepare(
@@ -98,9 +92,9 @@ if(isset($_POST["newpublicacion"])){
                   )
 
           );
-        //Copiando archivo falta chequear el path segun lo indico William biblioDocs/_AREA_/_TIPO_
         if($r==1){
           $path=plugin_dir_path( __FILE__ )."../biblioDocs/_".normalize($darea[0])."_/_".normalize($dtipo[0])."_/";
+           mkdir(WP_PLUGIN_DIR."/biblioteca/biblioDocs/_".normalize($darea[0])."_/_".normalize($dtipo[0])."_", 0777, true);
            @copy($archivo["tmp_name"],$path.normalize($archivo["name"]));
           //subiendo imagen de portada  
           @copy($archivoPortada["tmp_name"],$path.normalize($archivoPortada["name"]));

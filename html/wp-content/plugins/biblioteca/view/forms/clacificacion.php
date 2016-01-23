@@ -1,35 +1,17 @@
 		<table class='table table-bordered table-hover'>
-				<tr class=success>
-					<th class='text-center' colspan=6>QUÉ GRUPOS VULNERABLES AFECTA</th>
-				</tr>
-				<tr>
-				 <td colspan=6>
-				 	<?php
-							$col=ceil(count($grupos)/3);
-							$cuenta=0;
-						?>
-						<table class='table table-bordered table-hover'>
-							<tr>	
+				<tr >
+					<td >QUÉ GRUPOS VULNERABLES AFECTA</td>
+					<td >
+						<select name=grupo id=grupo onchange="func()" >
+								<option value="0" selected>Todos los registros</option>
 								<?php
-									foreach ($grupos as $g) {
-										if($cuenta%3==0){
-											if($cuenta==0){
-											echo"
-												<td colspan=$col>
-												<input type=checkbox name=grupo[] value=".$g->idgrupo.">".$g->nombre."</td>";
-											}else{
-												echo"
-													<tr><td colspan=$col>
-													<input type=checkbox name=grupo[] value=".$g->idgrupo.">".$g->nombre."</td>";
-											}
-										}else{
-											echo "<td colspan=$col><input type=checkbox name=grupo[] value=".$g->idgrupo.">".$g->nombre."</td>";
-										}
-										$cuenta++;		
-									}
+								     $query = "select  dgpc_grupovulnerable.idgrupo,dgpc_grupovulnerable.nombre from dgpc_grupovulnerable  order by dgpc_grupovulnerable.nombre;";
+								     $lista=$wpdb->get_results($query);
+								     foreach ($lista as $i) {
+										 echo '<option value="'.$i->idgrupo.'">'.$i->nombre.'</option>';
+								     }
 								?>
-							</tr>
-						</table>		
-				 </td>	
+								</select>
+					</td>	
 				</tr>
 			</table>

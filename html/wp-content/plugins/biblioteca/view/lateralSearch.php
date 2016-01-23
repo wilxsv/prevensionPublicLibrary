@@ -34,17 +34,17 @@ class LateralView extends WP_Widget {
         if ( ! empty( $title ) ) {
 			echo $before_title . $title . $after_title;
         }
-        $query = "SELECT nombre, objetivo";
-        if ( ! empty( $images ) ) { $query.=", portadaherramienta AS portada"; }
-        $query.=" FROM dgpc_herramienta";
+        $query = "SELECT h.nombre, h.objetivo, h.idherramienta AS id";
+        if ( ! empty( $images ) ) { $query.=", p.portada AS portada"; }
+        $query.=" FROM dgpc_herramienta AS h, dgpc_publicacion AS p WHERE h.idherramienta = p.idherramienta ";
         if ( ! empty( $ramdom ) && $ramdom == 1 ) { $query.=" ORDER BY RAND()"; }
         if ( ! empty( $limit ) && $limit > 2 ) { $query.=" LIMIT ".$limit; }
         else { $query.=" LIMIT 2"; }
         $lista=$wpdb->get_results($query);        
         foreach ($lista as $i) {
-			echo "<p>".$i->nombre.'<br />';
-			if ( ! empty( $images ) ) { echo '<img src="'.get_site_url().'/'.$i->portada.'" alt="'.$i->nombre.'" height="300" width="200" />'; }
-			echo '</p>';
+			echo '<a href="'.site_url().'/index.php/buscar-herramienta?herramienta='.$i->id.'" ><p>'.$i->nombre.'<br />';
+			if ( ! empty( $images ) ) { echo '<img src="'.$i->portada.'" alt="'.$i->nombre.'" height="128" width="128" class="img-responsive img-thumbnail"/>'; }
+			echo '</p></a>';
 		}
 		
 		echo $after_widget;
