@@ -51,31 +51,3 @@ function func()
   include include WP_PLUGIN_DIR."/biblioteca/control/buscaPorHerramienta.php";  
  ?>
 </div>
-<!--
-
-<div class="parametrosDiv"></div>
- wp_enqueue_script('jquery-ui-datepicker');
- wp_enqueue_script('jquery-ui');//
- wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/ui-lightness/jquery-ui.css');
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js" type="text/javascript"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  
-<script type="text/javascript">
- $(document).ready(function(){
-  $(".parametrosDiv").hide();
-  $(".show_hide").show();
-  $('.show_hide').click(function(){
-   $(".parametrosDiv").slideToggle();
-  });
- });
- $(function() {
-    $( "#tabs" ).tabs();
-  }); 
-</script>
-
-<a href="#" class="show_hide">
-	<?php echo '<img src="'.get_site_url().'/wp-content/plugins/biblioteca/view/img/document_search.png" alt="Buscar herramienta" height="64" width="64" />'; ?>Buscar herramienta
-</a>
-!>

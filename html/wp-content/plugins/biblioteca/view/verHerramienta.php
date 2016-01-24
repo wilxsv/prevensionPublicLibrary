@@ -8,18 +8,17 @@
 				h.idtipoherramienta = t.idtipo AND h.idinstitucionelaboro = i.idinstitucion AND h.idherramienta='".$_GET['herramienta']."';";
 	$q=$wpdb->get_results( $query );
 	foreach ($q as $i) { ?>
-		<h1 class="page-title title title-large"><?php echo $i->nombre; ?></h1>
+		<h2 ><?php echo $i->nombre; ?></h2>
 		<hr>
 		<p>
-			<img src="<?php echo $i->portada; ?>" alt="<?php echo $i->nombre; ?>" height="128" width="128" class="img-responsive img-thumbnail" align="left"/>
-			<?php echo $i->descripcion; ?>
-			<br />
-			<b>Objetivo : </b><?php echo $i->objetivo; ?>
-			<br />
-			<b>Idioma : </b><?php echo $i->idioma; ?>
-			<br />
-			<b>Peso : </b><?php echo $i->peso; ?> Kb
+		 <center>
+		  <img src="<?php echo $i->portada; ?>" alt="<?php echo $i->nombre; ?>" height="128" width="128" class="img-responsive img-thumbnail" align="center"/>
+		 </center>
 		</p>
+		<p><b>Descripción : </b> <?php echo $i->descripcion; ?></p>
+		<p><b>Objetivo : </b> <?php echo $i->objetivo; ?></p>
+		<p><b>Idioma : </b> <?php echo $i->idioma; ?></p>
+		<p><b>Peso : </b> <?php echo $i->peso; ?> Kb</p>
 		<p><b>Institución que lo elaboró : </b> <?php echo $i->institucion; ?></p>
 		<p><b>Lugar donde se desarrolló : </b> <?php echo $i->lugarelaboracion; ?></p>
 		<p><b>Fecha de elaboración : </b> <?php echo $i->fechaelaboracion; ?></p>
