@@ -10,6 +10,9 @@ add_action('admin_menu', 'setup_menu');
 add_action('admin_menu', 'setup_menu');
 add_action('wp_ajax_get_instituciones', 'ajax_get_instituciones');
 add_action('wp_ajax_insert_institucion', 'ajax_insert_institucion');
+add_shortcode('mapaHerramientas', 'mostrarMapaHerramientas_shortcode');
+add_shortcode('verHerramienta', 'verHerramienta_shortcode');
+
 function createDB(){
 	include('load.php');
 }
@@ -68,4 +71,13 @@ function listadoHerramienta()	{ require('view/listHerramienta.php'); }
 function viewContent()			{ include('view/contentSearch.php'); }
 include("view/lateralSearch.php");
 $lateralView = new LateralView();
+/**********************************************************************
+ *  Shortcode
+ * *******************************************************************/
+function mostrarMapaHerramientas_shortcode() {
+	include WP_PLUGIN_DIR."/biblioteca/view/forms/territorio.php";
+}
+function verHerramienta_shortcode() {
+	include WP_PLUGIN_DIR."/biblioteca/view/verHerramienta.php";
+}
 ?>

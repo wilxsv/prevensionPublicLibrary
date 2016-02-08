@@ -148,10 +148,10 @@ $herramientas=$wpdb->get_results(
             <th class="text-center">Fecha fin</th>
             <th class="text-center">Peso</th>
             <th class="text-center">Acceso</th>
-            <th class="text-center">Acciones</th>
+            <th class="text-center">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Acciones &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</th>
             
           </tr>
-          <thead>
+          </thead>
           <tbody>
           <?php
             foreach ($herramientas as $h) {
@@ -189,7 +189,9 @@ $herramientas=$wpdb->get_results(
         </table>
     </div>
  <div class="card pressthis">
-  <p>Informacion que se considere necesaria ...... o derechos de autor de proteccion civil</p>
+  <p>
+   «La "Biblioteca virtual" a sido realizada con el apoyo financiero de la Unión Europea. Las opiniones expresadas en ella no deben interpretarse en modo alguno como la opinión oficial de la Unión Europea. La Comisión Europea no se hace responsable del uso que se pueda hacer de la información contenida».
+  </p>
  </div>
 </div>
   <!-- Modal DELPub -->
