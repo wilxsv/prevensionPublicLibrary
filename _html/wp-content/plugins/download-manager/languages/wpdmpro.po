@@ -1,0 +1,1686 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Download Manager Pro v4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-26 01:56+0600\n"
+"PO-Revision-Date: 2015-10-26 01:56+0600\n"
+"Last-Translator: \n"
+"Language-Team: Shaon <proshaon@yahoo.com>\n"
+"Language: en_BD\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.8.6\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/settings/basic.php:61
+msgid "URL Structure"
+msgstr ""
+
+#: admin/settings/basic.php:63
+msgid ""
+"If you like, you may enter custom structures for your wpdm category and "
+"package URLs here. For example, using \"<b>packages</b>\" as your category "
+"base would make your category links like http://example.org/<b>packages</b>/"
+"category-slug/. If you leave these blank the defaults will be used."
+msgstr ""
+
+#: admin/settings/basic.php:64
+msgid ""
+"Caution: Use unique word for each url base. Also, don't create any page or "
+"post with same slug you used for WPDM URL Bases below."
+msgstr ""
+
+#: admin/settings/basic.php:67
+msgid "WPDM Category URL Base"
+msgstr ""
+
+#: admin/settings/basic.php:71
+msgid "WPDM Package URL Base"
+msgstr ""
+
+#: admin/settings/basic.php:75
+msgid "WPDM Archive Page"
+msgstr ""
+
+#: admin/settings/basic.php:77 admin/settings/basic.php:215
+#: admin/settings/basic.php:272 admin/settings/basic.php:279
+msgid "Disabled"
+msgstr ""
+
+#: admin/settings/basic.php:78 admin/settings/basic.php:214
+#: admin/settings/basic.php:271 admin/settings/basic.php:278
+msgid "Enabled"
+msgstr ""
+
+#: admin/settings/basic.php:83
+msgid "Archive Page Slug"
+msgstr ""
+
+#: admin/settings/basic.php:95
+msgid "Access Settings"
+msgstr ""
+
+#: admin/settings/basic.php:99
+msgid "When user is not allowed to download:"
+msgstr ""
+
+#: admin/settings/basic.php:101
+msgid "Only Block Download Link"
+msgstr ""
+
+#: admin/settings/basic.php:102
+msgid "Hide Everything"
+msgstr ""
+
+#: admin/settings/basic.php:107
+msgid "File Browser Root:"
+msgstr ""
+
+#: admin/settings/basic.php:107
+msgid ""
+"Root dir for server file browser.<br/><b>*Don't add tailing slash (/)</b>"
+msgstr ""
+
+#: admin/settings/basic.php:111
+msgid "Reset Base Dir"
+msgstr ""
+
+#: admin/settings/basic.php:117
+msgid "File Browser Access:"
+msgstr ""
+
+#: admin/settings/basic.php:118
+msgid "Who will have access to server file browser"
+msgstr ""
+
+#: admin/settings/basic.php:146
+msgid "Facebook APP ID"
+msgstr ""
+
+#: admin/settings/basic.php:152
+msgid "LinkedIn Client ID"
+msgstr ""
+
+#: admin/settings/basic.php:161
+msgid "Email Verification Settings"
+msgstr ""
+
+#: admin/settings/basic.php:165
+msgid "Blocked Domains:"
+msgstr ""
+
+#: admin/settings/basic.php:171
+msgid "Blocked Emails:"
+msgstr ""
+
+#: admin/settings/basic.php:183
+msgid "Upload Settings"
+msgstr ""
+
+#: admin/settings/basic.php:187 admin/settings/frontend.php:63
+msgid "When File Already Exists:"
+msgstr ""
+
+#: admin/settings/basic.php:189 admin/settings/frontend.php:65
+msgid "Rename New File"
+msgstr ""
+
+#: admin/settings/basic.php:190 admin/settings/frontend.php:66
+msgid "Overwrite"
+msgstr ""
+
+#: admin/settings/basic.php:196
+msgid "Sanitize Filename"
+msgstr ""
+
+#: admin/settings/basic.php:197
+msgid ""
+"Check the option if you want to sanitize uploaded file names to remove "
+"illegal chars"
+msgstr ""
+
+#: admin/settings/basic.php:208 wpdm-functions.php:4060
+msgid "Messages"
+msgstr ""
+
+#: admin/settings/basic.php:212
+msgid "Plugin Update Notice:"
+msgstr ""
+
+#: admin/settings/basic.php:220
+msgid "Permission Denied Message for Packages:"
+msgstr ""
+
+#: admin/settings/basic.php:225
+msgid "Category Access Blocked Message:"
+msgstr ""
+
+#: admin/settings/basic.php:226
+msgid "You are not allowed to access this category!"
+msgstr ""
+
+#: admin/settings/basic.php:231
+msgid "Login Required Message:"
+msgstr ""
+
+#: admin/settings/basic.php:233
+msgid "Show Only Login Form Instead of Login Required Message"
+msgstr ""
+
+#: admin/settings/basic.php:241
+msgid "File Download"
+msgstr ""
+
+#: admin/settings/basic.php:245
+msgid "Increase download count on individual file download"
+msgstr ""
+
+#: admin/settings/basic.php:246
+msgid ""
+"Increase download count for the multi-file package when someone downloads "
+"even a file from list"
+msgstr ""
+
+#: admin/settings/basic.php:249
+msgid "Enable Single File Download"
+msgstr ""
+
+#: admin/settings/basic.php:250
+msgid "Disable Single File Download"
+msgstr ""
+
+#: admin/settings/basic.php:251
+msgid ""
+"Check this option if you want to enable/disable single file download from "
+"multi-file package"
+msgstr ""
+
+#: admin/settings/basic.php:254
+msgid "Cache created zip file from multi-file package"
+msgstr ""
+
+#: admin/settings/basic.php:255
+msgid ""
+"Check this option if you want to cache the zip file created from multi-file "
+"package when someone tries to download"
+msgstr ""
+
+#: admin/settings/basic.php:259
+msgid "Download Speed:"
+msgstr ""
+
+#: admin/settings/basic.php:266
+msgid ""
+"If you get broken download, then try enabling/disabling following options, "
+"as sometimes server may not support output buffering or partial downloads"
+msgstr ""
+
+#: admin/settings/basic.php:269
+msgid "Resumable Downloads"
+msgstr ""
+
+#: admin/settings/basic.php:276
+msgid "Output Buffering"
+msgstr ""
+
+#: admin/settings/basic.php:285
+msgid "Open in Browser"
+msgstr ""
+
+#: admin/settings/basic.php:286
+msgid ""
+"Try to Open in Browser instead of download when someone clicks on download "
+"link"
+msgstr ""
+
+#: admin/settings/basic.php:292
+msgid "Skip Lock for Loggedin User:"
+msgstr ""
+
+#: admin/settings/basic.php:293
+msgid "Select..."
+msgstr ""
+
+#: admin/settings/basic.php:310
+msgid "Misc Settings"
+msgstr ""
+
+#: admin/settings/basic.php:315
+msgid "Disable Style & Script"
+msgstr ""
+
+#: admin/settings/basic.php:317
+msgid "Bootstrap JS"
+msgstr ""
+
+#: admin/settings/basic.php:318
+msgid "Bootstrap CSS"
+msgstr ""
+
+#: admin/settings/basic.php:319
+msgid "Font Awesome"
+msgstr ""
+
+#: admin/settings/basic.php:321
+msgid ""
+"Because, sometimes your theme may have those scripts/styles enqueued already"
+msgstr ""
+
+#: admin/settings/frontend.php:4
+msgid "Front-end Settings"
+msgstr ""
+
+#: admin/settings/frontend.php:8
+msgid "User Dashboard Page"
+msgstr ""
+
+#: admin/settings/frontend.php:9
+msgid "None Selected"
+msgstr ""
+
+#: admin/settings/frontend.php:10 admin/settings/frontend.php:16
+#, php-format
+msgid "The page where you used short-code %s"
+msgstr ""
+
+#: admin/settings/frontend.php:14
+msgid "Frontend Uploader Page"
+msgstr ""
+
+#: admin/settings/frontend.php:21
+msgid "Allowed User Roles to Create Package From Front-end"
+msgstr ""
+
+#: admin/settings/frontend.php:49
+msgid "Message For Blocked Users:"
+msgstr ""
+
+#: admin/settings/frontend.php:55
+msgid "When Someone Create a Package:"
+msgstr ""
+
+#: admin/settings/frontend.php:57
+msgid "Publish Instantly"
+msgstr ""
+
+#: admin/settings/frontend.php:58
+msgid "Pending for Review"
+msgstr ""
+
+#: admin/settings/frontend.php:71
+msgid "Allowed File Types From Front-end:"
+msgstr ""
+
+#: admin/settings/frontend.php:76
+msgid "Max Upload Size From Front-end"
+msgstr ""
+
+#: admin/settings/frontend.php:82
+msgid "New Package Review Email"
+msgstr ""
+
+#: admin/settings/frontend.php:84
+msgid ""
+"This email will receive a notification every time any user add/edit a "
+"package from front-end"
+msgstr ""
+
+#: admin/settings/frontend.php:88
+msgid "New Package Review Email Subject"
+msgstr ""
+
+#: admin/settings/frontend.php:94
+msgid "Enable Pagination & Search in File List"
+msgstr ""
+
+#: admin/settings/frontend.php:95
+msgid ""
+"Check this option if you want enable pagination & seach in file list where "
+"there are more then 30 files attached with a package"
+msgstr ""
+
+#: admin/settings/frontend.php:102
+msgid "Include Packages in Main RSS Feed"
+msgstr ""
+
+#: admin/settings/frontend.php:103
+#, php-format
+msgid ""
+"Check this option if you want to show wpdm packages in your main <a target="
+"\"_blank\" href=\"%s\">RSS Feed</a>"
+msgstr ""
+
+#: admin/settings/frontend.php:117
+msgid "Category Page Options"
+msgstr ""
+
+#: admin/settings/frontend.php:126
+msgid "Select Package Info To Show in Category Page:"
+msgstr ""
+
+#: admin/settings/frontend.php:127
+msgid "Show Version"
+msgstr ""
+
+#: admin/settings/frontend.php:128
+msgid "Show View Count"
+msgstr ""
+
+#: admin/settings/frontend.php:129
+msgid "Show Download Count"
+msgstr ""
+
+#: admin/settings/frontend.php:130
+msgid "Show Package Size"
+msgstr ""
+
+#: admin/settings/frontend.php:131
+msgid "Show Download Link"
+msgstr ""
+
+#: admin/settings/frontend.php:136
+msgid "Show Package Info:"
+msgstr ""
+
+#: admin/settings/frontend.php:138
+msgid "After Excerpt"
+msgstr ""
+
+#: admin/settings/frontend.php:139
+msgid "Before Excerpt"
+msgstr ""
+
+#: admin/settings/frontend.php:150
+msgid "Select Link Template:"
+msgstr ""
+
+#: admin/settings/frontend.php:174
+msgid "Selected link template will replace the excerpt"
+msgstr ""
+
+#: admin/stats/pvupd.php:81 admin/wpdm-emails.php:292 admin/wpdm-import.php:158
+#: tpls/wpdm-list-files-front.php:118
+msgid "&laquo;"
+msgstr ""
+
+#: admin/stats/pvupd.php:82 admin/wpdm-emails.php:293 admin/wpdm-import.php:159
+#: tpls/wpdm-list-files-front.php:119
+msgid "&raquo;"
+msgstr ""
+
+#: admin/stats/pvupd.php:90
+#, php-format
+msgid "Displaying %s&#8211;%s of %s users"
+msgstr ""
+
+#: admin/wpdm-emails-template.php:203 admin/wpdm-emails.php:222
+#: download-manager.php:185
+msgid "Subscribers"
+msgstr ""
+
+#: admin/wpdm-emails-template.php:204 admin/wpdm-emails.php:223
+msgid "Export All"
+msgstr ""
+
+#: admin/wpdm-emails-template.php:205 admin/wpdm-emails.php:224
+msgid "Export Unique Emails"
+msgstr ""
+
+#: admin/wpdm-emails-template.php:210 admin/wpdm-emails.php:229
+msgid "Emails"
+msgstr ""
+
+#: admin/wpdm-emails-template.php:211 admin/wpdm-emails.php:230
+msgid "Email Template"
+msgstr ""
+
+#: admin/wpdm-emails.php:242 admin/wpdm-emails.php:254
+msgid "ID"
+msgstr ""
+
+#: admin/wpdm-emails.php:243 admin/wpdm-emails.php:255
+msgid "Email"
+msgstr ""
+
+#: admin/wpdm-emails.php:244 admin/wpdm-emails.php:256
+msgid "Name"
+msgstr ""
+
+#: admin/wpdm-emails.php:245 admin/wpdm-emails.php:257
+#: tpls/user-dashboard/download-history.php:6
+#: tpls/user-dashboard/profile.php:67
+msgid "Package Name"
+msgstr ""
+
+#: admin/wpdm-emails.php:246 admin/wpdm-emails.php:258
+msgid "Date"
+msgstr ""
+
+#: admin/wpdm-emails.php:247 admin/wpdm-emails.php:259
+#: tpls/metaboxes/attached-files-datatable.php:46
+#: tpls/metaboxes/attached-files-front.php:44 wpdm-functions.php:2379
+msgid "Action"
+msgstr ""
+
+#: admin/wpdm-emails.php:305
+msgid "Delete Selected"
+msgstr ""
+
+#: admin/wpdm-emails.php:307
+msgid "Reset Search"
+msgstr ""
+
+#: admin/wpdm-emails.php:313 admin/wpdm-import.php:172
+#: tpls/wpdm-list-files-front.php:132
+#, php-format
+msgid "Displaying %s&#8211;%s of %s"
+msgstr ""
+
+#: admin/wpdm-link-templates.php:253 admin/wpdm-template-editor.php:235
+#: download-manager.php:184
+msgid "Templates"
+msgstr ""
+
+#: admin/wpdm-link-templates.php:255 admin/wpdm-template-editor.php:237
+msgid "Create Page Template"
+msgstr ""
+
+#: admin/wpdm-link-templates.php:255 admin/wpdm-template-editor.php:237
+msgid "Create Link Template"
+msgstr ""
+
+#: admin/wpdm-link-templates.php:265
+msgid ""
+"Pre-designed templates can't be deleted or edited from this section. But you "
+"can clone any of them and edit as your own. If you seriously want to edit "
+"any pre-designed template you have to edit those directly edting php files "
+"at /download-manager/templates/ dir"
+msgstr ""
+
+#: admin/wpdm-link-templates.php:271
+msgid "Template Name"
+msgstr ""
+
+#: admin/wpdm-link-templates.php:272
+msgid "Template ID"
+msgstr ""
+
+#: admin/wpdm-link-templates.php:273
+msgid "Actions"
+msgstr ""
+
+#: admin/wpdm-link-templates.php:334
+msgid "Edit"
+msgstr ""
+
+#: admin/wpdm-link-templates.php:335 admin/wpdm-template-editor.php:325
+msgid "Preview"
+msgstr ""
+
+#: admin/wpdm-link-templates.php:336
+msgid "Delete"
+msgstr ""
+
+#: admin/wpdm-link-templates.php:361
+msgid ""
+"This is a preview, original template color scheme may look little different, "
+"but structure will be same"
+msgstr ""
+
+#: admin/wpdm-stats.php:256
+msgid "Download Statistics"
+msgstr ""
+
+#: admin/wpdm-stats.php:260
+msgid "Monthly Stats"
+msgstr ""
+
+#: admin/wpdm-stats.php:261
+msgid "Package vs Date"
+msgstr ""
+
+#: admin/wpdm-stats.php:262
+msgid "Package vs User"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:242
+msgid "Link Templates"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:243
+msgid "Page Templates"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:244
+msgid "Template Editor"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:258
+msgid "Page"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:258
+msgid "Link"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:258
+msgid "Template"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:321
+#: tpls/metaboxes/attached-files-datatable.php:48
+#: tpls/metaboxes/attached-files-front.php:46 tpls/wpdm-all-downloads.php:113
+#: wpdm-functions.php:2289
+msgid "Title"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:324
+msgid "Code"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:383
+msgid "Save Template"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:410
+msgid "Template Variables"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:420
+msgid "download link open as popup"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:421
+msgid "download link open as page"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:423
+msgid "Package details page url"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:424
+msgid "show package title"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:425
+msgid "show categories"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:426
+msgid "show tags"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:427
+msgid "show icon if available"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:428
+msgid ""
+"show preview thumbnail with specified width and height if available,l eg: "
+"[thumb_700x400] will show 700px &times; 400px image preview "
+msgstr ""
+
+#: admin/wpdm-template-editor.php:429
+msgid ""
+"returns preview thumbnail url with specified width and height if available,l "
+"eg: [thumb_url_700x400] will return 700px &times; 400px image preview url"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:431
+msgid ""
+"show additional preview thumbnails in gallery format, each image height and "
+"with will be same as specified, eg: [gallery_50x30] will show image gallery "
+"of additional previews and each image size will be 50px &timesx40px"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:432
+msgid "show previews in a slider type gallery"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:434
+msgid ""
+"show a short description of package from description, eg: [excerpt_200] will "
+"show short description with first 200 chars of description"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:435
+msgid "package description"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:436
+msgid "download counter"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:437
+msgid "download url"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:438
+msgid "direct link to download using download link label"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:439
+msgid "number of downloads to expire download quota"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:440
+msgid "show list of all files in a package"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:441
+msgid "show package version"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:442
+msgid "show package create date"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:443
+msgid "show package update date"
+msgstr ""
+
+#: admin/wpdm-template-editor.php:444
+msgid "Show mp3 player with your page or link template."
+msgstr ""
+
+#: download-manager.php:183
+msgid "Bulk Import &lsaquo; Download Manager"
+msgstr ""
+
+#: download-manager.php:183
+msgid "Bulk Import"
+msgstr ""
+
+#: download-manager.php:184
+msgid "Templates &lsaquo; Download Manager"
+msgstr ""
+
+#: download-manager.php:185
+msgid "Subscribers &lsaquo; Download Manager"
+msgstr ""
+
+#: download-manager.php:186
+msgid "Stats &lsaquo; Download Manager"
+msgstr ""
+
+#: download-manager.php:186 wpdm-core.php:1125
+msgid "Stats"
+msgstr ""
+
+#: download-manager.php:187
+msgid "Add-Ons &lsaquo; Download Manager"
+msgstr ""
+
+#: download-manager.php:187
+msgid "Add-Ons"
+msgstr ""
+
+#: download-manager.php:188
+msgid "Settings &lsaquo; Download Manager"
+msgstr ""
+
+#: download-manager.php:188
+msgid "Settings"
+msgstr ""
+
+#: libs/class.CategoryHandler.php:38 libs/class.CategoryHandler.php:65
+msgid "Access:"
+msgstr ""
+
+#: libs/class.CategoryHandler.php:39 libs/class.CategoryHandler.php:68
+msgid ""
+"Select the roles who should have access to the packages under this category"
+msgstr ""
+
+#: libs/class.CategoryHandler.php:42 libs/class.CategoryHandler.php:78
+#: tpls/metaboxes/package-settings-front.php:52
+#: tpls/metaboxes/package-settings.php:70
+msgid "All Visitors"
+msgstr ""
+
+#: libs/class.Package.php:46 libs/class.Package.php:174
+#: libs/class.PackageLocks.php:236 tpls/wpdm-all-downloads.php:116
+#: wpdm-functions.php:410 wpdm-functions.php:435 wpdm-functions.php:538
+#: wpdm-functions.php:543 wpdm-functions.php:599 wpdm-functions.php:624
+#: wpdm-functions.php:731 wpdm-functions.php:735 wpdm-functions.php:770
+#: wpdm-functions.php:851 wpdm-functions.php:965 wpdm-functions.php:1081
+#: wpdm-functions.php:2411 wpdm-functions.php:2413 wpdm-functions.php:2450
+#: wpdm-functions.php:2452 wpdm-functions.php:2528 wpdm-functions.php:2569
+#: wpdm-functions.php:2624 wpdm-functions.php:2668 wpdm-functions.php:2743
+#: wpdm-functions.php:3012
+msgid "Download"
+msgstr ""
+
+#: libs/class.PackageLocks.php:206
+msgid "Enter Correct Password to Download"
+msgstr ""
+
+#: libs/class.PackageLocks.php:209 libs/class.PackageLocks.php:225
+#: tpls/wpdm-all-downloads.php:88 wpdm-functions.php:779 wpdm-functions.php:810
+#: wpdm-functions.php:4982
+msgid "Processing..."
+msgstr ""
+
+#: libs/class.PackageLocks.php:216
+msgid "Enter Password"
+msgstr ""
+
+#: libs/class.PackageLocks.php:217
+msgid "Submit"
+msgstr ""
+
+#: libs/class.Pagination.php:63 tpls/wpdm-all-downloads.php:94
+#: wpdm-functions.php:4988
+msgid "Previous"
+msgstr ""
+
+#: libs/class.Pagination.php:64 tpls/wpdm-all-downloads.php:93
+#: wpdm-functions.php:4987
+msgid "Next"
+msgstr ""
+
+#: libs/class.ShortCodes.php:98
+msgid "Sorry, Your Are Not Allowed!"
+msgstr ""
+
+#: libs/class.ShortCodes.php:197
+msgid ""
+"<b>form_page</b> parameter is required! Please use [wpdm_list_packages "
+"form_page=\"the page url where you used short-code <u>wpdm_package_form</u>"
+"\"]"
+msgstr ""
+
+#: libs/class.ShortCodes.php:249
+msgid "User registration is disabled"
+msgstr ""
+
+#: modules/server-dir-browser.php:5 modules/server-dir-browser.php:26
+#: modules/server-dir-browser.php:107
+msgid "Not Allowed!"
+msgstr ""
+
+#: modules/server-dir-browser.php:80
+msgid "Open Dir Browser"
+msgstr ""
+
+#: modules/server-file-browser.php:117
+msgid "Add file(s) from server"
+msgstr ""
+
+#: modules/widgets.php:35
+msgid "WPDM Affiliate ID:"
+msgstr ""
+
+#: modules/widgets.php:78 modules/widgets.php:151 modules/widgets.php:207
+#: modules/widgets.php:296 modules/widgets.php:412 modules/widgets.php:525
+msgid "Title:"
+msgstr ""
+
+#: modules/widgets.php:211 modules/widgets.php:300 modules/widgets.php:422
+msgid "Number of packages to show:"
+msgstr ""
+
+#: modules/widgets.php:215 modules/widgets.php:309 modules/widgets.php:431
+#: tpls/metaboxes/package-settings-front.php:87
+#: tpls/metaboxes/package-settings.php:120
+msgid "Link Template:"
+msgstr ""
+
+#: modules/widgets.php:416
+msgid "Select Category:"
+msgstr ""
+
+#: modules/widgets.php:529
+msgid "Fields to Show:"
+msgstr ""
+
+#: tpls/metaboxes/attach-file-datatable.php:3
+#: tpls/metaboxes/attach-file-front.php:3 tpls/metaboxes/attach-file.php:13
+msgid "Upload"
+msgstr ""
+
+#: tpls/metaboxes/attach-file-datatable.php:5 tpls/metaboxes/attach-file.php:15
+#: wpdm-functions.php:2626 wpdm-functions.php:2745
+msgid "Browse"
+msgstr ""
+
+#: tpls/metaboxes/attach-file-datatable.php:7
+#: tpls/metaboxes/attach-file-front.php:5 tpls/metaboxes/attach-file.php:17
+msgid "URL"
+msgstr ""
+
+#: tpls/metaboxes/attach-file-datatable.php:14
+#: tpls/metaboxes/attach-file-front.php:12 tpls/metaboxes/attach-file.php:24
+msgid "Drop files here"
+msgstr ""
+
+#: tpls/metaboxes/attach-file-datatable.php:34
+#: tpls/metaboxes/attach-file-front.php:36 tpls/metaboxes/attach-file.php:44
+msgid "Allowed Files"
+msgstr ""
+
+#: tpls/metaboxes/attach-file.php:162 tpls/metaboxes/attached-files.php:50
+msgid "File Title"
+msgstr ""
+
+#: tpls/metaboxes/attach-file.php:164 tpls/metaboxes/attached-files.php:52
+msgid "File Password"
+msgstr ""
+
+#: tpls/metaboxes/attached-files-datatable.php:47
+#: tpls/metaboxes/attached-files-front.php:45
+msgid "Filename"
+msgstr ""
+
+#: tpls/metaboxes/attached-files-datatable.php:49
+#: tpls/metaboxes/attached-files-front.php:47 tpls/wpdm-be-member.php:67
+#: tpls/wpdm-login-form.php:29 tpls/wpdm-reg-form.php:47
+#: wpdm-functions.php:2378 wpdm-functions.php:2409 wpdm-functions.php:2448
+#: wpdm-functions.php:2527 wpdm-functions.php:2667
+msgid "Password"
+msgstr ""
+
+#: tpls/metaboxes/icons.php:112
+msgid "Icon URL"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:2
+msgid ""
+"You can use one or more of following methods to lock your package download:"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:7
+msgid "Enable Password Lock"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:11
+msgid "Password:"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:22
+msgid "PW Usage Limit:"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:23
+msgid "password"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:23
+msgid "Password will expire after it exceed this usage limit"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:26
+msgid "Reset Password Usage Count"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:33
+msgid "LinkedIn Share Lock"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:42
+msgid "URL to share (keep empty for current page url):"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:51
+msgid "Tweet Lock"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:55
+msgid "Custom tweet message:"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:62
+msgid "Enable Google +1 Lock"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:66
+msgid "URL for +1:"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:73
+msgid "Enable Twitter Follow Lock"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:77
+msgid "Twiiter Handle:"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:84
+msgid "Enable Facebook Like Lock"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:89
+msgid "URL to Like:"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:96
+msgid "Enable Email Lock"
+msgstr ""
+
+#: tpls/metaboxes/lock-options.php:105
+msgid "Will ask for email (and checked custom data) before download"
+msgstr ""
+
+#: tpls/metaboxes/package-settings-front.php:3
+#: tpls/metaboxes/package-settings.php:6 tpls/wpdm-add-new-file-front.php:61
+#: wpdm-functions.php:4500
+msgid "Package Settings"
+msgstr ""
+
+#: tpls/metaboxes/package-settings-front.php:4
+#: tpls/metaboxes/package-settings.php:7
+msgid "Lock Options"
+msgstr ""
+
+#: tpls/metaboxes/package-settings-front.php:5
+#: tpls/metaboxes/package-settings.php:8
+msgid "Icons"
+msgstr ""
+
+#: tpls/metaboxes/package-settings-front.php:19
+#: tpls/metaboxes/package-settings.php:27
+msgid "Link Label:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings-front.php:24
+#: tpls/metaboxes/package-settings.php:32
+msgid "Stock&nbsp;Limit:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings-front.php:29
+#: tpls/metaboxes/package-settings.php:37
+msgid "Download&nbsp;Limit:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings-front.php:33
+#: tpls/metaboxes/package-settings.php:49
+msgid "Download&nbsp;Count:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings-front.php:37
+#: tpls/metaboxes/package-settings.php:54
+msgid "Package&nbsp;Size:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings-front.php:41
+#: tpls/metaboxes/package-settings.php:59
+msgid "Allow Access:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings-front.php:72
+msgid "Individual File:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings-front.php:94
+#: tpls/metaboxes/package-settings-front.php:134
+#: tpls/metaboxes/package-settings.php:127
+#: tpls/metaboxes/package-settings.php:167
+msgid "Select"
+msgstr ""
+
+#: tpls/metaboxes/package-settings-front.php:124
+#: tpls/metaboxes/package-settings.php:157
+msgid "Page Template:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:22
+msgid "Version:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:38
+msgid "user"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:38
+msgid "For non-registered members IP will be taken as ID"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:39
+msgid "Reset Limit for All Users"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:44
+msgid "View&nbsp;Count:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:61
+msgid "Who should be able to download?"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:90
+msgid "Single File Download:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:95
+#: tpls/metaboxes/package-settings.php:110
+msgid "Use Global"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:96
+#: tpls/metaboxes/package-settings.php:111
+msgid "Enable"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:97
+#: tpls/metaboxes/package-settings.php:112
+msgid "Disable"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:98
+msgid "Enable/Disable single file download from multi-file package"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:105
+msgid "Cache Zip File:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:113
+msgid "Do you want to cache the zip file created from attached files"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:193
+msgid "Master Key"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:194
+msgid "Regenerate Master Key for Download"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:194
+msgid "This key can be used for direct download"
+msgstr ""
+
+#: tpls/user-dashboard/download-history.php:7
+#: tpls/user-dashboard/profile.php:68
+msgid "Download Time"
+msgstr ""
+
+#: tpls/user-dashboard/download-history.php:8
+#: tpls/user-dashboard/profile.php:69
+msgid "IP"
+msgstr ""
+
+#: tpls/user-dashboard/edit-profile.php:20
+msgid "Basic Profile"
+msgstr ""
+
+#: tpls/user-dashboard/profile.php:6
+msgid "User Level"
+msgstr ""
+
+#: tpls/user-dashboard/profile.php:17 wpdm-functions.php:4072
+msgid "Total Downloads"
+msgstr ""
+
+#: tpls/user-dashboard/profile.php:25
+msgid "Today's Download"
+msgstr ""
+
+#: tpls/user-dashboard/profile.php:33
+msgid "Recommended Downloads"
+msgstr ""
+
+#: tpls/user-dashboard/profile.php:63
+msgid "Last 5 Downloads"
+msgstr ""
+
+#: tpls/wpdm-add-new-file-front.php:52 wpdm-functions.php:4498
+msgid "Attached Files"
+msgstr ""
+
+#: tpls/wpdm-add-new-file-front.php:79
+msgid "Attach Files"
+msgstr ""
+
+#: tpls/wpdm-add-new-file-front.php:88
+msgid "Live Demo/Preview"
+msgstr ""
+
+#: tpls/wpdm-add-new-file-front.php:91
+msgid "Live Preview URL"
+msgstr ""
+
+#: tpls/wpdm-add-new-file-front.php:96 tpls/wpdm-all-downloads.php:114
+#: wpdm-functions.php:59 wpdm-functions.php:69
+msgid "Categories"
+msgstr ""
+
+#: tpls/wpdm-add-new-file-front.php:132
+msgid "Main Preview Image"
+msgstr ""
+
+#: tpls/wpdm-add-new-file-front.php:151
+msgid "Additional Preview Images"
+msgstr ""
+
+#: tpls/wpdm-add-new-file-front.php:180
+msgid "Save as Draft"
+msgstr ""
+
+#: tpls/wpdm-add-new-file-front.php:183
+msgid "Update Package"
+msgstr ""
+
+#: tpls/wpdm-add-new-file-front.php:183
+msgid "Create Package"
+msgstr ""
+
+#: tpls/wpdm-addons-list.php:199
+msgid "WPDM Add-Ons"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:79
+msgid "Display _MENU_ downloads per page"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:80
+msgid "Nothing _START_ to - sorry"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:81
+msgid "Showing _START_ to _END_ of _TOTAL_ downloads"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:82
+msgid "No downloads available"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:83
+msgid "(filtered from _MAX_ total downloads)"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:84 wpdm-functions.php:4978
+msgid "No data available in table"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:87 wpdm-functions.php:4981
+msgid "Loading..."
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:89 wpdm-functions.php:4983
+msgid "Search:"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:91 wpdm-functions.php:4985
+msgid "First"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:92 wpdm-functions.php:4986
+msgid "Last"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:97 wpdm-functions.php:4991
+msgid "activate to sort column ascending"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:98 wpdm-functions.php:4992
+msgid "activate to sort column descending"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:102 wpdm-functions.php:4996
+msgid "All"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:115
+msgid "Create Date"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:174 wpdm-functions.php:2718
+msgid "files"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:176
+msgid "downloads"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:176
+msgid "download"
+msgstr ""
+
+#: tpls/wpdm-all-downloads.php:190
+msgid "No Packages Found"
+msgstr ""
+
+#: tpls/wpdm-be-member.php:19 tpls/wpdm-login-form.php:38
+msgid "Log In"
+msgstr ""
+
+#: tpls/wpdm-be-member.php:20
+msgid "Register"
+msgstr ""
+
+#: tpls/wpdm-be-member.php:41 tpls/wpdm-login-form.php:8
+msgid "You are already logged in."
+msgstr ""
+
+#: tpls/wpdm-be-member.php:41 tpls/wpdm-login-form.php:8
+msgid "Logout"
+msgstr ""
+
+#: tpls/wpdm-be-member.php:54 tpls/wpdm-login-form.php:20
+msgid "Login Failed!"
+msgstr ""
+
+#: tpls/wpdm-be-member.php:61 tpls/wpdm-login-form.php:25
+#: tpls/wpdm-reg-form.php:31
+msgid "Username"
+msgstr ""
+
+#: tpls/wpdm-be-member.php:74 tpls/wpdm-login-form.php:36
+msgid "Remember Me"
+msgstr ""
+
+#: tpls/wpdm-be-member.php:81 tpls/wpdm-login-form.php:43
+msgid "Forgot Password?"
+msgstr ""
+
+#: tpls/wpdm-be-member.php:81
+msgid "Request New Password."
+msgstr ""
+
+#: tpls/wpdm-generate-password.php:16
+msgid "Select Options"
+msgstr ""
+
+#: tpls/wpdm-generate-password.php:18
+msgid "Number of passwords:"
+msgstr ""
+
+#: tpls/wpdm-generate-password.php:22
+msgid "Number of chars for each password:"
+msgstr ""
+
+#: tpls/wpdm-generate-password.php:26
+msgid "Valid chars:"
+msgstr ""
+
+#: tpls/wpdm-generate-password.php:35
+msgid "Generated Passwords"
+msgstr ""
+
+#: tpls/wpdm-generate-password.php:39
+msgid "Generate"
+msgstr ""
+
+#: tpls/wpdm-login-form.php:16
+msgid "LogIn"
+msgstr ""
+
+#: tpls/wpdm-login-form.php:43
+msgid "Request New Password"
+msgstr ""
+
+#: tpls/wpdm-reg-form.php:25
+msgid "Full Name"
+msgstr ""
+
+#: tpls/wpdm-reg-form.php:38
+msgid "E-mail"
+msgstr ""
+
+#: tpls/wpdm-reg-form.php:53
+msgid "Confirm Password"
+msgstr ""
+
+#: tpls/wpdm-reg-form.php:66
+msgid "Join Now!"
+msgstr ""
+
+#: tpls/wpdm-reg-form.php:96
+msgid "Loggin In..."
+msgstr ""
+
+#: tpls/wpdm-reg-form.php:113
+msgid "Registration is disabled!"
+msgstr ""
+
+#: wpdm-core.php:542
+msgid "No categories"
+msgstr ""
+
+#: wpdm-functions.php:7
+msgid "Top Level Category"
+msgstr ""
+
+#: wpdm-functions.php:18 wpdm-functions.php:30 wpdm-functions.php:2271
+#: wpdm-functions.php:2290
+msgid "Downloads"
+msgstr ""
+
+#: wpdm-functions.php:19
+msgid "Package"
+msgstr ""
+
+#: wpdm-functions.php:20
+msgid "Add New"
+msgstr ""
+
+#: wpdm-functions.php:21
+msgid "Add New Package"
+msgstr ""
+
+#: wpdm-functions.php:22
+msgid "Edit Package"
+msgstr ""
+
+#: wpdm-functions.php:23
+msgid "New Package"
+msgstr ""
+
+#: wpdm-functions.php:24
+msgid "All Packages"
+msgstr ""
+
+#: wpdm-functions.php:25
+msgid "View Package"
+msgstr ""
+
+#: wpdm-functions.php:26
+msgid "Search Packages"
+msgstr ""
+
+#: wpdm-functions.php:27
+msgid "No Package Found"
+msgstr ""
+
+#: wpdm-functions.php:28
+msgid "No Packages found in Trash"
+msgstr ""
+
+#: wpdm-functions.php:60
+msgid "Category"
+msgstr ""
+
+#: wpdm-functions.php:61
+msgid "Search Categories"
+msgstr ""
+
+#: wpdm-functions.php:62
+msgid "All Categories"
+msgstr ""
+
+#: wpdm-functions.php:63
+msgid "Parent Category"
+msgstr ""
+
+#: wpdm-functions.php:64
+msgid "Parent Category:"
+msgstr ""
+
+#: wpdm-functions.php:65
+msgid "Edit Category"
+msgstr ""
+
+#: wpdm-functions.php:66
+msgid "Update Category"
+msgstr ""
+
+#: wpdm-functions.php:67
+msgid "Add New Category"
+msgstr ""
+
+#: wpdm-functions.php:68
+msgid "New Category Name"
+msgstr ""
+
+#: wpdm-functions.php:419 wpdm-functions.php:608 wpdm-start-download.php:13
+msgid "Download Limit Exceeded"
+msgstr ""
+
+#: wpdm-functions.php:423 wpdm-functions.php:612
+msgid "Download was expired on"
+msgstr ""
+
+#: wpdm-functions.php:425 wpdm-functions.php:432 wpdm-functions.php:442
+#: wpdm-functions.php:614 wpdm-functions.php:621 wpdm-functions.php:638
+msgid "Download:"
+msgstr ""
+
+#: wpdm-functions.php:430 wpdm-functions.php:619
+msgid "Download will be available from "
+msgstr ""
+
+#: wpdm-functions.php:530 wpdm-functions.php:723
+msgid "Like or Share to Download"
+msgstr ""
+
+#: wpdm-functions.php:556 wpdm-functions.php:748
+msgid "Download limit exceeded!"
+msgstr ""
+
+#: wpdm-functions.php:656
+msgid "Login"
+msgstr ""
+
+#: wpdm-functions.php:735
+msgid "Please take any of the actions above to start download"
+msgstr ""
+
+#: wpdm-functions.php:768
+msgid "Subscribe to download"
+msgstr ""
+
+#: wpdm-functions.php:769
+msgid "Subscribe"
+msgstr ""
+
+#: wpdm-functions.php:862
+msgid "Tweet to download"
+msgstr ""
+
+#: wpdm-functions.php:975
+msgid "Google +1 to download"
+msgstr ""
+
+#: wpdm-functions.php:1085
+msgid "Like on FB to Download"
+msgstr ""
+
+#: wpdm-functions.php:1195
+msgid "Email Link"
+msgstr ""
+
+#: wpdm-functions.php:1287
+msgid "Download link sent to your email!"
+msgstr ""
+
+#: wpdm-functions.php:1291
+msgid "Download link also sent to your email!"
+msgstr ""
+
+#: wpdm-functions.php:1313 wpdm-functions.php:1730
+msgid "Invalid Email Address!"
+msgstr ""
+
+#: wpdm-functions.php:1366 wpdm-functions.php:1370
+msgid "Wrong Password!"
+msgstr ""
+
+#: wpdm-functions.php:1383
+msgid "Password usages limit exceeded"
+msgstr ""
+
+#: wpdm-functions.php:1721
+msgid "Username is Empty!"
+msgstr ""
+
+#: wpdm-functions.php:1788
+msgid "Email already exists."
+msgstr ""
+
+#: wpdm-functions.php:1797
+msgid "User already exists."
+msgstr ""
+
+#: wpdm-functions.php:2271
+msgid "Sub-Categories"
+msgstr ""
+
+#: wpdm-functions.php:2291
+msgid "Publish Date"
+msgstr ""
+
+#: wpdm-functions.php:2292
+msgid "Update Date"
+msgstr ""
+
+#: wpdm-functions.php:2293
+msgid "Asc"
+msgstr ""
+
+#: wpdm-functions.php:2294
+msgid "Desc"
+msgstr ""
+
+#: wpdm-functions.php:2295
+msgid "Search"
+msgstr ""
+
+#: wpdm-functions.php:2296
+msgid "Order By"
+msgstr ""
+
+#: wpdm-functions.php:2383
+msgid "File"
+msgstr ""
+
+#: wpdm-functions.php:2684
+msgid "Home"
+msgstr ""
+
+#: wpdm-functions.php:3433
+msgid "You don't have permission to download this file"
+msgstr ""
+
+#: wpdm-functions.php:3439
+msgid "Download link is expired. Please get new download link."
+msgstr ""
+
+#: wpdm-functions.php:3441
+msgid "Download link is expired or not valid. Please get new download link."
+msgstr ""
+
+#: wpdm-functions.php:3449
+msgid "Invalid download link."
+msgstr ""
+
+#: wpdm-functions.php:3972
+msgid "Ask for Visitor's Name"
+msgstr ""
+
+#: wpdm-functions.php:3975
+msgid "After submit form:"
+msgstr ""
+
+#: wpdm-functions.php:3977
+msgid "Mail Download Link"
+msgstr ""
+
+#: wpdm-functions.php:3979
+msgid "Download Instantly"
+msgstr ""
+
+#: wpdm-functions.php:3996
+msgid "Your Name"
+msgstr ""
+
+#: wpdm-functions.php:4058
+msgid "Summary"
+msgstr ""
+
+#: wpdm-functions.php:4059
+msgid "Social"
+msgstr ""
+
+#: wpdm-functions.php:4061
+msgid "News Updates"
+msgstr ""
+
+#: wpdm-functions.php:4068
+msgid "Total Packages"
+msgstr ""
+
+#: wpdm-functions.php:4076
+msgid "Total Categories"
+msgstr ""
+
+#: wpdm-functions.php:4080
+msgid "Total Subscribers"
+msgstr ""
+
+#: wpdm-functions.php:4084
+msgid "Subscribed Today"
+msgstr ""
+
+#: wpdm-functions.php:4094
+msgid "Total FB Likes"
+msgstr ""
+
+#: wpdm-functions.php:4098
+msgid "Total Tweets"
+msgstr ""
+
+#: wpdm-functions.php:4102
+msgid "Total Google +1"
+msgstr ""
+
+#: wpdm-functions.php:4106
+msgid "Total LinkedIn Shares"
+msgstr ""
+
+#: wpdm-functions.php:4417
+msgid "No related download found!"
+msgstr ""
+
+#: wpdm-functions.php:4456
+msgid ""
+"No package found! Please create at least 1 package to see template preview"
+msgstr ""
+
+#: wpdm-functions.php:4499
+msgid "Attach Dir"
+msgstr ""
+
+#: wpdm-functions.php:4501
+msgid "Attach File"
+msgstr ""
+
+#: wpdm-functions.php:4739
+msgid "Version"
+msgstr ""
+
+#: wpdm-functions.php:4742
+msgid "View(s)"
+msgstr ""
+
+#: wpdm-functions.php:4745
+msgid "Download(s)"
+msgstr ""
+
+#: wpdm-functions.php:4973
+msgid "Display _MENU_ files per page"
+msgstr ""
+
+#: wpdm-functions.php:4974
+msgid "No matching files found"
+msgstr ""
+
+#: wpdm-functions.php:4975
+msgid "Showing _START_ to _END_ of _TOTAL_ files"
+msgstr ""
+
+#: wpdm-functions.php:4976
+msgid "No files available"
+msgstr ""
+
+#: wpdm-functions.php:4977
+msgid "(filtered from _MAX_ total files)"
+msgstr ""
+
+#: wpdm-start-download.php:45
+msgid "Sorry! Download is not available yet."
+msgstr ""
